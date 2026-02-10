@@ -1,0 +1,1320 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kirolos Ehab | Executive Systems Architect</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg0:#070A10;
+      --bg1:#0B1020;
+      --card:#0F1930cc;
+      --cardSolid:#0F1930;
+      --stroke:#1a2e55;
+      --text:#EAF2FF;
+      --muted:#A7B6D1;
+      --muted2:#7F93B5;
+      --accent:#00E1FF;
+      --accent2:#7C5CFF;
+      --good:#39ff88;
+      --warn:#FFD166;
+      --shadow: 0 20px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 15% 10%, rgba(0,225,255,.18), transparent 55%),
+        radial-gradient(900px 500px at 75% 20%, rgba(124,92,255,.18), transparent 55%),
+        radial-gradient(900px 700px at 50% 80%, rgba(0,225,255,.08), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      color:var(--text);
+      line-height:1.75;
+      overflow-x:hidden;
+    }
+
+    /* Scroll progress */
+    .progress{
+      position:fixed; top:0; left:0; height:3px; width:0%;
+      background:linear-gradient(90deg, var(--accent), var(--accent2));
+      z-index:9999;
+      box-shadow: 0 0 20px rgba(0,225,255,.35);
+    }
+
+    /* Layout */
+    .container{width:min(1200px, 92%); margin:0 auto}
+    section{padding:90px 0}
+    .subtle-divider{border-top:1px solid rgba(255,255,255,.06)}
+
+    /* Nav */
+    .nav{
+      position:sticky; top:0; z-index:999;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      background: rgba(7,10,16,.55);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--text);
+    }
+    .brand-badge{
+      width:38px;height:38px;border-radius:12px;
+      background: linear-gradient(135deg, rgba(0,225,255,.9), rgba(124,92,255,.9));
+      display:grid;place-items:center;
+      box-shadow: 0 10px 30px rgba(0,225,255,.18);
+      font-weight:900; color:#001018;
+    }
+    .brand span{font-weight:800; letter-spacing:.2px}
+    .links{display:flex; gap:18px; flex-wrap:wrap; align-items:center}
+    .links a{
+      color:var(--muted);
+      text-decoration:none;
+      font-weight:600;
+      font-size:13px;
+      letter-spacing:.2px;
+      padding:8px 10px;
+      border-radius:12px;
+      transition:.2s;
+    }
+    .links a:hover{color:var(--text); background:rgba(255,255,255,.06)}
+    .links a.active{color:var(--text); background:rgba(0,225,255,.10); border:1px solid rgba(0,225,255,.20)}
+
+    /* Hero */
+    .hero{
+      padding:90px 0 0;
+    }
+    .hero-grid{
+      display:grid; grid-template-columns: 1.2fr .8fr; gap:26px;
+      align-items:stretch;
+    }
+    @media (max-width: 980px){
+      .hero-grid{grid-template-columns:1fr}
+    }
+    .kicker{
+      color:var(--accent);
+      font-size:12px;
+      letter-spacing:.35em;
+      font-weight:800;
+      text-transform:uppercase;
+      opacity:.95;
+    }
+    h1{
+      margin-top:10px;
+      font-size: clamp(36px, 4vw, 58px);
+      line-height:1.08;
+      letter-spacing:-.02em;
+      font-weight:900;
+    }
+    .gradient-text{
+      background:linear-gradient(135deg, var(--text), rgba(0,225,255,.95), rgba(124,92,255,.95));
+      -webkit-background-clip:text;
+      background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+    .role{
+      margin-top:14px;
+      font-size:18px;
+      color:var(--muted);
+      max-width: 58ch;
+    }
+    .hero-actions{
+      margin-top:22px;
+      display:flex; gap:12px; flex-wrap:wrap;
+    }
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:12px 16px;
+      border-radius:14px;
+      text-decoration:none;
+      font-weight:800;
+      letter-spacing:.2px;
+      transition:.2s;
+      border:1px solid transparent;
+      user-select:none;
+    }
+    .btn-primary{
+      color:#001018;
+      background:linear-gradient(135deg, rgba(0,225,255,.95), rgba(124,92,255,.95));
+      box-shadow: 0 16px 40px rgba(0,225,255,.18);
+    }
+    .btn-primary:hover{transform: translateY(-1px); filter:brightness(.98)}
+    .btn-ghost{
+      color:var(--text);
+      background:rgba(255,255,255,.05);
+      border-color: rgba(255,255,255,.10);
+    }
+    .btn-ghost:hover{background:rgba(255,255,255,.08); transform: translateY(-1px)}
+    .btn small{font-weight:700; color:rgba(0,0,0,.65)}
+    .pill-row{
+      margin-top:18px;
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+    .pill{
+      font-size:12px;
+      color:rgba(234,242,255,.88);
+      padding:8px 10px;
+      border-radius:999px;
+      background: rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.10);
+    }
+    .side-card{
+      background: linear-gradient(180deg, rgba(15,25,48,.78), rgba(15,25,48,.55));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      padding:22px;
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .side-card:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(400px 200px at 20% 20%, rgba(0,225,255,.25), transparent 60%),
+                  radial-gradient(450px 220px at 80% 30%, rgba(124,92,255,.22), transparent 55%);
+      opacity:.75;
+      pointer-events:none;
+    }
+    .side-card > *{position:relative}
+    .side-title{
+      font-weight:900;
+      font-size:14px;
+      letter-spacing:.28em;
+      text-transform:uppercase;
+      color:rgba(234,242,255,.85);
+    }
+    .side-sub{
+      margin-top:12px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .quick{
+      margin-top:18px;
+      display:grid; gap:12px;
+    }
+    .quick-item{
+      padding:14px 14px;
+      border-radius:14px;
+      background: rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      display:flex; justify-content:space-between; gap:14px;
+    }
+    .quick-item b{font-size:14px}
+    .quick-item span{color:var(--muted2); font-weight:700; font-size:13px}
+    .note{
+      margin-top:16px;
+      padding:12px 14px;
+      border-radius:14px;
+      background: rgba(0,225,255,.08);
+      border:1px solid rgba(0,225,255,.18);
+      color:rgba(234,242,255,.9);
+      font-size:13px;
+    }
+
+    /* Section titles */
+    .section-head{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:16px; flex-wrap:wrap;
+      margin-bottom:28px;
+    }
+    .section-head h2{
+      font-size: clamp(22px, 2.4vw, 34px);
+      font-weight:900;
+      letter-spacing:-.01em;
+    }
+    .section-head p{
+      color:var(--muted);
+      max-width: 70ch;
+      font-size:14px;
+    }
+
+    /* Cards/grid */
+    .grid{display:grid; gap:18px}
+    .grid-4{grid-template-columns: repeat(4, minmax(0, 1fr))}
+    .grid-3{grid-template-columns: repeat(3, minmax(0, 1fr))}
+    @media (max-width: 1100px){.grid-4{grid-template-columns: repeat(2, 1fr)} .grid-3{grid-template-columns: repeat(2, 1fr)}}
+    @media (max-width: 680px){.grid-4,.grid-3{grid-template-columns: 1fr}}
+
+    .card{
+      background: rgba(15,25,48,.62);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      padding:18px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.25);
+      transition: .2s;
+      position:relative;
+      overflow:hidden;
+    }
+    .card:hover{transform: translateY(-2px); border-color: rgba(0,225,255,.22)}
+    .card .top{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      margin-bottom:10px;
+    }
+    .chip{
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color: rgba(234,242,255,.85);
+      padding:6px 10px;
+      border-radius:999px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+    }
+    .metric{
+      font-size:30px; font-weight:900;
+      background: linear-gradient(135deg, rgba(0,225,255,.95), rgba(124,92,255,.95));
+      -webkit-background-clip:text; background-clip:text;
+      -webkit-text-fill-color:transparent;
+      line-height:1;
+    }
+    .card h3{font-size:16px; font-weight:900; letter-spacing:.2px}
+    .card p{color:var(--muted); font-size:13.5px; margin-top:6px}
+    .small{color:var(--muted2); font-size:12px; margin-top:10px}
+
+    /* Reveal on scroll */
+    .reveal{
+      opacity:0;
+      transform: translateY(18px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.in-view{
+      opacity:1;
+      transform: translateY(0);
+    }
+
+    /* Accordion (case studies, why hire me) */
+    .accordion{
+      display:grid; gap:12px;
+    }
+    details{
+      background: rgba(15,25,48,.55);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      padding:14px 16px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.22);
+    }
+    details[open]{border-color: rgba(0,225,255,.22)}
+    summary{
+      cursor:pointer;
+      list-style:none;
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      font-weight:900;
+      letter-spacing:.2px;
+    }
+    summary::-webkit-details-marker{display:none}
+    .sum-left{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+    .sum-title{font-size:15px}
+    .sum-tags{display:flex; gap:8px; flex-wrap:wrap}
+    .tag{
+      font-size:11px;
+      padding:5px 9px;
+      border-radius:999px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      color: rgba(234,242,255,.85);
+      font-weight:800;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+    }
+    .caret{
+      width:34px;height:34px;
+      border-radius:12px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      display:grid; place-items:center;
+      transition:.2s;
+      flex:0 0 auto;
+    }
+    details[open] .caret{transform: rotate(180deg); background: rgba(0,225,255,.10); border-color: rgba(0,225,255,.22)}
+    .details-body{
+      margin-top:12px;
+      padding-top:12px;
+      border-top:1px solid rgba(255,255,255,.06);
+      color:var(--muted);
+      font-size:13.5px;
+    }
+    .bullets{margin-top:10px; padding-left:18px}
+    .bullets li{margin:8px 0}
+    .bullets li::marker{color: var(--accent)}
+    .highlight{
+      color: rgba(234,242,255,.92);
+      font-weight:800;
+    }
+
+    /* Role fit bars */
+    .fit{
+      display:grid; gap:12px;
+    }
+    .fit-row{
+      padding:14px 16px;
+      border-radius: var(--radius);
+      background: rgba(15,25,48,.55);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .fit-top{display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap}
+    .fit-top b{font-size:14px; letter-spacing:.2px}
+    .fit-top span{color:var(--muted2); font-weight:800; font-size:13px}
+    .bar{
+      margin-top:10px;
+      height:12px;
+      border-radius:999px;
+      background: rgba(255,255,255,.06);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .bar i{
+      display:block; height:100%; width:0%;
+      background: linear-gradient(90deg, rgba(0,225,255,.95), rgba(124,92,255,.95));
+      border-radius:999px;
+      transition: width 1.1s cubic-bezier(.2,.8,.2,1);
+    }
+
+    /* Footer */
+    footer{
+      padding:70px 0;
+      background: rgba(0,0,0,.18);
+      border-top:1px solid rgba(255,255,255,.06);
+    }
+    .footer-grid{
+      display:flex; justify-content:space-between; align-items:flex-start; gap:18px; flex-wrap:wrap;
+    }
+    .footer-grid p{color:var(--muted); font-size:13.5px; max-width:70ch}
+    .foot-links{display:flex; gap:10px; flex-wrap:wrap}
+    .foot-links a{
+      text-decoration:none; color:var(--text);
+      padding:10px 12px;
+      border-radius:14px;
+      background: rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.10);
+      font-weight:800;
+      font-size:13px;
+      transition:.2s;
+    }
+    .foot-links a:hover{border-color: rgba(0,225,255,.22); background: rgba(0,225,255,.10)}
+    .copyright{margin-top:18px; color:var(--muted2); font-size:12px}
+
+    /* Mobile menu (simple) */
+    .menu-btn{
+      display:none;
+      padding:10px 12px;
+      border-radius:14px;
+      background: rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.10);
+      color:var(--text);
+      font-weight:900;
+      cursor:pointer;
+    }
+    @media (max-width: 880px){
+      .menu-btn{display:inline-flex}
+      .links{display:none}
+      .links.open{display:flex; width:100%}
+      .nav-inner{flex-wrap:wrap; gap:10px}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="progress" id="progress"></div>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="Home">
+        <div class="brand-badge">K</div>
+        <span>Kirolos Ehab</span>
+      </a>
+
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle Menu">Menu</button>
+
+      <nav class="links" id="navLinks">
+        <a href="#summary">Summary</a>
+        <a href="#impact">Impact</a>
+        <a href="#experience-timeline">Experience</a>
+        <a href="#engineering-training">Training</a>
+        <a href="#why">Why Hire Me</a>
+        <a href="#fit">Role Fit</a>
+        <a href="#case">Case Studies</a>
+        <a href="#stack">Stack</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="container hero">
+    <div class="hero-grid">
+      <div class="reveal">
+        <div class="kicker">EXECUTIVE ENGINEERING PORTFOLIO</div>
+        <h1><span class="gradient-text">Systems Architect</span> building scalable commerce, publishing, and AI automation.</h1>
+        <p class="role">
+          End‑to‑end delivery: Architecture → Build → Deploy → Optimize.
+          Specialized in Shopify ecosystems, WordPress publishing infrastructure, SEO engineering, Laravel backends,
+          and AI automation pipelines.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="mailto:kyrolosehab@gmail.com">Contact <small>→</small></a>
+          <a class="btn btn-ghost" href="https://github.com/Eng-Kirolos-Ehab" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn btn-ghost" href="https://linkedin.com/in/eng-kirolos-ehab" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+
+        <div class="pill-row" aria-label="Highlights">
+          <span class="pill">Shopify (Liquid + JS + Dynamic Sections)</span>
+          <span class="pill">WordPress Architecture + Yoast SEO</span>
+          <span class="pill">Laravel + PHP + MySQL</span>
+          <span class="pill">Cloudflare + cPanel/WHM</span>
+          <span class="pill">AI Automation + Prompt Engineering</span>
+          <span class="pill">Bilingual UX (RTL/LTR)</span>
+        </div>
+      </div>
+
+      <aside class="side-card reveal">
+        <div class="side-title">QUICK SNAPSHOT</div>
+        <div class="side-sub">A fast view of what you get when hiring me.</div>
+
+        <div class="quick">
+          <div class="quick-item"><b>Focus</b><span>Systems & Automation</span></div>
+          <div class="quick-item"><b>Strength</b><span>Commerce + Publishing</span></div>
+          <div class="quick-item"><b>Style</b><span>Product Ownership</span></div>
+          <div class="quick-item"><b>Delivery</b><span>End‑to‑End</span></div>
+        </div>
+
+        <div class="note">
+          Numbers below are <b>reasonable approximations</b> based on project scope and responsibilities (no sensitive company data).
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  
+<section id="summary" class="subtle-divider">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker">SUMMARY</div>
+        <h2>Who I am</h2>
+      </div>
+      <p>A concise executive overview designed for recruiters and decision-makers.</p>
+    </div>
+
+    <div class="card reveal">
+      <h3>Executive Systems Engineer & Product Architect</h3>
+      <p>
+        I build scalable digital systems that connect engineering, business, and automation. 
+        My work sits at the intersection of commerce platforms, publishing infrastructure, AI workflows,
+        and performance engineering.
+      </p>
+      <p>
+        I operate with a systems mindset: understanding operations first, then designing technology that reduces friction,
+        increases automation, and supports growth. My focus is not just writing code — it’s delivering platforms that run businesses.
+      </p>
+      <p>
+        Strongest domains: Shopify ecosystems, WordPress publishing, Laravel platforms, SEO engineering,
+        AI automation pipelines, infrastructure performance, and product-driven system design.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="logos" class="subtle-divider">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker">BRANDS & PROJECTS</div>
+        <h2>Organizations & platforms I worked on</h2>
+      </div>
+      <p>Replace placeholders with official logos.</p>
+    </div>
+
+    <div class="grid grid-4">
+      <div class="card reveal"><h3>Saudi Times</h3><p>Publishing & infrastructure</p></div>
+      <div class="card reveal"><h3>Meat Station</h3><p>Shopify commerce & POS</p></div>
+      <div class="card reveal"><h3>Feraasa</h3><p>AI + Laravel platform</p></div>
+      <div class="card reveal"><h3>Publishelly</h3><p>Media & SEO systems</p></div>
+    </div>
+  </div>
+</section>
+<section id="experience-timeline" class="subtle-divider">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker">EXPERIENCE TIMELINE</div>
+        <h2>Roles & responsibilities (detailed)</h2>
+      </div>
+      <p>Clear, structured bullets that show leadership + systems impact. Expand any role to see the details.</p>
+    </div>
+
+    <div class="accordion reveal">
+
+      <details open>
+        <summary>
+          <div class="sum-left">
+            <span class="sum-title">CTO — Saudi Times (Remote)</span>
+            <div class="sum-tags">
+              <span class="tag">leadership</span><span class="tag">publishing</span><span class="tag">infra</span><span class="tag">ai</span>
+            </div>
+          </div>
+          <div class="caret">▾</div>
+        </summary>
+        <div class="details-body">
+          <ul class="bullets">
+            <li>Owned technical direction of a digital news platform end-to-end.</li>
+            <li>Managed infrastructure, performance, scalability, and security posture.</li>
+            <li>Introduced AI-based content enhancement and automation workflows.</li>
+            <li>Integrated Google Workspace workflows, Cloudflare layers, analytics, and automation tooling.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <div class="sum-left">
+            <span class="sum-title">Lead Shopify Developer & Business Strategist — Meat Station (Remote)</span>
+            <div class="sum-tags">
+              <span class="tag">shopify</span><span class="tag">pos</span><span class="tag">dashboards</span><span class="tag">strategy</span>
+            </div>
+          </div>
+          <div class="caret">▾</div>
+        </summary>
+        <div class="details-body">
+          <ul class="bullets">
+            <li>Built and customized the full Shopify store with dynamic widgets and editable templates.</li>
+            <li>Designed store visuals (banners, icons, product images, landing sections) to match brand direction.</li>
+            <li>Developed POS workflows, interactive business dashboards, and an app prototype (Figma).</li>
+            <li>Conducted market research + competitor analysis to shape branding and pricing strategy.</li>
+            <li>Coordinated with app developers and managed operational continuity across web/app/admin systems.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <div class="sum-left">
+            <span class="sum-title">IT Manager — Oloom Ltd (London, UK) (Remote)</span>
+            <div class="sum-tags">
+              <span class="tag">it</span><span class="tag">platform</span><span class="tag">analytics</span><span class="tag">automation</span>
+            </div>
+          </div>
+          <div class="caret">▾</div>
+        </summary>
+        <div class="details-body">
+          <ul class="bullets">
+            <li>Managed platform infrastructure and ensured stable, smooth operations.</li>
+            <li>Optimized system performance and reliability as usage scaled.</li>
+            <li>Integrated third-party tools (email, analytics, automation) to support growth.</li>
+            <li>Coordinated with developers and marketing teams for a stable user experience.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <div class="sum-left">
+            <span class="sum-title">Web Developer & Maintenance Specialist — Publishelly (UAE) (Remote)</span>
+            <div class="sum-tags">
+              <span class="tag">wordpress</span><span class="tag">seo</span><span class="tag">leads</span>
+            </div>
+          </div>
+          <div class="caret">▾</div>
+        </summary>
+        <div class="details-body">
+          <ul class="bullets">
+            <li>Developed and launched the official website using WordPress, HTML, and CSS.</li>
+            <li>Implemented advanced SEO techniques and improved page speed/performance.</li>
+            <li>Designed client-facing flows for press releases and media kit submissions.</li>
+            <li>Integrated analytics and lead tracking to improve visibility and conversion.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <div class="sum-left">
+            <span class="sum-title">Full-Stack Web Developer & Graphic Designer / AI Lead — Feraasa (UAE) (Remote)</span>
+            <div class="sum-tags">
+              <span class="tag">laravel</span><span class="tag">ai</span><span class="tag">security</span><span class="tag">localization</span>
+            </div>
+          </div>
+          <div class="caret">▾</div>
+        </summary>
+        <div class="details-body">
+          <ul class="bullets">
+            <li>Managed full-stack platform development using Laravel, cPanel, and Cloudflare.</li>
+            <li>Designed bilingual responsive layouts (RTL/LTR) with optimized user flow.</li>
+            <li>Integrated AI-based image analysis for personality readings + built a custom chatbot for trait analysis.</li>
+            <li>Implemented country-based localization for personalized user experiences.</li>
+            <li>Handled security hardening during real-time hacking attempts and fortified system access.</li>
+            <li>Automated email responses and service delivery using Zoho Mail + backend logic.</li>
+          </ul>
+        </div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<section id="engineering-training" class="subtle-divider">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker">ENGINEERING BACKGROUND</div>
+        <h2>Industrial engineering training (what differentiates me)</h2>
+      </div>
+      <p>This is where the systems mindset comes from — not only “web”.</p>
+    </div>
+
+    <div class="accordion reveal">
+      <details open>
+        <summary>
+          <div class="sum-left">
+            <span class="sum-title">Ezz Direct Reduction — Control & Monitoring Systems Trainee (On-site)</span>
+            <div class="sum-tags">
+              <span class="tag">plc</span><span class="tag">automation</span><span class="tag">monitoring</span>
+            </div>
+          </div>
+          <div class="caret">▾</div>
+        </summary>
+        <div class="details-body">
+          <ul class="bullets">
+            <li>Exposure to PLC systems, control automation, and real-time monitoring.</li>
+            <li>Assisted with fault diagnosis and software–hardware integration concepts.</li>
+            <li>Learned troubleshooting, QA practices, and system analysis in industrial environments.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <div class="sum-left">
+            <span class="sum-title">Ezz Flat Steel — Electrical Engineering Trainee (On-site)</span>
+            <div class="sum-tags">
+              <span class="tag">power</span><span class="tag">safety</span><span class="tag">industry</span>
+            </div>
+          </div>
+          <div class="caret">▾</div>
+        </summary>
+        <div class="details-body">
+          <ul class="bullets">
+            <li>Observed electrical distribution systems inside a large industrial steel plant.</li>
+            <li>Practiced maintenance basics and industrial safety protocols.</li>
+            <li>Built understanding of steel production lifecycle and operational constraints.</li>
+            <li>Worked alongside engineers during inspections and diagnostics around high-voltage equipment.</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+
+<section id="screens" class="subtle-divider">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker">SYSTEM VISUALS</div>
+        <h2>Platform screenshots</h2>
+      </div>
+      <p>Add real UI screenshots from Shopify, WordPress, dashboards, and automation tools.</p>
+    </div>
+
+    <div class="grid grid-3">
+      <div class="card reveal"><h3>Shopify dashboards</h3><p>Product systems & calculators.</p></div>
+      <div class="card reveal"><h3>Publishing workflows</h3><p>SEO + automation pipelines.</p></div>
+      <div class="card reveal"><h3>Admin panels</h3><p>Client-controlled systems.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="architecture" class="subtle-divider">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker">SYSTEM ARCHITECTURE</div>
+        <h2>Engineering diagrams</h2>
+      </div>
+      <p>Add system diagrams: workflows, automation maps, platform architecture.</p>
+    </div>
+
+    <div class="grid grid-3">
+      <div class="card reveal"><h3>Automation flow</h3><p>Content → AI → publish → analytics.</p></div>
+      <div class="card reveal"><h3>Commerce architecture</h3><p>Shopify + POS + dashboards.</p></div>
+      <div class="card reveal"><h3>Infrastructure</h3><p>Cloudflare + hosting + DNS.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="video" class="subtle-divider">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker">INTRO VIDEO</div>
+        <h2>Quick personal introduction</h2>
+      </div>
+      <p>Add a 20–40 sec video introducing your approach and strengths.</p>
+    </div>
+
+    <div class="card reveal">
+      <h3>Video placeholder</h3>
+      <p>Embed YouTube / Loom video here explaining your systems mindset and experience.</p>
+    </div>
+  </div>
+</section>
+
+<section id="impact" class="subtle-divider">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <div class="kicker">BUSINESS IMPACT (APPROX.)</div>
+          <h2>Impact that shows up in operations</h2>
+        </div>
+        <p>Animated counters start when you scroll here. Everything is structured to keep readers engaged, not overwhelmed.</p>
+      </div>
+
+      <div class="grid grid-4">
+        <div class="card reveal">
+          <div class="top"><span class="chip">SYSTEMS</span><span class="metric counter" data-target="15">0</span></div>
+          <h3>Production systems built</h3>
+          <p>Commerce + publishing + automation + AI systems shipped to production.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="top"><span class="chip">PLATFORMS</span><span class="metric counter" data-target="8">0</span></div>
+          <h3>Platforms delivered</h3>
+          <p>Architected or rebuilt multiple products across media and e‑commerce.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="top"><span class="chip">AUTOMATION</span><span class="metric">~<span class="counter" data-target="60">0</span>%</span></div>
+          <h3>Manual workload reduced</h3>
+          <p>By building automation‑first publishing and operational workflows.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="top"><span class="chip">PERFORMANCE</span><span class="metric">~<span class="counter" data-target="3">0</span>×</span></div>
+          <h3>Performance wins</h3>
+          <p>Speed, stability, SEO & UX improvements across projects.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="top"><span class="chip">INTEGRATIONS</span><span class="metric counter" data-target="20">0</span></div>
+          <h3>Integrations shipped</h3>
+          <p>APIs, email, DNS/auth, analytics, SEO, automation services.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="top"><span class="chip">BRANDS</span><span class="metric counter" data-target="4">0</span></div>
+          <h3>Core brands supported</h3>
+          <p>Saudi Times, Meat Station, Feraasa, Publishelly.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="top"><span class="chip">COUNTRIES</span><span class="metric counter" data-target="5">0</span></div>
+          <h3>Markets served</h3>
+          <p>KSA, UAE, UK, Egypt + remote teams.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="top"><span class="chip">OWNERSHIP</span><span class="metric">E2E</span></div>
+          <h3>End‑to‑end delivery</h3>
+          <p>Architecture → build → deploy → optimize (full ownership).</p>
+          <div class="small">Approximations: used for positioning and clarity.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="why" class="subtle-divider">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <div class="kicker">POSITIONING</div>
+          <h2>Why hire me</h2>
+        </div>
+        <p>Expandable cards keep this section readable. Open what you care about.</p>
+      </div>
+
+      <div class="accordion reveal">
+        <details open>
+          <summary>
+            <div class="sum-left">
+              <span class="sum-title">I build <span class="highlight">systems</span>, not “web pages”.</span>
+              <div class="sum-tags">
+                <span class="tag">architecture</span><span class="tag">ownership</span>
+              </div>
+            </div>
+            <div class="caret">▾</div>
+          </summary>
+          <div class="details-body">
+            I start from the business problem (operations, pricing, workflows, data, automation), then design a scalable solution
+            that doesn’t depend on a single person. The goal: fewer errors, less manual effort, faster delivery, measurable outcomes.
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="sum-left">
+              <span class="sum-title">Automation‑first mindset (AI where it makes sense).</span>
+              <div class="sum-tags">
+                <span class="tag">ai</span><span class="tag">workflows</span>
+              </div>
+            </div>
+            <div class="caret">▾</div>
+          </summary>
+          <div class="details-body">
+            I look for repeatable tasks and convert them into workflows: AI-assisted writing, draft pipelines,
+            publishing checks, content rules, and operational automation.
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="sum-left">
+              <span class="sum-title">Performance + SEO are engineering problems.</span>
+              <div class="sum-tags">
+                <span class="tag">seo</span><span class="tag">performance</span>
+              </div>
+            </div>
+            <div class="caret">▾</div>
+          </summary>
+          <div class="details-body">
+            Not “final touches” — I treat performance and SEO as part of architecture: clean structure, fast pages,
+            smart caching, proper metadata strategy, and content workflow compatibility (e.g., Yoast).
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="sum-left">
+              <span class="sum-title">Client‑controlled systems (no‑code control panels).</span>
+              <div class="sum-tags">
+                <span class="tag">shopify</span><span class="tag">ux</span>
+              </div>
+            </div>
+            <div class="caret">▾</div>
+          </summary>
+          <div class="details-body">
+            I design dynamic sections and dashboards so clients can manage content and products without code edits.
+            That reduces operational friction and scales faster.
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="fit" class="subtle-divider">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <div class="kicker">ROLE FIT ENGINE</div>
+          <h2>How well my skills match roles</h2>
+        </div>
+        <p>Bars animate when this section becomes visible.</p>
+      </div>
+
+      <div class="fit reveal" aria-label="Role fit list">
+        <div class="fit-row" data-fit="95">
+          <div class="fit-top"><b>Shopify Systems Architect</b><span>95%</span></div>
+          <div class="bar"><i></i></div>
+        </div>
+        <div class="fit-row" data-fit="92">
+          <div class="fit-top"><b>WordPress Infrastructure + SEO Engineer</b><span>92%</span></div>
+          <div class="bar"><i></i></div>
+        </div>
+        <div class="fit-row" data-fit="90">
+          <div class="fit-top"><b>AI Automation Engineer</b><span>90%</span></div>
+          <div class="bar"><i></i></div>
+        </div>
+        <div class="fit-row" data-fit="88">
+          <div class="fit-top"><b>Full‑Stack Product Engineer (Laravel/PHP/JS)</b><span>88%</span></div>
+          <div class="bar"><i></i></div>
+        </div>
+        <div class="fit-row" data-fit="87">
+          <div class="fit-top"><b>AI Product Builder (Platform + UX + Ops)</b><span>87%</span></div>
+          <div class="bar"><i></i></div>
+        </div>
+        <div class="fit-row" data-fit="85">
+          <div class="fit-top"><b>Technical Lead / CTO Track</b><span>85%</span></div>
+          <div class="bar"><i></i></div>
+        </div>
+        <div class="fit-row" data-fit="78">
+          <div class="fit-top"><b>DevOps / System Integrator</b><span>78%</span></div>
+          <div class="bar"><i></i></div>
+        </div>
+      </div>
+
+      <p class="small reveal" style="margin-top:14px">
+        Percentages are approximate and based on real responsibilities across Shopify, WordPress, Laravel, SEO, infrastructure and automation work.
+      </p>
+    </div>
+  </section>
+
+  <section id="case" class="subtle-divider">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <div class="kicker">CASE STUDIES</div>
+          <h2>What I shipped (structured)</h2>
+        </div>
+        <p>Click to expand. This keeps the page interactive and easy to skim.</p>
+      </div>
+
+      <div class="accordion reveal">
+        <details open>
+          <summary>
+            <div class="sum-left">
+              <span class="sum-title">Saudi Times — AI Blogging & Publishing Engine</span>
+              <div class="sum-tags">
+                <span class="tag">publishing</span><span class="tag">ai</span><span class="tag">seo</span>
+              </div>
+            </div>
+            <div class="caret">▾</div>
+          </summary>
+          <div class="details-body">
+            <p><span class="highlight">Problem:</span> High manual effort to produce, optimize and publish content.</p>
+            <p><span class="highlight">Solution:</span> Automated pipeline for trend discovery, drafting, SEO structure, and publishing workflow compatibility.</p>
+            <p><span class="highlight">Impact (approx.):</span> ~50–70% reduction in time per article cycle, more consistent structure, and better operational clarity.</p>
+            <ul class="bullets">
+              <li>Draft-first workflow with rules for bilingual (Arabic/English) content structure.</li>
+              <li>Image sourcing checks (no watermark), captions, and source attribution.</li>
+              <li>SEO alignment designed to work smoothly with Yoast.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="sum-left">
+              <span class="sum-title">Meat Station — Shopify Commerce System + POS Logic</span>
+              <div class="sum-tags">
+                <span class="tag">shopify</span><span class="tag">pos</span><span class="tag">automation</span>
+              </div>
+            </div>
+            <div class="caret">▾</div>
+          </summary>
+          <div class="details-body">
+            <p><span class="highlight">Problem:</span> Complex ordering logic and operational needs not supported by default Shopify flows.</p>
+            <p><span class="highlight">Solution:</span> Custom calculators, dynamic pricing, quantity logic, and interactive product modals with reliable add‑to‑cart behavior.</p>
+            <p><span class="highlight">Impact (approx.):</span> Fewer order errors, smoother UX, and more client control via Theme Editor settings.</p>
+            <ul class="bullets">
+              <li>Fixed quantity logic to use real slider values (not hardcoded).</li>
+              <li>Improved error handling + loading states for production reliability.</li>
+              <li>Built dynamic sections so admins can manage content without code edits.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="sum-left">
+              <span class="sum-title">Feraasa — Bilingual Platform + AI Features + Security Hardening</span>
+              <div class="sum-tags">
+                <span class="tag">laravel</span><span class="tag">rtl/ltr</span><span class="tag">security</span>
+              </div>
+            </div>
+            <div class="caret">▾</div>
+          </summary>
+          <div class="details-body">
+            <p><span class="highlight">Problem:</span> Direction issues (RTL/LTR), complex service journey, and reliability/security concerns.</p>
+            <p><span class="highlight">Solution:</span> System-wide bilingual layout logic, service journey flow, and strengthened platform posture.</p>
+            <p><span class="highlight">Impact (approx.):</span> Cleaner bilingual UX, clearer customer journey, and reduced friction in service delivery.</p>
+            <ul class="bullets">
+              <li>Built language-aware styling and layout behavior (RTL/LTR switching).</li>
+              <li>Service workflow: login → submit → style → purchase → delivery within 24h.</li>
+              <li>Infrastructure + email/DNS integration readiness mindset.</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  
+<section id="experience-extended" class="subtle-divider">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker">FULL EXPERIENCE</div>
+        <h2>All strengths & professional background</h2>
+      </div>
+      <p>This section highlights the full range of leadership, engineering, and product experience.</p>
+    </div>
+
+    <div class="grid grid-3">
+
+      <div class="card reveal">
+        <div class="top"><span class="chip">LEADERSHIP</span></div>
+        <h3>CTO & Technical Leadership</h3>
+        <p>Technology leadership across publishing, commerce, and AI-driven platforms with full infrastructure responsibility.</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="top"><span class="chip">COMMERCE</span></div>
+        <h3>Shopify Architecture</h3>
+        <p>Advanced product systems, POS workflows, pricing engines, and dynamic theme sections.</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="top"><span class="chip">PUBLISHING</span></div>
+        <h3>Digital Media Infrastructure</h3>
+        <p>WordPress systems, SEO frameworks, automation pipelines, and editorial workflows.</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="top"><span class="chip">AI</span></div>
+        <h3>AI Systems</h3>
+        <p>Automation pipelines, chatbots, AI-assisted publishing, and intelligent workflow systems.</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="top"><span class="chip">ENGINEERING</span></div>
+        <h3>Industrial Engineering Background</h3>
+        <p>Automation, PLC exposure, industrial monitoring, and engineering system thinking.</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="top"><span class="chip">PRODUCT</span></div>
+        <h3>Product Strategy</h3>
+        <p>UX logic, dashboards, operational workflows, and system ownership mindset.</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="top"><span class="chip">SECURITY</span></div>
+        <h3>Security & Infrastructure</h3>
+        <p>Cloudflare, hosting architecture, DNS configuration, and platform hardening.</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="top"><span class="chip">SYSTEMS</span></div>
+        <h3>End‑to‑End Systems</h3>
+        <p>Architecture → Development → Deployment → Optimization → Scaling.</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="top"><span class="chip">BUSINESS</span></div>
+        <h3>Business & Operations</h3>
+        <p>Market research, pricing strategy, automation ROI thinking, and operational efficiency.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="stack" class="subtle-divider">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <div class="kicker">STACK</div>
+          <h2>Tools & technologies</h2>
+        </div>
+        <p>Structured for scanning. Use it as a recruiter-friendly checklist.</p>
+      </div>
+
+      <div class="grid grid-4">
+        <div class="card reveal">
+          <div class="top"><span class="chip">WEB</span></div>
+          <h3>Web Platforms</h3>
+          <p>WordPress, Shopify, Laravel, HTML, CSS, JavaScript.</p>
+        </div>
+        <div class="card reveal">
+          <div class="top"><span class="chip">BACKEND</span></div>
+          <h3>Backend</h3>
+          <p>PHP, MySQL, API integrations, authentication flows, email systems.</p>
+        </div>
+        <div class="card reveal">
+          <div class="top"><span class="chip">INFRA</span></div>
+          <h3>Infrastructure</h3>
+          <p>Cloudflare, cPanel/WHM, DNS (SPF/DKIM/DMARC), performance tuning.</p>
+        </div>
+        <div class="card reveal">
+          <div class="top"><span class="chip">AI</span></div>
+          <h3>AI & Automation</h3>
+          <p>Prompt engineering, automation workflows, chatbots, AI publishing pipelines.</p>
+        </div>
+        <div class="card reveal">
+          <div class="top"><span class="chip">UX</span></div>
+          <h3>Product UX</h3>
+          <p>Client-controlled systems, dynamic editors, bilingual UX (RTL/LTR).</p>
+        </div>
+        <div class="card reveal">
+          <div class="top"><span class="chip">TOOLS</span></div>
+          <h3>Tools</h3>
+          <p>Figma, Adobe Suite, Visual Studio, Windows 11.</p>
+        </div>
+        <div class="card reveal">
+          <div class="top"><span class="chip">SYSTEMS</span></div>
+          <h3>System Design</h3>
+          <p>Dashboards, operational workflows, automation-first architecture.</p>
+        </div>
+        <div class="card reveal">
+          <div class="top"><span class="chip">SECURITY</span></div>
+          <h3>Security Mindset</h3>
+          <p>Hardening, rate-limits awareness, safer platform configurations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="subtle-divider">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <div class="kicker">NEXT STEP</div>
+          <h2>Let’s build something that scales</h2>
+        </div>
+        <p>Fast CTA with the same theme and energy — no boring footer.</p>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="card reveal">
+          <h3>Best fit engagements</h3>
+          <p>Shopify ecosystems • publishing platforms • AI automation pipelines • SEO/performance engineering.</p>
+          <div class="small">If you need an “owner” who can ship and optimize, that’s me.</div>
+        </div>
+        <div class="card reveal">
+          <h3>Availability</h3>
+          <p>Remote collaboration • multi-timezone teams • fast iterations with clear milestones.</p>
+          <div class="small">I can lead execution or integrate into an existing team.</div>
+        </div>
+        <div class="card reveal">
+          <h3>Contact</h3>
+          <p><b>Email:</b> <a href="mailto:kyrolosehab@gmail.com" style="color:var(--accent);text-decoration:none;font-weight:900">kyrolosehab@gmail.com</a></p>
+          <p><b>GitHub:</b> <a href="https://github.com/Eng-Kirolos-Ehab" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;font-weight:900">Eng‑Kirolos‑Ehab</a></p>
+          <div class="small">Optional: add a one‑page PDF resume link here.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <div class="kicker">CLOSING</div>
+        <p>
+          This page is intentionally interactive: scroll‑reveal, animated counters, expandable case studies, and role‑fit bars.
+          It’s designed to keep attention and make the value obvious in under 60 seconds.
+        </p>
+        <div class="copyright">© 2026 Kirolos Ehab • Executive Systems Portfolio</div>
+      </div>
+      <div class="foot-links">
+        <a href="#top">Top</a>
+        <a href="#case">Case Studies</a>
+        <a href="mailto:kyrolosehab@gmail.com">Email</a>
+        <a href="https://github.com/Eng-Kirolos-Ehab" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    menuBtn?.addEventListener('click', () => navLinks.classList.toggle('open'));
+
+    // Scroll progress
+    const progress = document.getElementById('progress');
+    function updateProgress(){
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const pct = height ? (scrollTop / height) * 100 : 0;
+      progress.style.width = pct.toFixed(2) + '%';
+    }
+    window.addEventListener('scroll', updateProgress, {passive:true});
+    updateProgress();
+
+    // Reveal on scroll
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.classList.add('in-view');
+          io.unobserve(e.target);
+        }
+      });
+    }, {threshold:0.12});
+    revealEls.forEach(el=>io.observe(el));
+
+    // Animated counters
+    function animateCounter(el){
+      const target = Number(el.dataset.target || 0);
+      const isSmall = target <= 5;
+      const duration = isSmall ? 650 : 1000;
+      const start = performance.now();
+      const from = 0;
+
+      function tick(now){
+        const t = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - t, 3);
+        const value = Math.round(from + (target - from) * eased);
+        el.textContent = value.toString();
+        if(t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    const counters = document.querySelectorAll('.counter');
+    const counterIO = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          animateCounter(e.target);
+          counterIO.unobserve(e.target);
+        }
+      });
+    }, {threshold:0.35});
+    counters.forEach(c=>counterIO.observe(c));
+
+    // Role-fit bars animate
+    const fitRows = document.querySelectorAll('.fit-row');
+    const fitIO = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          const row = e.target;
+          const pct = Number(row.dataset.fit || 0);
+          const bar = row.querySelector('.bar i');
+          if(bar) bar.style.width = pct + '%';
+          fitIO.unobserve(row);
+        }
+      });
+    }, {threshold:0.25});
+    fitRows.forEach(r=>fitIO.observe(r));
+
+    // Active nav links
+    const sections = ['summary','impact','experience-timeline','engineering-training','why','fit','case','logos','screens','architecture','video','stack','contact'].map(id=>document.getElementById(id)).filter(Boolean);
+    const navA = Array.from(document.querySelectorAll('.links a'));
+    const spy = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          navA.forEach(a=>a.classList.remove('active'));
+          const id = e.target.getAttribute('id');
+          const hit = navA.find(a=>a.getAttribute('href') === '#'+id);
+          hit?.classList.add('active');
+        }
+      });
+    }, {rootMargin:'-40% 0px -55% 0px', threshold:0.01});
+    sections.forEach(s=>spy.observe(s));
+
+    // Optional: keep only one accordion open in case studies
+    const caseSection = document.getElementById('case');
+    if(caseSection){
+      const details = caseSection.querySelectorAll('details');
+      details.forEach(d=>{
+        d.addEventListener('toggle', ()=>{
+          if(d.open){
+            details.forEach(other=>{ if(other!==d) other.removeAttribute('open'); });
+          }
+        });
+      });
+    }
+  </script>
+</body>
+</html>
