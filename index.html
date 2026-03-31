@@ -589,75 +589,63 @@
 ═════════════════════════════════════════════════════════ -->
 <script>
 const CONFIG = {
+  photo: "https://raw.githubusercontent.com/Eng-Kirolos-Ehab/Kyrolos-Ehab/6b09e5b478a5586b7c6b27b83accf64422fa408a/images/Untitled%20design%20(21)%20-%20Copy.png",
 
-  /* ── YOUR PHOTO ─────────────────────────────────────────
-     Use a relative path:   photo: "images/kirolos.jpg"
-     Or a full URL:         photo: "https://example.com/photo.jpg"
-     Or leave blank:        photo: ""
-  ──────────────────────────────────────────────────────── */
-  photo: "https://github.com/Eng-Kirolos-Ehab/Kyrolos-Ehab/blob/6b09e5b478a5586b7c6b27b83accf64422fa408a/images/Untitled%20design%20(21)%20-%20Copy.png",  // 👈 ضع هنا مسار صورتك
-
-  /* ── COMPANY LOGOS ──────────────────────────────────────
-     id          : don't change these
-     logo        : path/URL to image, or "" to show fallback
-     fallbackBg  : gradient shown when no logo (CSS string)
-     fallbackText: initials shown when no logo
-  ──────────────────────────────────────────────────────── */
   brands: [
     {
-      id:           "saudi-times",
-      logo:         "https://github.com/Eng-Kirolos-Ehab/Kyrolos-Ehab/blob/5b28cafe86eb921f822bd6c290108d9452432182/images/s-w%20-%20Copy.png",   // 👈 ضع هنا لوجو Saudi Times
-      fallbackBg:   "linear-gradient(135deg,#00D2FF,#0A4F7A)",
+      id: "saudi-times",
+      logo: "https://raw.githubusercontent.com/Eng-Kirolos-Ehab/Kyrolos-Ehab/5b28cafe86eb921f822bd6c290108d9452432182/images/s-w%20-%20Copy.png",
+      fallbackBg: "linear-gradient(135deg,#00D2FF,#0A4F7A)",
       fallbackText: "ST",
-      name:         "Saudi Times",
-      desc:         "Digital news platform",
-      country:      "🇸🇦 Saudi Arabia · CTO"
+      name: "Saudi Times",
+      desc: "Digital news platform",
+      country: "🇸🇦 Saudi Arabia · CTO"
     },
     {
-      id:           "meat-station",
-      logo:         "https://github.com/Eng-Kirolos-Ehab/Kyrolos-Ehab/blob/5b28cafe86eb921f822bd6c290108d9452432182/images/Meat%20Station%20Web%20Icon.png",   // 👈 ضع هنا لوجو Meat Station
-      fallbackBg:   "linear-gradient(135deg,#F4C842,#8B3A0A)",
+      id: "meat-station",
+      logo: "https://raw.githubusercontent.com/Eng-Kirolos-Ehab/Kyrolos-Ehab/5b28cafe86eb921f822bd6c290108d9452432182/images/Meat%20Station%20Web%20Icon.png",
+      fallbackBg: "linear-gradient(135deg,#F4C842,#8B3A0A)",
       fallbackText: "MS",
-      name:         "Meat Station",
-      desc:         "Shopify commerce & POS",
-      country:      "🇸🇦 Saudi Arabia · Lead Dev"
+      name: "Meat Station",
+      desc: "Shopify commerce & POS",
+      country: "🇸🇦 Saudi Arabia · Lead Dev"
     },
     {
-      id:           "feraasa",
-      logo:         "https://github.com/Eng-Kirolos-Ehab/Kyrolos-Ehab/blob/5b28cafe86eb921f822bd6c290108d9452432182/images/sociallogo.png",   // 👈 ضع هنا لوجو Feraasa
-      fallbackBg:   "linear-gradient(135deg,#8B5CF6,#1E0A4F)",
+      id: "feraasa",
+      logo: "https://raw.githubusercontent.com/Eng-Kirolos-Ehab/Kyrolos-Ehab/5b28cafe86eb921f822bd6c290108d9452432182/images/sociallogo.png",
+      fallbackBg: "linear-gradient(135deg,#8B5CF6,#1E0A4F)",
       fallbackText: "FS",
-      name:         "Feraasa",
-      desc:         "AI personality platform",
-      country:      "🇦🇪 UAE · AI Lead & Dev"
+      name: "Feraasa",
+      desc: "AI personality platform",
+      country: "🇦🇪 UAE · AI Lead & Dev"
     },
     {
-      id:           "publishelly",
-      logo:         "https://github.com/Eng-Kirolos-Ehab/Kyrolos-Ehab/blob/5b28cafe86eb921f822bd6c290108d9452432182/images/Untitled-1-1.png",   // 👈 ضع هنا لوجو Publishelly
-      fallbackBg:   "linear-gradient(135deg,#22D97A,#0A3320)",
+      id: "publishelly",
+      logo: "https://raw.githubusercontent.com/Eng-Kirolos-Ehab/Kyrolos-Ehab/5b28cafe86eb921f822bd6c290108d9452432182/images/Untitled-1-1.png",
+      fallbackBg: "linear-gradient(135deg,#22D97A,#0A3320)",
       fallbackText: "PB",
-      name:         "Publishelly",
-      desc:         "Media & press releases",
-      country:      "🇦🇪 UAE · Web Developer"
+      name: "Publishelly",
+      desc: "Media & press releases",
+      country: "🇦🇪 UAE · Web Developer"
     },
     {
-      id:           "oloom",
-      logo:         "https://github.com/Eng-Kirolos-Ehab/Kyrolos-Ehab/blob/5b28cafe86eb921f822bd6c290108d9452432182/images/Untitled%20design%20(9).png",   // 👈 ضع هنا لوجو Oloom
-      fallbackBg:   "linear-gradient(135deg,#3B82F6,#0A2050)",
+      id: "oloom",
+      logo: "https://raw.githubusercontent.com/Eng-Kirolos-Ehab/Kyrolos-Ehab/5b28cafe86eb921f822bd6c290108d9452432182/images/Untitled%20design%20(9).png",
+      fallbackBg: "linear-gradient(135deg,#3B82F6,#0A2050)",
       fallbackText: "OL",
-      name:         "Oloom Ltd",
-      desc:         "Educational SaaS platform",
-      country:      "🇬🇧 London, UK · IT Manager",
+      name: "Oloom Ltd",
+      desc: "Educational SaaS platform",
+      country: "🇬🇧 London, UK · IT Manager",
       small: true
     },
     {
-      id:           "ezz",
-      logo:         "https://github.com/Eng-Kirolos-Ehab/Kyrolos-Ehab/blob/5b28cafe86eb921f822bd6c290108d9452432182/images/%D8%AD%D8%AF%D9%8A%D8%AF-%D8%B9%D8%B2-ezz-steel.png",   // 👈 ضع هنا لوجو Ezz Industries
-      fallbackBg:   "linear-gradient(135deg,#EF4444,#3A0A0A)",
+      id: "ezz",
+      logo: "https://raw.githubusercontent.com/Eng-Kirolos-Ehab/Kyrolos-Ehab/5b28cafe86eb921f822bd6c290108d9452432182/images/%D8%AD%D8%AF%D9%8A%D8%AF-%D8%B9%D8%B2-ezz-steel.png",
+      fallbackBg: "linear-gradient(135deg,#EF4444,#3A0A0A)",
       fallbackText: "EZ",
-      name:         "Ezz Industries",
-      desc:         "Industrial engineering training",
-      country:      "🇪🇬 Ain Sokhna · On-site",
+      name: "Ezz Industries",
+      desc: "Industrial engineering training",
+      country: "🇪🇬 Ain Sokhna · On-site",
       small: true
     }
   ]
