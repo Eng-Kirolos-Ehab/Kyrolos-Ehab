@@ -6,13 +6,9 @@
   <title>Kirolos Ehab — Systems Architect & AI Engineer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Bebas Neue: bold display titles | Outfit: clean UI/body -->
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    /* ═══════════════════════════════════════════════
-       DESIGN TOKENS
-    ═══════════════════════════════════════════════ */
     :root {
       --bg:      #05070F;
       --bg1:     #080C18;
@@ -42,7 +38,6 @@
       overflow-x: hidden;
     }
 
-    /* Ambient mesh */
     body::before {
       content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
       background:
@@ -50,14 +45,12 @@
         radial-gradient(ellipse 700px 600px at 100% 20%, rgba(139,92,246,.13), transparent 55%),
         radial-gradient(ellipse 800px 400px at 50% 90%,  rgba(0,210,255,.06), transparent 60%);
     }
-    /* Grain */
     body::after {
       content:''; position:fixed; inset:0; z-index:1; pointer-events:none;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
       opacity:.45;
     }
 
-    /* Scroll progress */
     #progress {
       position:fixed; top:0; left:0; height:2px; width:0%;
       background:linear-gradient(90deg, var(--cyan), var(--purple));
@@ -65,19 +58,11 @@
       transition: width .05s linear;
     }
 
-    /* Layout */
     .wrap { width:min(1180px,92%); margin:0 auto; position:relative; z-index:2; }
     section { padding:88px 0; }
     .divider { border:none; border-top:1px solid var(--border); margin:0; }
 
-    /* ═══════════════════════════════════════════════
-       TYPOGRAPHY — Bebas Neue for all display headings
-    ═══════════════════════════════════════════════ */
-    .display {
-      font-family: 'Bebas Neue', sans-serif;
-      letter-spacing: .03em;
-      line-height: 1.0;
-    }
+    .display { font-family: 'Bebas Neue', sans-serif; letter-spacing: .03em; line-height: 1.0; }
     h1 { font-family:'Bebas Neue',sans-serif; letter-spacing:.03em; line-height:1.0; }
     h2 { font-family:'Bebas Neue',sans-serif; letter-spacing:.03em; line-height:1.05; }
 
@@ -87,9 +72,6 @@
       font-family:'Outfit',sans-serif;
     }
 
-    /* ═══════════════════════════════════════════════
-       NAV
-    ═══════════════════════════════════════════════ */
     .nav {
       position:sticky; top:0; z-index:900;
       backdrop-filter:blur(22px) saturate(180%);
@@ -101,17 +83,13 @@
       display:flex; align-items:center; justify-content:space-between;
       gap:12px; padding:12px 0; flex-wrap:wrap;
     }
-    .brand-link {
-      display:flex; align-items:center; gap:10px;
-      text-decoration:none; color:var(--text); flex-shrink:0;
-    }
+    .brand-link { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); flex-shrink:0; }
     .brand-badge {
       width:36px; height:36px; border-radius:10px; flex-shrink:0;
       background:linear-gradient(135deg, var(--cyan), var(--purple));
       display:grid; place-items:center;
       font-family:'Bebas Neue',sans-serif; font-size:16px; color:#000;
       box-shadow:0 8px 24px rgba(0,210,255,.22);
-      /* will show photo if set */
       overflow:hidden;
     }
     .brand-badge img { width:100%; height:100%; object-fit:cover; }
@@ -139,14 +117,8 @@
       .nav-links.open{display:flex}
     }
 
-    /* ═══════════════════════════════════════════════
-       HERO
-    ═══════════════════════════════════════════════ */
     .hero { padding:88px 0 16px; }
-    .hero-grid {
-      display:grid; grid-template-columns:1.3fr .7fr;
-      gap:24px; align-items:start;
-    }
+    .hero-grid { display:grid; grid-template-columns:1.3fr .7fr; gap:24px; align-items:start; }
     @media(max-width:900px){ .hero-grid{grid-template-columns:1fr} }
 
     h1 { font-size:clamp(54px,7vw,96px); }
@@ -156,16 +128,8 @@
       -webkit-text-fill-color:transparent;
     }
 
-    .hero-role {
-      margin-top:8px;
-      font-size:clamp(17px, 2vw, 22px);
-      font-family:'Bebas Neue',sans-serif; letter-spacing:.12em;
-      color:var(--muted);
-    }
-    .hero-sub {
-      margin-top:14px; font-size:16px; color:var(--muted);
-      max-width:54ch; line-height:1.65; font-weight:300;
-    }
+    .hero-role { margin-top:8px; font-size:clamp(17px, 2vw, 22px); font-family:'Bebas Neue',sans-serif; letter-spacing:.12em; color:var(--muted); }
+    .hero-sub  { margin-top:14px; font-size:16px; color:var(--muted); max-width:54ch; line-height:1.65; font-weight:300; }
 
     .hero-actions { margin-top:22px; display:flex; gap:10px; flex-wrap:wrap; }
     .btn {
@@ -182,9 +146,7 @@
       box-shadow:0 14px 38px rgba(0,210,255,.2);
     }
     .btn-primary:hover { transform:translateY(-1px); filter:brightness(1.04); }
-    .btn-ghost {
-      background:var(--surface); border-color:var(--border); color:var(--text);
-    }
+    .btn-ghost { background:var(--surface); border-color:var(--border); color:var(--text); }
     .btn-ghost:hover { background:var(--surfB); transform:translateY(-1px); }
 
     .pill-row { margin-top:18px; display:flex; gap:7px; flex-wrap:wrap; }
@@ -194,7 +156,6 @@
       color:rgba(232,241,255,.82);
     }
 
-    /* Hero side card */
     .hero-side {
       background:linear-gradient(160deg, rgba(255,255,255,.055), rgba(255,255,255,.022));
       border:1px solid var(--border); border-radius:var(--rLg);
@@ -208,10 +169,7 @@
       pointer-events:none;
     }
 
-    /* Profile photo inside hero-side */
-    .profile-wrap {
-      display:flex; align-items:center; gap:14px; margin-bottom:16px;
-    }
+    .profile-wrap { display:flex; align-items:center; gap:14px; margin-bottom:16px; }
     .profile-photo {
       width:64px; height:64px; border-radius:16px; flex-shrink:0;
       background:linear-gradient(135deg, rgba(0,210,255,.25), rgba(139,92,246,.25));
@@ -221,7 +179,7 @@
       overflow:hidden;
     }
     .profile-photo img { width:100%; height:100%; object-fit:cover; }
-    .profile-name { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:.05em; }
+    .profile-name  { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:.05em; }
     .profile-title { font-size:12px; color:var(--muted); font-weight:400; margin-top:2px; }
 
     .side-label {
@@ -235,7 +193,7 @@
       padding:10px 13px; border-radius:11px;
       background:rgba(255,255,255,.04); border:1px solid var(--border);
     }
-    .snap-row b { font-size:13px; font-weight:600; }
+    .snap-row b    { font-size:13px; font-weight:600; }
     .snap-row span { font-size:12px; color:var(--muted); font-weight:400; }
     .notice {
       margin-top:12px; padding:10px 13px; border-radius:11px;
@@ -243,7 +201,6 @@
       font-size:11.5px; color:rgba(232,241,255,.82); line-height:1.6;
     }
 
-    /* Timeline strip */
     .tl-strip {
       margin-top:48px; padding:20px 22px;
       border-radius:var(--rLg);
@@ -254,30 +211,18 @@
       content:''; position:absolute; top:50%; left:22px; right:22px; height:1px;
       background:linear-gradient(90deg, transparent, var(--border) 8%, var(--border) 92%, transparent);
     }
-    .tl-inner {
-      display:flex; justify-content:space-between; gap:8px; overflow-x:auto; padding-bottom:2px;
-    }
+    .tl-inner { display:flex; justify-content:space-between; gap:8px; overflow-x:auto; padding-bottom:2px; }
     .tl-inner::-webkit-scrollbar{ height:3px; }
     .tl-inner::-webkit-scrollbar-thumb{ background:rgba(255,255,255,.1); border-radius:99px; }
     .tl-node { display:flex; flex-direction:column; align-items:center; gap:7px; min-width:100px; position:relative; z-index:1; }
-    .tl-dot {
-      width:13px; height:13px; border-radius:50%;
-      background:linear-gradient(135deg, var(--cyan), var(--purple));
-      border:2px solid var(--bg); box-shadow:0 0 10px rgba(0,210,255,.4);
-    }
-    .tl-year { font-size:10.5px; font-weight:700; color:var(--cyan); letter-spacing:.06em; }
+    .tl-dot  { width:13px; height:13px; border-radius:50%; background:linear-gradient(135deg, var(--cyan), var(--purple)); border:2px solid var(--bg); box-shadow:0 0 10px rgba(0,210,255,.4); }
+    .tl-year  { font-size:10.5px; font-weight:700; color:var(--cyan); letter-spacing:.06em; }
     .tl-label { font-size:11px; color:var(--muted); text-align:center; line-height:1.4; font-weight:300; }
 
-    /* ═══════════════════════════════════════════════
-       SECTION HEADERS
-    ═══════════════════════════════════════════════ */
     .sec-head { margin-bottom:30px; }
     .sec-head h2 { font-size:clamp(32px, 4vw, 52px); margin-top:6px; }
-    .sec-head p { color:var(--muted); font-size:14px; max-width:68ch; margin-top:6px; font-weight:300; }
+    .sec-head p  { color:var(--muted); font-size:14px; max-width:68ch; margin-top:6px; font-weight:300; }
 
-    /* ═══════════════════════════════════════════════
-       CARDS / GRIDS
-    ═══════════════════════════════════════════════ */
     .grid { display:grid; gap:14px; }
     .g4 { grid-template-columns:repeat(4,1fr); }
     .g3 { grid-template-columns:repeat(3,1fr); }
@@ -308,42 +253,111 @@
       -webkit-text-fill-color:transparent;
     }
     .card h3 { font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:.04em; }
-    .card p { color:var(--muted); font-size:13.5px; margin-top:6px; line-height:1.6; font-weight:300; }
+    .card p  { color:var(--muted); font-size:13.5px; margin-top:6px; line-height:1.6; font-weight:300; }
     .card .small { color:var(--muted2); font-size:11.5px; margin-top:10px; }
 
     /* ═══════════════════════════════════════════════
-       BRANDS SECTION
+       ORGANIZATIONS SECTION — REDESIGNED
     ═══════════════════════════════════════════════ */
-    .brand-cards { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
-    @media(max-width:860px){ .brand-cards{grid-template-columns:repeat(2,1fr)} }
-    @media(max-width:480px){ .brand-cards{grid-template-columns:1fr} }
 
-    .brand-card {
-      padding:20px 16px; border-radius:var(--r);
-      background:rgba(255,255,255,.04); border:1px solid var(--border);
-      text-align:center; transition:.2s; position:relative; overflow:hidden;
-    }
-    .brand-card:hover { border-color:var(--borHi); transform:translateY(-2px); }
+    .orgs-grid { display:grid; gap:12px; }
+    .orgs-row-primary   { grid-template-columns: repeat(3, 1fr); }
+    .orgs-row-secondary { grid-template-columns: repeat(3, 1fr); }
 
-    .brand-logo-wrap {
-      width:56px; height:56px; border-radius:14px; margin:0 auto 12px;
-      display:grid; place-items:center; overflow:hidden;
-      border:1px solid rgba(255,255,255,.1);
+    @media(max-width: 1080px) {
+      .orgs-row-primary   { grid-template-columns: repeat(2, 1fr); }
+      .orgs-row-secondary { grid-template-columns: repeat(2, 1fr); }
     }
-    .brand-logo-wrap img { width:100%; height:100%; object-fit:contain; padding:4px; }
-    .brand-logo-wrap .fallback {
-      font-family:'Bebas Neue',sans-serif; font-size:20px;
-      color:#000; width:100%; height:100%;
-      display:grid; place-items:center;
+    @media(max-width: 480px) {
+      .orgs-row-primary,
+      .orgs-row-secondary { grid-template-columns: 1fr; }
     }
 
-    .brand-card h3 { font-family:'Bebas Neue',sans-serif; font-size:17px; letter-spacing:.06em; }
-    .brand-card p  { font-size:12px; color:var(--muted); margin-top:4px; font-weight:300; }
-    .brand-card .country { font-size:11px; color:var(--muted2); margin-top:5px; font-weight:600; letter-spacing:.04em; }
+    .orgs-divider {
+      display: flex; align-items: center; gap: 12px;
+      margin: 24px 0 12px;
+    }
+    .orgs-divider span {
+      font-size: 10.5px; font-weight: 700; letter-spacing: .38em;
+      text-transform: uppercase; color: var(--muted2);
+      white-space: nowrap;
+    }
+    .orgs-divider::before,
+    .orgs-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: var(--border);
+    }
 
-    /* ═══════════════════════════════════════════════
-       ACCORDION
-    ═══════════════════════════════════════════════ */
+    /* Uniform org card */
+    .org-card {
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; padding: 24px 16px 18px;
+      border-radius: var(--rLg);
+      background: rgba(255,255,255,.038);
+      border: 1px solid var(--border);
+      transition: border-color .2s, transform .2s, box-shadow .2s;
+      position: relative; overflow: hidden;
+      min-height: 220px;
+    }
+    .org-card:hover {
+      border-color: rgba(0,210,255,.28);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 48px rgba(0,0,0,.3);
+    }
+    .org-card::before {
+      content: ''; position: absolute; top: 0; left: 20%; right: 20%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,210,255,.45), transparent);
+      opacity: 0; transition: opacity .3s;
+    }
+    .org-card:hover::before { opacity: 1; }
+
+    /* Logo box — object-fit: contain → any aspect ratio, no distortion */
+    .org-logo-box {
+      width: 68px; height: 68px; border-radius: 16px; flex-shrink: 0;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.11);
+      display: grid; place-items: center;
+      overflow: hidden; margin-bottom: 14px;
+      padding: 6px;
+    }
+    .org-logo-box img {
+      width: 100%; height: 100%;
+      object-fit: contain;   /* ← key fix — no distortion regardless of logo shape */
+      display: block;
+    }
+    .org-fallback {
+      font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: #000;
+      width: 100%; height: 100%; display: grid; place-items: center;
+    }
+
+    .org-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 16px; letter-spacing: .06em; margin-bottom: 5px;
+    }
+    .org-desc {
+      font-size: 12px; color: var(--muted); font-weight: 300;
+      line-height: 1.5; flex: 1;
+    }
+
+    /* Role badge — colored by type */
+    .org-role {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 10.5px; font-weight: 700;
+      letter-spacing: .06em; text-transform: uppercase;
+      padding: 5px 11px; border-radius: 999px; margin-top: 12px;
+    }
+    .org-role-lead  { background: rgba(0,210,255,.1);   border: 1px solid rgba(0,210,255,.25);  color: var(--cyan); }
+    .org-role-dev   { background: rgba(139,92,246,.1);  border: 1px solid rgba(139,92,246,.25); color: var(--purple); }
+    .org-role-mgr   { background: rgba(34,217,122,.1);  border: 1px solid rgba(34,217,122,.25); color: var(--green); }
+    .org-role-train { background: rgba(244,200,66,.1);  border: 1px solid rgba(244,200,66,.25); color: var(--gold); }
+
+    /* Earlier experience cards — slightly smaller */
+    .org-card.org-sm { min-height: 180px; padding: 18px 14px 14px; }
+    .org-card.org-sm .org-logo-box { width: 54px; height: 54px; border-radius: 13px; }
+    .org-card.org-sm .org-name { font-size: 14px; }
+
+    /* ─── end orgs redesign ─────────────────────────────── */
+
     .accordion { display:grid; gap:10px; }
     details {
       background:rgba(255,255,255,.032);
@@ -351,10 +365,7 @@
       padding:15px 18px; transition:border-color .2s;
     }
     details[open] { border-color:rgba(0,210,255,.26); background:rgba(0,210,255,.028); }
-    summary {
-      cursor:pointer; list-style:none;
-      display:flex; align-items:center; justify-content:space-between; gap:14px;
-    }
+    summary { cursor:pointer; list-style:none; display:flex; align-items:center; justify-content:space-between; gap:14px; }
     summary::-webkit-details-marker { display:none; }
     .sum-l { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
     .sum-title { font-family:'Bebas Neue',sans-serif; font-size:17px; letter-spacing:.04em; }
@@ -386,18 +397,11 @@
     .hl { color:rgba(232,241,255,.92); font-weight:600; }
 
     .job-meta { display:flex; flex-wrap:wrap; gap:7px 14px; margin-bottom:10px; }
-    .job-badge {
-      font-size:11.5px; font-weight:600;
-      padding:4px 10px; border-radius:999px;
-      display:flex; align-items:center; gap:5px;
-    }
+    .job-badge { font-size:11.5px; font-weight:600; padding:4px 10px; border-radius:999px; display:flex; align-items:center; gap:5px; }
     .jb-period { background:rgba(244,200,66,.1); border:1px solid rgba(244,200,66,.25); color:var(--gold); }
     .jb-loc    { background:rgba(34,217,122,.1);  border:1px solid rgba(34,217,122,.25); color:var(--green); }
     .jb-type   { background:rgba(0,210,255,.1);   border:1px solid rgba(0,210,255,.2);   color:var(--cyan); }
 
-    /* ═══════════════════════════════════════════════
-       ROLE FIT
-    ═══════════════════════════════════════════════ */
     .fit-list { display:grid; gap:10px; }
     .fit-row {
       padding:13px 16px; border-radius:var(--r);
@@ -414,9 +418,6 @@
       transition:width 1.2s cubic-bezier(.16,.84,.28,1);
     }
 
-    /* ═══════════════════════════════════════════════
-       STACK TABLE
-    ═══════════════════════════════════════════════ */
     .stack-table { display:grid; gap:8px; }
     .stack-row {
       display:grid; grid-template-columns:190px 1fr; gap:12px; align-items:start;
@@ -427,9 +428,6 @@
     .stack-label { font-family:'Bebas Neue',sans-serif; font-size:14px; letter-spacing:.06em; color:var(--cyan); }
     .stack-val   { font-size:13.5px; color:var(--muted); line-height:1.6; font-weight:300; }
 
-    /* ═══════════════════════════════════════════════
-       EDUCATION
-    ═══════════════════════════════════════════════ */
     .edu-card {
       padding:24px; border-radius:var(--rLg);
       background:rgba(255,255,255,.04); border:1px solid var(--border);
@@ -439,23 +437,13 @@
     .edu-deg  { font-family:'Bebas Neue',sans-serif; font-size:24px; letter-spacing:.04em; }
     .edu-uni  { font-size:14.5px; color:var(--cyan); font-weight:600; margin-top:4px; }
     .edu-meta { font-size:13px; color:var(--muted); margin-top:3px; font-weight:300; }
-    .edu-badge {
-      padding:10px 16px; border-radius:12px;
-      background:rgba(244,200,66,.1); border:1px solid rgba(244,200,66,.25);
-      text-align:center;
-    }
-    .edu-badge b { font-family:'Bebas Neue',sans-serif; font-size:28px; color:var(--gold); display:block; }
+    .edu-badge { padding:10px 16px; border-radius:12px; background:rgba(244,200,66,.1); border:1px solid rgba(244,200,66,.25); text-align:center; }
+    .edu-badge b    { font-family:'Bebas Neue',sans-serif; font-size:28px; color:var(--gold); display:block; }
     .edu-badge span { font-size:10.5px; color:var(--muted2); font-weight:600; letter-spacing:.06em; }
     .edu-projects { margin-top:14px; display:grid; gap:6px; }
-    .edu-proj {
-      display:flex; align-items:flex-start; gap:8px;
-      font-size:13px; color:var(--muted); line-height:1.55; font-weight:300;
-    }
+    .edu-proj { display:flex; align-items:flex-start; gap:8px; font-size:13px; color:var(--muted); line-height:1.55; font-weight:300; }
     .edu-proj::before { content:'▸'; color:var(--cyan); font-size:10px; margin-top:3px; flex-shrink:0; }
 
-    /* ═══════════════════════════════════════════════
-       CONTACT
-    ═══════════════════════════════════════════════ */
     .contact-grid { display:grid; grid-template-columns:1.6fr 1fr; gap:20px; align-items:start; }
     @media(max-width:760px){ .contact-grid{grid-template-columns:1fr} }
 
@@ -483,21 +471,13 @@
       background:linear-gradient(160deg, rgba(34,217,122,.08), rgba(0,210,255,.05));
       border:1px solid rgba(34,217,122,.2);
     }
-    .avail-dot {
-      width:9px; height:9px; border-radius:50%;
-      background:var(--green); box-shadow:0 0 10px rgba(34,217,122,.6);
-      display:inline-block; margin-right:8px;
-    }
+    .avail-dot { width:9px; height:9px; border-radius:50%; background:var(--green); box-shadow:0 0 10px rgba(34,217,122,.6); display:inline-block; margin-right:8px; }
     .avail-card h4 { font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:.04em; margin-bottom:8px; }
     .avail-card p  { font-size:13px; color:var(--muted); line-height:1.65; font-weight:300; }
     .avail-list    { margin-top:11px; display:grid; gap:6px; }
-    .avail-item {
-      display:flex; align-items:center; gap:8px;
-      font-size:12.5px; color:rgba(232,241,255,.8); font-weight:300;
-    }
+    .avail-item    { display:flex; align-items:center; gap:8px; font-size:12.5px; color:rgba(232,241,255,.8); font-weight:300; }
     .avail-item::before { content:'▸'; color:var(--cyan); font-size:10px; }
 
-    /* Reference */
     .ref-card {
       padding:18px; border-radius:var(--r);
       background:rgba(255,255,255,.032); border:1px solid var(--border);
@@ -511,48 +491,23 @@
       display:grid; place-items:center;
       font-family:'Bebas Neue',sans-serif; font-size:22px; color:var(--cyan);
     }
-    .ref-card h4  { font-family:'Bebas Neue',sans-serif; font-size:17px; letter-spacing:.04em; }
-    .ref-card p   { font-size:13px; color:var(--muted); margin-top:3px; line-height:1.5; font-weight:300; }
-    .ref-card a   { font-size:13px; color:var(--cyan); text-decoration:none; margin-top:4px; display:inline-block; }
+    .ref-card h4 { font-family:'Bebas Neue',sans-serif; font-size:17px; letter-spacing:.04em; }
+    .ref-card p  { font-size:13px; color:var(--muted); margin-top:3px; line-height:1.5; font-weight:300; }
+    .ref-card a  { font-size:13px; color:var(--cyan); text-decoration:none; margin-top:4px; display:inline-block; }
 
-    /* ═══════════════════════════════════════════════
-       FOOTER
-    ═══════════════════════════════════════════════ */
-    footer {
-      position:relative; z-index:2;
-      background:rgba(0,0,0,.28); border-top:1px solid var(--border);
-    }
-    .footer-top {
-      padding:52px 0 38px;
-      display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px;
-    }
+    footer { position:relative; z-index:2; background:rgba(0,0,0,.28); border-top:1px solid var(--border); }
+    .footer-top { padding:52px 0 38px; display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px; }
     @media(max-width:760px){ .footer-top{grid-template-columns:1fr; gap:28px} }
 
-    .footer-brand .fb-logo {
-      display:flex; align-items:center; gap:11px; margin-bottom:14px;
-      text-decoration:none; color:var(--text);
-    }
-    .footer-brand .fb-badge {
-      width:40px; height:40px; border-radius:12px; overflow:hidden;
-      background:linear-gradient(135deg, var(--cyan), var(--purple));
-      display:grid; place-items:center;
-      font-family:'Bebas Neue',sans-serif; font-size:17px; color:#000;
-      flex-shrink:0;
-    }
+    .footer-brand .fb-logo { display:flex; align-items:center; gap:11px; margin-bottom:14px; text-decoration:none; color:var(--text); }
+    .footer-brand .fb-badge { width:40px; height:40px; border-radius:12px; overflow:hidden; background:linear-gradient(135deg, var(--cyan), var(--purple)); display:grid; place-items:center; font-family:'Bebas Neue',sans-serif; font-size:17px; color:#000; flex-shrink:0; }
     .footer-brand .fb-badge img { width:100%; height:100%; object-fit:cover; }
-    .footer-brand .fb-name { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:.05em; }
+    .footer-brand .fb-name    { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:.05em; }
     .footer-brand .fb-tagline { font-size:13px; color:var(--muted); line-height:1.65; max-width:38ch; font-weight:300; }
-    .footer-brand .fb-copy { font-size:11.5px; color:var(--muted2); margin-top:16px; }
+    .footer-brand .fb-copy    { font-size:11.5px; color:var(--muted2); margin-top:16px; }
 
-    .footer-col h5 {
-      font-family:'Bebas Neue',sans-serif; font-size:14px; letter-spacing:.25em;
-      color:var(--muted2); margin-bottom:14px;
-    }
-    .footer-col a, .footer-col p {
-      display:block; font-size:13.5px; color:var(--muted);
-      text-decoration:none; margin-bottom:8px;
-      transition:color .15s; font-weight:300; line-height:1.5;
-    }
+    .footer-col h5 { font-family:'Bebas Neue',sans-serif; font-size:14px; letter-spacing:.25em; color:var(--muted2); margin-bottom:14px; }
+    .footer-col a, .footer-col p { display:block; font-size:13.5px; color:var(--muted); text-decoration:none; margin-bottom:8px; transition:color .15s; font-weight:300; line-height:1.5; }
     .footer-col a:hover { color:var(--text); }
     .footer-col .fl-hi { color:var(--cyan); font-weight:500; }
 
@@ -564,14 +519,8 @@
     }
     .footer-bottom p { font-size:11.5px; color:var(--muted2); font-weight:300; }
     .footer-badges { display:flex; gap:7px; flex-wrap:wrap; }
-    .fbadge {
-      font-size:10.5px; font-weight:600; padding:4px 9px; border-radius:7px;
-      background:var(--surface); border:1px solid var(--border); color:var(--muted);
-    }
+    .fbadge { font-size:10.5px; font-weight:600; padding:4px 9px; border-radius:7px; background:var(--surface); border:1px solid var(--border); color:var(--muted); }
 
-    /* ═══════════════════════════════════════════════
-       SCROLL REVEAL
-    ═══════════════════════════════════════════════ */
     .r  { opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
     .r.v{ opacity:1; transform:translateY(0); }
     .r2 { transition-delay:.08s; }
@@ -583,18 +532,14 @@
 <body>
 <div id="progress"></div>
 
-<!-- ═══════════ CONFIG — EDIT HERE ═══════════════════════
-     Put image paths or URLs below.
-     Leave as empty string "" to show the fallback initials.
-═════════════════════════════════════════════════════════ -->
 <script>
 const CONFIG = {
-  photo: "https://raw.githubusercontent.com/Eng-Kirolos-Ehab/Kyrolos-Ehab/6b09e5b478a5586b7c6b27b83accf64422fa408a/images/Untitled%20design%20(21)%20-%20Copy.png",
+  photo: "https://raw.githubusercontent.com/Eng-Kirolos-Ehab/Kyrolos-Ehab/main/images/Untitled%20design%20(21)%20-%20Copy.png",
 
   brands: [
     {
       id: "saudi-times",
-      logo: "https://raw.githubusercontent.com/Eng-Kirolos-Ehab/Kyrolos-Ehab/5b28cafe86eb921f822bd6c290108d9452432182/images/s-w%20-%20Copy.png",
+      logo: "https://raw.githubusercontent.com/Eng-Kirolos-Ehab/Kyrolos-Ehab/main/images/s-w%20-%20Copy.png",
       fallbackBg: "linear-gradient(135deg,#00D2FF,#0A4F7A)",
       fallbackText: "ST",
       name: "Saudi Times",
@@ -603,7 +548,7 @@ const CONFIG = {
     },
     {
       id: "meat-station",
-      logo: "https://raw.githubusercontent.com/Eng-Kirolos-Ehab/Kyrolos-Ehab/5b28cafe86eb921f822bd6c290108d9452432182/images/Meat%20Station%20Web%20Icon.png",
+      logo: "https://raw.githubusercontent.com/Eng-Kirolos-Ehab/Kyrolos-Ehab/main/images/Meat%20Station%20Web%20Icon.png",
       fallbackBg: "linear-gradient(135deg,#F4C842,#8B3A0A)",
       fallbackText: "MS",
       name: "Meat Station",
@@ -612,7 +557,7 @@ const CONFIG = {
     },
     {
       id: "feraasa",
-      logo: "https://raw.githubusercontent.com/Eng-Kirolos-Ehab/Kyrolos-Ehab/5b28cafe86eb921f822bd6c290108d9452432182/images/sociallogo.png",
+      logo: "https://raw.githubusercontent.com/Eng-Kirolos-Ehab/Kyrolos-Ehab/main/images/sociallogo.png",
       fallbackBg: "linear-gradient(135deg,#8B5CF6,#1E0A4F)",
       fallbackText: "FS",
       name: "Feraasa",
@@ -621,7 +566,7 @@ const CONFIG = {
     },
     {
       id: "publishelly",
-      logo: "https://raw.githubusercontent.com/Eng-Kirolos-Ehab/Kyrolos-Ehab/5b28cafe86eb921f822bd6c290108d9452432182/images/Untitled-1-1.png",
+      logo: "https://raw.githubusercontent.com/Eng-Kirolos-Ehab/Kyrolos-Ehab/main/images/Untitled-1-1.png",
       fallbackBg: "linear-gradient(135deg,#22D97A,#0A3320)",
       fallbackText: "PB",
       name: "Publishelly",
@@ -630,28 +575,25 @@ const CONFIG = {
     },
     {
       id: "oloom",
-      logo: "https://raw.githubusercontent.com/Eng-Kirolos-Ehab/Kyrolos-Ehab/5b28cafe86eb921f822bd6c290108d9452432182/images/Untitled%20design%20(9).png",
+      logo: "https://raw.githubusercontent.com/Eng-Kirolos-Ehab/Kyrolos-Ehab/main/images/Untitled%20design%20(9).png",
       fallbackBg: "linear-gradient(135deg,#3B82F6,#0A2050)",
       fallbackText: "OL",
       name: "Oloom Ltd",
       desc: "Educational SaaS platform",
-      country: "🇬🇧 London, UK · IT Manager",
-      small: true
+      country: "🇬🇧 London, UK · IT Manager"
     },
     {
       id: "ezz",
-      logo: "https://raw.githubusercontent.com/Eng-Kirolos-Ehab/Kyrolos-Ehab/5b28cafe86eb921f822bd6c290108d9452432182/images/%D8%AD%D8%AF%D9%8A%D8%AF-%D8%B9%D8%B2-ezz-steel.png",
+      logo: "https://raw.githubusercontent.com/Eng-Kirolos-Ehab/Kyrolos-Ehab/main/images/%D8%AD%D8%AF%D9%8A%D8%AF-%D8%B9%D8%B2-ezz-steel.png",
       fallbackBg: "linear-gradient(135deg,#EF4444,#3A0A0A)",
       fallbackText: "EZ",
       name: "Ezz Industries",
       desc: "Industrial engineering training",
-      country: "🇪🇬 Ain Sokhna · On-site",
-      small: true
+      country: "🇪🇬 Ain Sokhna · On-site"
     }
   ]
 };
 </script>
-<!-- ═══════════ END CONFIG ════════════════════════════ -->
 
 <!-- NAV -->
 <header class="nav">
@@ -667,8 +609,8 @@ const CONFIG = {
     <nav class="nav-links" id="navLinks">
       <a href="#summary">Summary</a>
       <a href="#impact">Impact</a>
-      <a href="#brands">Brands</a>
-      <a href="#experience">Experience</a>
+      <a href="#brands">Experience</a>
+      <a href="#experience">Roles</a>
       <a href="#education">Education</a>
       <a href="#fit">Role Fit</a>
       <a href="#case">Case Studies</a>
@@ -861,15 +803,15 @@ const CONFIG = {
 
   <hr class="divider">
 
-  <!-- BRANDS — rendered by JS from CONFIG -->
+  <!-- ═══════════════ ORGANIZATIONS & EXPERIENCE ═══════════════ -->
   <section id="brands">
     <div class="wrap">
       <div class="sec-head r">
-        <div class="kicker">Organizations & Platforms</div>
-        <h2>Brands I Built & Led</h2>
-        <p>All remote — spanning Saudi Arabia, UAE, UK, and Egypt.</p>
+        <div class="kicker">Where I Worked &amp; Grew</div>
+        <h2>Organizations &amp; Experience</h2>
+        <p>Full-time roles, freelance projects, and hands-on training — 4 countries, one engineering mindset.</p>
       </div>
-      <div id="brandsGrid" class="r"></div>
+      <div id="orgsGrid" class="r"></div>
     </div>
   </section>
 
@@ -1362,7 +1304,7 @@ const CONFIG = {
         <h5>Portfolio</h5>
         <a href="#summary">Summary</a>
         <a href="#impact">Impact Metrics</a>
-        <a href="#brands">Brands</a>
+        <a href="#brands">Organizations</a>
         <a href="#experience">Experience</a>
         <a href="#education">Education</a>
         <a href="#case">Case Studies</a>
@@ -1398,7 +1340,6 @@ const CONFIG = {
   function applyConfig() {
 
     // ── Photo ──────────────────────────────────────
-    // Appears in: nav badge, hero side card, footer badge
     if (CONFIG.photo) {
       ['navPhoto','heroPhoto','footerPhoto'].forEach(id => {
         const el = document.getElementById(id);
@@ -1412,91 +1353,68 @@ const CONFIG = {
       });
     }
 
-    // ── Brands grid ────────────────────────────────
-    const grid = document.getElementById('brandsGrid');
+    // ── Organizations grid ─────────────────────────
+    const grid = document.getElementById('orgsGrid');
     if (!grid) return;
 
-    const mainBrands  = CONFIG.brands.filter(b => !b.small);
-    const smallBrands = CONFIG.brands.filter(b =>  b.small);
+    // Role badge map
+    const roleStyle = {
+      'saudi-times':  { cls: 'org-role-lead',  label: '🏗 CTO' },
+      'meat-station': { cls: 'org-role-lead',  label: '💻 Lead Dev' },
+      'feraasa':      { cls: 'org-role-dev',   label: '🤖 AI Lead & Dev' },
+      'publishelly':  { cls: 'org-role-dev',   label: '🌐 Web Developer' },
+      'oloom':        { cls: 'org-role-mgr',   label: '🖥 IT Manager' },
+      'ezz':          { cls: 'org-role-train', label: '🏭 Engineering Training' },
+    };
 
-    // Helper: build one brand card element
-    function makeCard(b, small) {
+    function makeOrgCard(b, small) {
       const card = document.createElement('div');
-      card.className = 'brand-card' + (small ? '' : '');
+      card.className = 'org-card' + (small ? ' org-sm' : '');
 
-      const logoWrap = document.createElement('div');
-      logoWrap.className = 'brand-logo-wrap';
-      logoWrap.style.background = b.logo ? 'transparent' : b.fallbackBg;
-
+      // Logo box — object-fit:contain handles any aspect ratio
+      const logoBox = document.createElement('div');
+      logoBox.className = 'org-logo-box';
       if (b.logo) {
         const img = document.createElement('img');
         img.src = b.logo;
         img.alt = b.name + ' logo';
-        logoWrap.appendChild(img);
+        logoBox.appendChild(img);
       } else {
+        logoBox.style.background = b.fallbackBg;
         const fb = document.createElement('div');
-        fb.className = 'fallback';
+        fb.className = 'org-fallback';
         fb.textContent = b.fallbackText;
-        logoWrap.appendChild(fb);
+        logoBox.appendChild(fb);
       }
+      card.appendChild(logoBox);
 
-      card.innerHTML = `
-        <h3>${b.name}</h3>
-        <p>${b.desc}</p>
-        <div class="country">${b.country}</div>
-      `;
-      card.insertBefore(logoWrap, card.firstChild);
+      // Name
+      const name = document.createElement('div');
+      name.className = 'org-name';
+      name.textContent = b.name;
+      card.appendChild(name);
+
+      // Description
+      const desc = document.createElement('div');
+      desc.className = 'org-desc';
+      desc.textContent = b.desc;
+      card.appendChild(desc);
+
+      // Role badge
+      const rs = roleStyle[b.id] || { cls: 'org-role-dev', label: b.country };
+      const role = document.createElement('div');
+      role.className = 'org-role ' + rs.cls;
+      role.textContent = rs.label;
+      card.appendChild(role);
+
       return card;
     }
 
-    // Main 4-column row
-    const mainRow = document.createElement('div');
-    mainRow.className = 'brand-cards';
-    mainBrands.forEach(b => mainRow.appendChild(makeCard(b)));
-    grid.appendChild(mainRow);
-
-    // Small 2-column row (if any)
-    if (smallBrands.length) {
-      const smallRow = document.createElement('div');
-      smallRow.className = 'grid g2';
-      smallRow.style.marginTop = '12px';
-
-      smallBrands.forEach(b => {
-        const card = document.createElement('div');
-        card.className = 'brand-card';
-        card.style.cssText = 'text-align:left;padding:16px 18px';
-
-        const logoWrap = document.createElement('div');
-        logoWrap.className = 'brand-logo-wrap';
-        logoWrap.style.cssText = 'width:42px;height:42px;border-radius:11px;flex-shrink:0;' +
-          (b.logo ? '' : 'background:' + b.fallbackBg);
-
-        if (b.logo) {
-          const img = document.createElement('img');
-          img.src = b.logo; img.alt = b.name + ' logo';
-          logoWrap.appendChild(img);
-        } else {
-          const fb = document.createElement('div');
-          fb.className = 'fallback'; fb.textContent = b.fallbackText;
-          fb.style.fontSize = '16px';
-          logoWrap.appendChild(fb);
-        }
-
-        card.innerHTML = `
-          <div style="display:flex;align-items:center;gap:12px">
-            <div class="inner-logo"></div>
-            <div>
-              <h3 style="font-size:15px">${b.name}</h3>
-              <p style="font-size:12px;margin-top:2px">${b.desc}</p>
-              <div class="country" style="margin-top:2px">${b.country}</div>
-            </div>
-          </div>
-        `;
-        card.querySelector('.inner-logo').replaceWith(logoWrap);
-        smallRow.appendChild(card);
-      });
-      grid.appendChild(smallRow);
-    }
+    // All 6 orgs — single unified 3×2 grid, uniform cards
+    const rowAll = document.createElement('div');
+    rowAll.className = 'orgs-grid orgs-row-primary';
+    CONFIG.brands.forEach(b => rowAll.appendChild(makeOrgCard(b, false)));
+    grid.appendChild(rowAll);
   }
 
   applyConfig();
