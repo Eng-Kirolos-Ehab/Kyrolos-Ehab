@@ -81,6 +81,7 @@
 
   .wrap{ width:min(1180px,92%); margin:0 auto; position:relative; z-index:2; }
   section{ padding:96px 0; position:relative; }
+  @media(max-width:640px){ section{ padding:56px 0; } .sec-head{ margin-bottom:24px; } }
   .divider{ border:none; border-top:1px solid var(--border); margin:0; position:relative; z-index:2; }
 
   h1,h2{ font-family:'Bebas Neue',sans-serif; letter-spacing:.03em; line-height:1.0; }
@@ -132,7 +133,14 @@
   .icon-btn:hover{ background:var(--surfB); border-color:var(--borHi); transform:translateY(-1px); }
   .clock{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); padding:0 6px; white-space:nowrap; }
   .menu-btn{ display:none; padding:7px 12px; border-radius:9px; background:var(--surface); border:1px solid var(--border); color:var(--text); font-size:12px; font-weight:600; cursor:pointer; font-family:'Outfit',sans-serif; }
-  @media(max-width:940px){ .menu-btn{ display:inline-flex; } .nav-links{ display:none; width:100%; order:5; } .nav-links.open{ display:flex; } .clock{ display:none; } }
+  @media(max-width:940px){
+    .menu-btn{ display:inline-flex; }
+    .nav-links{ display:none; width:100%; order:5; flex-direction:column; gap:2px; margin-top:10px; padding-top:10px; border-top:1px solid var(--border); }
+    .nav-links.open{ display:flex; }
+    .nav-links a{ width:100%; padding:12px 14px; border-radius:11px; font-size:14px; min-height:44px; display:flex; align-items:center; }
+    .clock{ display:none; }
+  }
+  @media(max-width:480px){ .icon-btn{ width:40px; height:40px; } }
 
   /* ═══ HERO ═══ */
   .hero{ padding:64px 0 16px; }
@@ -187,6 +195,13 @@
   .sec-head{ margin-bottom:34px; position:relative; }
   .sec-head h2{ font-size:clamp(32px,4vw,50px); margin-top:6px; }
   .sec-head p{ color:var(--muted); font-size:14px; max-width:68ch; margin-top:6px; font-weight:300; }
+
+  .story-band{ display:flex; gap:18px; align-items:flex-start; padding:22px 24px; border-radius:var(--rLg); background:linear-gradient(135deg, rgba(0,210,255,.09), rgba(139,92,246,.07)); border:1px solid rgba(0,210,255,.22); margin-bottom:20px; }
+  .story-band .story-ic{ width:44px; height:44px; border-radius:12px; background:rgba(0,210,255,.14); display:grid; place-items:center; flex-shrink:0; color:var(--cyan); }
+  .story-band .story-ic svg{ width:22px; height:22px; stroke:currentColor; fill:none; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+  .story-band h3{ font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:.03em; margin-bottom:8px; }
+  .story-band p{ color:var(--muted); font-size:14px; line-height:1.7; font-weight:300; max-width:76ch; }
+  @media(max-width:560px){ .story-band{ flex-direction:column; padding:18px; } }
 
   .grid{ display:grid; gap:14px; }
   .g4{ grid-template-columns:repeat(4,1fr); } .g3{ grid-template-columns:repeat(3,1fr); } .g2{ grid-template-columns:repeat(2,1fr); }
@@ -256,7 +271,7 @@
   .flip.on .flip-in{ transform:rotateY(180deg); }
   .flip-face{ position:absolute; inset:0; backface-visibility:hidden; border-radius:var(--r); border:1px solid var(--border); padding:20px; display:flex; flex-direction:column; }
   .flip-front{ background:var(--surface); justify-content:space-between; }
-  .flip-front .ic{ font-size:26px; }
+  .flip-front .ic{ color:var(--cyan); }
   .flip-front h3{ font-family:'Bebas Neue',sans-serif; font-size:17px; letter-spacing:.03em; }
   .flip-front .tap{ font-size:10.5px; color:var(--muted2); font-family:'JetBrains Mono',monospace; }
   .flip-back{ background:linear-gradient(160deg,rgba(0,210,255,.1),rgba(139,92,246,.08)); transform:rotateY(180deg); justify-content:center; border-color:rgba(0,210,255,.28); }
@@ -317,8 +332,12 @@
   .orbit-tip b{ color:var(--text); margin-right:6px; }
   @media(max-width:900px){ .orbit-stage{ display:none; } }
 
-  .stack-tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:22px; }
-  .stack-tags span{ font-size:12px; padding:6px 12px; border-radius:999px; background:var(--surface); border:1px solid var(--border); color:var(--muted); }
+  .stack-group{ margin-top:20px; }
+  .stack-group:first-of-type{ margin-top:22px; }
+  .stack-group-label{ display:flex; align-items:center; gap:8px; font-size:10.5px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--muted2); margin-bottom:9px; }
+  .stack-group-label .sw{ width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+  .stack-tags{ display:flex; flex-wrap:wrap; gap:7px; }
+  .stack-tags span{ font-size:12px; padding:6px 12px; border-radius:999px; background:var(--surface); border:1px solid var(--border); color:var(--text); opacity:.88; }
 
   /* ═══ EDU / CONTACT (reuse) ═══ */
   .edu-card{ padding:24px; border-radius:var(--rLg); background:var(--surface); border:1px solid var(--border); display:grid; grid-template-columns:1fr auto; gap:16px; align-items:start; }
@@ -395,12 +414,38 @@
   #totop.show{ opacity:1; visibility:visible; }
   #totop:hover{ border-color:var(--borHi); transform:translateY(-3px); }
 
+  /* ═══ MOBILE QUICK-CONTACT BAR ═══ */
+  #mobileBar{ display:none; }
+  @media(max-width:760px){
+    body{ padding-bottom:calc(64px + env(safe-area-inset-bottom)); }
+    #mobileBar{
+      display:flex; position:fixed; left:0; right:0; bottom:0; z-index:850;
+      background:color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter:blur(18px) saturate(160%);
+      border-top:1px solid var(--border);
+      padding:8px 8px calc(8px + env(safe-area-inset-bottom));
+      gap:6px;
+    }
+    #mobileBar a{
+      flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px;
+      min-height:48px; border-radius:12px; text-decoration:none; color:var(--muted);
+      font-size:10.5px; font-weight:600; transition:.15s; background:var(--surface);
+    }
+    #mobileBar a:active{ background:var(--surfB); color:var(--cyan); }
+    #totop{ bottom:calc(78px + env(safe-area-inset-bottom)); right:16px; width:44px; height:44px; }
+  }
+
   /* ═══ KONAMI EASTER EGG ═══ */
   #egg{ position:fixed; inset:0; z-index:99998; background:rgba(0,0,0,.9); display:none; align-items:center; justify-content:center; flex-direction:column; gap:10px; text-align:center; }
   #egg.show{ display:flex; }
   #egg h2{ font-size:clamp(36px,8vw,80px); background:linear-gradient(135deg,var(--cyan),var(--green),var(--purple)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
   #egg p{ font-family:'JetBrains Mono',monospace; color:var(--muted); font-size:13px; }
   #egg-canvas{ position:fixed; inset:0; z-index:99997; display:none; pointer-events:none; }
+
+  .ic{ display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; line-height:0; }
+  .ic svg{ width:100%; height:100%; display:block; stroke:currentColor; fill:none; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+  .ic-11{ width:11px; height:11px; } .ic-13{ width:13px; height:13px; } .ic-14{ width:14px; height:14px; }
+  .ic-16{ width:16px; height:16px; } .ic-18{ width:18px; height:18px; } .ic-20{ width:20px; height:20px; }
+  .ic-24{ width:24px; height:24px; } .ic-28{ width:28px; height:28px; }
 
   .r{ opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
   .r.v{ opacity:1; transform:translateY(0); }
@@ -437,6 +482,40 @@ const CONFIG = {
     { id:"ezz", logo:"https://raw.githubusercontent.com/Eng-Kirolos-Ehab/Kyrolos-Ehab/5b28cafe86eb921f822bd6c290108d9452432182/images/%D8%AD%D8%AF%D9%8A%D8%AF-%D8%B9%D8%B2-ezz-steel.png", fallbackBg:"linear-gradient(135deg,#EF4444,#3A0A0A)", fallbackText:"EZ", name:"Ezz Industries", desc:"Industrial engineering training", country:"🇪🇬 Ain Sokhna · On-site" }
   ]
 };
+
+/* Outline icon set — no emoji, currentColor strokes, 24x24 viewBox */
+const ICONS = {
+  mail: '<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.2"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg>',
+  phone: '<svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.3 15.3 0 0 0 6.6 6.6l2.1-2.1a1 1 0 0 1 1-.25 10.8 10.8 0 0 0 3.35.55 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 10.8 10.8 0 0 0 .55 3.35 1 1 0 0 1-.25 1z"/></svg>',
+  briefcase: '<svg viewBox="0 0 24 24"><rect x="3" y="7.5" width="18" height="12.5" rx="2"/><path d="M8.5 7.5V5.8A1.8 1.8 0 0 1 10.3 4h3.4a1.8 1.8 0 0 1 1.8 1.8v1.7"/><path d="M3 13h18"/></svg>',
+  calendar: '<svg viewBox="0 0 24 24"><rect x="3.2" y="4.3" width="17.6" height="16.4" rx="2"/><path d="M16 2.3v4M8 2.3v4M3.2 9.8h17.6"/></svg>',
+  pin: '<svg viewBox="0 0 24 24"><path d="M12 21.5s7-6.4 7-12.2a7 7 0 1 0-14 0c0 5.8 7 12.2 7 12.2z"/><circle cx="12" cy="9.3" r="2.4"/></svg>',
+  factory: '<svg viewBox="0 0 24 24"><path d="M3 21V10.5l5 3v-3l5 3V8l6 3.3V21z"/><path d="M3 21h17M7 15.2v2.3M11.5 15.2v2.3M16 13.6v3.9"/></svg>',
+  globe: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.5 4 5.7 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.7-4-9s1.4-6.5 4-9z"/></svg>',
+  search: '<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>',
+  sun: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.6M12 18.9v2.6M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M2.5 12h2.6M18.9 12h2.6M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></svg>',
+  moon: '<svg viewBox="0 0 24 24"><path d="M20.8 13.8A8.8 8.8 0 1 1 10.2 3.2a7 7 0 0 0 10.6 10.6z"/></svg>',
+  arrowUp: '<svg viewBox="0 0 24 24"><path d="M12 19.5V5M5.5 11.5L12 5l6.5 6.5"/></svg>',
+  shield: '<svg viewBox="0 0 24 24"><path d="M12 21.8s7.5-3.8 7.5-9.6V5.4L12 2.5 4.5 5.4v6.8c0 5.8 7.5 9.6 7.5 9.6z"/><path d="M8.7 12.1l2.2 2.2 4.4-4.6"/></svg>',
+  cpu: '<svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1.4"/><rect x="10" y="10" width="4" height="4"/><path d="M12 2v3.2M12 18.8V22M2 12h3.2M18.8 12H22M4.8 4.8l2.2 2.2M17 17l2.2 2.2M19.2 4.8L17 7M7 17l-2.2 2.2"/></svg>',
+  compass: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.3 8.7l-2 5.2-5.2 2 2-5.2z"/></svg>',
+  building: '<svg viewBox="0 0 24 24"><rect x="4" y="3" width="8" height="18"/><rect x="14.5" y="9.5" width="5.5" height="11.5"/><path d="M7 6.5h2M7 10h2M7 13.5h2M16.5 13h2M16.5 16.5h2"/></svg>',
+  smartphone: '<svg viewBox="0 0 24 24"><rect x="7.2" y="2.2" width="9.6" height="19.6" rx="2"/><path d="M10.8 18.3h2.4"/></svg>',
+  chat: '<svg viewBox="0 0 24 24"><path d="M21 11.5a8.3 8.3 0 0 1-8.3 8.3H5.3l-2.3 2.2V11.5A8.3 8.3 0 0 1 11.3 3.2 8.3 8.3 0 0 1 21 11.5z"/></svg>',
+  newspaper: '<svg viewBox="0 0 24 24"><rect x="3" y="5" width="13.5" height="15.5" rx="1.2"/><path d="M6.3 9h6.9M6.3 12.5h6.9M6.3 16h4.2"/><path d="M16.5 8h3.3a1 1 0 0 1 1 1v9.3a2.2 2.2 0 0 1-2.2 2.2h-2.1"/></svg>',
+  cart: '<svg viewBox="0 0 24 24"><circle cx="9.5" cy="20" r="1.2"/><circle cx="17.5" cy="20" r="1.2"/><path d="M2.2 3h2.2l2.3 12a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 7.2H5.8"/></svg>',
+  doc: '<svg viewBox="0 0 24 24"><path d="M6.5 2.3h8.2l5 5V21a1 1 0 0 1-1 1h-12a1 1 0 0 1-1-1V3.3a1 1 0 0 1 1-1z"/><path d="M14.5 2.3v5h5M8.5 12.5h7M8.5 16h7"/></svg>',
+  palette: '<svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.7-.8 1.7-1.7 0-.5-.2-.8-.4-1.1-.2-.3-.4-.6-.4-1.1 0-.9.7-1.6 1.6-1.6h1.9a4.3 4.3 0 0 0 4.3-4.3C20.7 6.4 16.8 3 12 3z"/><circle cx="7.3" cy="10.7" r="1.15"/><circle cx="10.3" cy="7.3" r="1.15"/><circle cx="15.2" cy="7.9" r="1.15"/><circle cx="17.1" cy="12.3" r="1.15"/></svg>',
+  chart: '<svg viewBox="0 0 24 24"><path d="M4.5 20V10.5M10.3 20V4M16 20v-7.3M21.5 20H2.5"/></svg>',
+  database: '<svg viewBox="0 0 24 24"><ellipse cx="12" cy="5.3" rx="8" ry="3"/><path d="M4 5.3v13.4c0 1.65 3.6 3 8 3s8-1.35 8-3V5.3"/><path d="M4 12c0 1.65 3.6 3 8 3s8-1.35 8-3"/></svg>',
+  cloud: '<svg viewBox="0 0 24 24"><path d="M7.2 18.3a4.4 4.4 0 0 1-.9-8.7 5.5 5.5 0 0 1 10.6-1.7 4.4 4.4 0 0 1-.8 10.4z"/></svg>',
+  network: '<svg viewBox="0 0 24 24"><circle cx="6" cy="6.5" r="2.5"/><circle cx="18" cy="6.5" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8.2 7.9L10.6 15.7M15.8 7.9L13.4 15.7M8.5 6.5h7"/></svg>',
+  code: '<svg viewBox="0 0 24 24"><path d="M8.7 7.2L3.4 12l5.3 4.8M15.3 7.2l5.3 4.8-5.3 4.8M13.6 4.6l-3.2 14.8"/></svg>',
+  lock: '<svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.8a4 4 0 0 1 8 0V11"/></svg>',
+  plug: '<svg viewBox="0 0 24 24"><path d="M13.3 2.3L4.3 14h5.9l-.9 7.7L18.3 10h-6z"/></svg>',
+  ruler: '<svg viewBox="0 0 24 24"><path d="M3 21l6.2-15.3L21 18z"/><path d="M8.6 6.5l9 9M7.1 10.3l2.2 2.2M5.6 14l2.2 2.2"/></svg>'
+};
+function icon(name, size){ return '<span class="ic ic-'+(size||16)+'">'+(ICONS[name]||'')+'</span>'; }
 </script>
 
 <!-- NAV -->
@@ -463,8 +542,8 @@ const CONFIG = {
     </nav>
     <div class="nav-tools">
       <span class="clock" id="clockDesk"></span>
-      <button class="icon-btn" id="cmdkBtn" title="Command palette (/)" aria-label="Open command palette">⌕</button>
-      <button class="icon-btn" id="themeBtn" title="Toggle theme" aria-label="Toggle light/dark theme">◐</button>
+      <button class="icon-btn" id="cmdkBtn" title="Command palette (/)" aria-label="Open command palette"><span class="ic ic-16"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span></button>
+      <button class="icon-btn" id="themeBtn" title="Toggle theme" aria-label="Toggle light/dark theme"><span class="ic ic-16" id="themeIcon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.6M12 18.9v2.6M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M2.5 12h2.6M18.9 12h2.6M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></svg></span></button>
     </div>
   </div>
 </header>
@@ -482,20 +561,20 @@ const CONFIG = {
           <div class="type-role mono"><span id="typeRole"></span><span class="cblink">▌</span></div>
           <p class="hero-sub">End-to-end ownership from architecture to deployment. 4+ years leading remote engineering across Saudi Arabia, UAE, Egypt &amp; UK — specializing in AI agents, Shopify ecosystems, Laravel platforms, and intelligent workflow systems.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="mailto:kyrolosehab@gmail.com">📡 Get in Touch</a>
+            <a class="btn btn-primary" href="mailto:kyrolosehab@gmail.com"><span class="ic ic-16"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.2"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg></span> Get in Touch</a>
             <a class="btn btn-ghost" href="https://github.com/Eng-Kirolos-Ehab" target="_blank" rel="noopener">GitHub</a>
             <a class="btn btn-ghost" href="https://linkedin.com/in/eng-kirolos-ehab" target="_blank" rel="noopener">LinkedIn</a>
-            <button class="btn btn-ghost" id="cmdkBtnHero">⌕ Search (press /)</button>
+            <button class="btn btn-ghost" id="cmdkBtnHero"><span class="ic ic-14"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span> Search (press /)</button>
           </div>
           <div class="pill-row">
-            <span class="pill">AI Agents & Automation</span>
+            <span class="pill">Custom AI Agents & Model Training</span>
             <span class="pill">Shopify (Liquid + JS)</span>
             <span class="pill">Laravel / PHP / MySQL</span>
-            <span class="pill">Prompt Engineering</span>
+            <span class="pill">Flutter — iOS & Android</span>
             <span class="pill">Cloudflare + cPanel</span>
             <span class="pill">Bilingual RTL/LTR UX</span>
-            <span class="pill">Mobile App Prototyping</span>
-            <span class="pill">POS Systems</span>
+            <span class="pill">WhatsApp / Telegram Bots</span>
+            <span class="pill">POS & SaaS Dashboards</span>
           </div>
         </div>
 
@@ -541,11 +620,18 @@ const CONFIG = {
   <section id="summary">
     <div class="wrap">
       <div class="sec-head r"><div class="kicker">Module 01 // Professional Summary</div><h2>Who I Am</h2><p>A concise overview designed for decision-makers and hiring teams.</p></div>
+      <div class="story-band r">
+        <div class="story-ic"><svg viewBox="0 0 24 24"><path d="M4.5 20V10.5M10.3 20V4M16 20v-7.3M21.5 20H2.5"/></svg></div>
+        <div>
+          <h3>Built From Zero, Not Inherited</h3>
+          <p>The senior titles on this page didn't come from years alone — they came from joining as an early technical hire at a startup and growing it into something with real market value. The clearest example is <span class="hl">The Saudi Times</span>: I've been there since its earliest days, and helped take its Semrush Authority Score from <span class="hl">8 to 40</span> while building its entire technical, editorial, and brand infrastructure — the media kit, magazine, sponsorship proposal template, promotional videos, and news template included — from the ground up.</p>
+        </div>
+      </div>
       <div class="grid g2 r">
         <div class="card"><h3>Executive Systems Engineer</h3><p>I build scalable digital systems at the intersection of commerce, publishing, AI automation, and backend engineering. Beyond writing code — I own platforms from architecture to ongoing optimization, ensuring they run businesses reliably at scale.</p></div>
         <div class="card"><h3>Multi-Disciplinary Leader</h3><p>I manage multiple cross-functional teams simultaneously across different companies and time zones. I translate business requirements into technical strategy, coordinate developers and stakeholders, and deliver end-to-end without losing context.</p></div>
-        <div class="card"><h3>AI-First Automation Mindset</h3><p>I systematically convert manual workflows into intelligent pipelines — AI-assisted content, LLM agents, chatbots, smart publishing, and operational automation. I work with OpenAI, Groq, Claude, and custom prompt architectures.</p></div>
-        <div class="card"><h3>Commerce & Publishing Specialist</h3><p>Deep production expertise in Shopify (Liquid, custom sections, POS logic, dynamic calculators) and WordPress infrastructure (SEO engineering, Yoast, performance, analytics). These are my strongest environments.</p></div>
+        <div class="card"><h3>AI-First Automation Mindset</h3><p>I systematically convert manual workflows into intelligent pipelines — custom-trained AI agents wired into WhatsApp, Telegram, and internal dashboards, SaaS and admin systems, and multi-modal automation spanning text, image, and video. I work with OpenAI, Groq, Claude, and custom prompt architectures.</p></div>
+        <div class="card"><h3>Commerce &amp; Publishing Specialist</h3><p>Deep production expertise in Shopify (Liquid, custom sections, POS logic, dynamic calculators) and WordPress infrastructure (SEO engineering, Yoast, performance, analytics). These are my strongest environments.</p></div>
       </div>
     </div>
   </section>
@@ -561,7 +647,7 @@ const CONFIG = {
         <div class="card r r2"><div class="card-top"><span class="chip">Systems</span><span class="metric counter" data-target="15">0</span></div><h3>Production Systems</h3><p>Commerce, publishing, AI, automation systems shipped live.</p></div>
         <div class="card r r3"><div class="card-top"><span class="chip">Automation</span><span class="metric">~<span class="counter" data-target="60">0</span>%</span></div><h3>Workload Reduced</h3><p>Via automation-first publishing and operational workflows.</p></div>
         <div class="card r r4"><div class="card-top"><span class="chip">Leadership</span><span class="metric counter" data-target="5">0</span></div><h3>Teams Led at Once</h3><p>Cross-company coordination across developers and stakeholders.</p></div>
-        <div class="card r"><div class="card-top"><span class="chip">Integrations</span><span class="metric counter" data-target="20">0</span></div><h3>Integrations Shipped</h3><p>APIs, email/DNS, analytics, SEO, auth, automation services.</p></div>
+        <div class="card r"><div class="card-top"><span class="chip">SEO Growth</span><span class="metric counter" data-target="40">0</span></div><h3>Semrush Authority Score</h3><p>Grew The Saudi Times from a score of 8 to 40 through technical SEO alone.</p></div>
         <div class="card r r2"><div class="card-top"><span class="chip">Brands</span><span class="metric counter" data-target="4">0</span></div><h3>Core Brands Active</h3><p>Saudi Times, Meat Station, Feraasa, Publishelly — simultaneously.</p></div>
         <div class="card r r3"><div class="card-top"><span class="chip">Countries</span><span class="metric counter" data-target="4">0</span></div><h3>Markets Served</h3><p>KSA, UAE, UK, Egypt — remote-first across all regions.</p></div>
         <div class="card r r4"><div class="card-top"><span class="chip">Delivery</span><span class="metric">E2E</span></div><h3>End-to-End Ownership</h3><p>Architecture → Build → Deploy → Optimize → Scale.</p><div class="small">Approximations — for positioning and clarity.</div></div>
@@ -589,19 +675,22 @@ const CONFIG = {
 
         <details class="tlog-item now" open data-org="saudi-times">
           <summary class="tlog-head">
-              <div><div class="sum-title">Chief Technology Officer (CTO)</div><div class="sum-meta">The Saudi Times — Digital News Platform</div><div class="sum-tags"><span class="tag">Leadership</span><span class="tag">AI</span><span class="tag">Publishing</span><span class="tag">Infra</span></div></div>
+              <div><div class="sum-title">Chief Technology Officer (CTO)</div><div class="sum-meta">The Saudi Times — Digital News Platform</div><div class="sum-tags"><span class="tag">Leadership</span><span class="tag">SEO</span><span class="tag">AI</span><span class="tag">Brand</span><span class="tag">Infra</span></div></div>
               <div class="caret">▾</div>
           </summary>
           <div class="detail-body">
-              <div class="job-meta"><span class="job-badge jb-period">📅 Jul 2024 – Present</span><span class="job-badge jb-loc">📍 Remote · Saudi Arabia</span><span class="job-badge jb-type">💼 Full-Time</span></div>
+              <div class="job-meta"><span class="job-badge jb-period"><span class="ic ic-13"><svg viewBox="0 0 24 24"><rect x="3.2" y="4.3" width="17.6" height="16.4" rx="2"/><path d="M16 2.3v4M8 2.3v4M3.2 9.8h17.6"/></svg></span> Jul 2024 – Present</span><span class="job-badge jb-loc"><span class="ic ic-13"><svg viewBox="0 0 24 24"><path d="M12 21.5s7-6.4 7-12.2a7 7 0 1 0-14 0c0 5.8 7 12.2 7 12.2z"/><circle cx="12" cy="9.3" r="2.4"/></svg></span> Remote · Saudi Arabia</span><span class="job-badge jb-type"><span class="ic ic-13"><svg viewBox="0 0 24 24"><rect x="3" y="7.5" width="18" height="12.5" rx="2"/><path d="M8.5 7.5V5.8A1.8 1.8 0 0 1 10.3 4h3.4a1.8 1.8 0 0 1 1.8 1.8v1.7"/><path d="M3 13h18"/></svg></span> Full-Time</span></div>
               <ul class="dbullets">
-                <li>Own the complete technical direction of a growing digital news platform end-to-end</li>
-                <li>Architect and manage infrastructure for performance, scalability, uptime, and security</li>
-                <li>Design and deploy AI-driven content automation pipelines — significantly reducing editorial workload</li>
-                <li>Build and configure AI agents for blogging, content enhancement, and editorial workflow automation using LLMs</li>
+                <li>Took the platform's Semrush Authority Score from <span class="hl">8 to 40</span> by rebuilding technical SEO, site structure, and a publishing system built for organic growth, not just article output</li>
+                <li>Designed and produced the brand's official <span class="hl">media kit</span>, a full digital <span class="hl">magazine</span>, and the <span class="hl">sponsorship proposal template</span> the sales side now uses to close advertiser deals</li>
+                <li>Directed and produced <span class="hl">promotional video content</span> for brand campaigns and social distribution</li>
+                <li>Designed the <span class="hl">news article template</span> and publishing layout — balancing reader experience, ad inventory, and Google News eligibility</li>
+                <li>Own the complete technical direction of the platform end-to-end: architecture, uptime, performance, and security</li>
+                <li>Designed and deployed AI-driven content automation pipelines that cut manual editorial work dramatically</li>
+                <li>Built and configured AI agents for blogging, content enhancement, and editorial workflow automation using LLMs</li>
                 <li>Integrate and manage Google Workspace, Cloudflare, analytics, and third-party automation tools</li>
                 <li>Collaborate cross-functionally with editorial, design, and marketing teams to align tech with business strategy</li>
-                <li>Lead pricing strategy, media package development, and vendor negotiations</li>
+                <li>Lead pricing strategy and vendor negotiations for advertising and media packages</li>
                 <li>Manage social media automation and content scheduling infrastructure</li>
               </ul>
             </div>
@@ -609,19 +698,19 @@ const CONFIG = {
 
         <details class="tlog-item" data-org="meat-station">
           <summary class="tlog-head">
-              <div><div class="sum-title">Lead Shopify Developer &amp; Business Strategist</div><div class="sum-meta">Meat Station</div><div class="sum-tags"><span class="tag">Shopify</span><span class="tag">POS</span><span class="tag">Dashboards</span><span class="tag">Strategy</span></div></div>
+              <div><div class="sum-title">Lead Shopify Developer, Mobile Engineer &amp; Business Strategist</div><div class="sum-meta">Meat Station</div><div class="sum-tags"><span class="tag">Shopify</span><span class="tag">Flutter · iOS/Android</span><span class="tag">POS</span><span class="tag">Strategy</span></div></div>
               <div class="caret">▾</div>
           </summary>
           <div class="detail-body">
-              <div class="job-meta"><span class="job-badge jb-period">📅 2025 – Present</span><span class="job-badge jb-loc">📍 Remote · Saudi Arabia</span><span class="job-badge jb-type">💼 Full Ownership</span></div>
+              <div class="job-meta"><span class="job-badge jb-period"><span class="ic ic-13"><svg viewBox="0 0 24 24"><rect x="3.2" y="4.3" width="17.6" height="16.4" rx="2"/><path d="M16 2.3v4M8 2.3v4M3.2 9.8h17.6"/></svg></span> 2025 – Present</span><span class="job-badge jb-loc"><span class="ic ic-13"><svg viewBox="0 0 24 24"><path d="M12 21.5s7-6.4 7-12.2a7 7 0 1 0-14 0c0 5.8 7 12.2 7 12.2z"/><circle cx="12" cy="9.3" r="2.4"/></svg></span> Remote · Saudi Arabia</span><span class="job-badge jb-type"><span class="ic ic-13"><svg viewBox="0 0 24 24"><rect x="3" y="7.5" width="18" height="12.5" rx="2"/><path d="M8.5 7.5V5.8A1.8 1.8 0 0 1 10.3 4h3.4a1.8 1.8 0 0 1 1.8 1.8v1.7"/><path d="M3 13h18"/></svg></span> Full Ownership</span></div>
               <ul class="dbullets">
                 <li>Architected and built the complete Shopify storefront with custom dynamic widgets and editable theme sections</li>
+                <li>Built and ship the full Flutter mobile suite — customer, driver, restaurant, and admin apps — live on both <span class="hl">Android and iOS</span></li>
+                <li>Developed a fully functional POS system tailored to company operational needs, including take-away/counter mode</li>
                 <li>Designed all store visual assets: banners, product images, icons, landing sections, and brand identity</li>
-                <li>Developed a fully functional POS system tailored to company operational needs</li>
-                <li>Built interactive mobile app prototype in Figma and coordinated with external mobile dev teams</li>
                 <li>Created real-time business dashboards for KPIs, sales, and operational metrics</li>
                 <li>Conducted deep competitor analysis and market research to define brand positioning and pricing</li>
-                <li>Managed all digital operations: website, admin systems, mobile app, and cross-team coordination</li>
+                <li>Managed all digital operations end-to-end: website, admin systems, all four mobile apps, and cross-team coordination</li>
               </ul>
             </div>
         </details>
@@ -632,7 +721,7 @@ const CONFIG = {
               <div class="caret">▾</div>
           </summary>
           <div class="detail-body">
-              <div class="job-meta"><span class="job-badge jb-period">📅 Oct 2024 – Present</span><span class="job-badge jb-loc">📍 Remote · UAE</span><span class="job-badge jb-type">💼 Freelance</span></div>
+              <div class="job-meta"><span class="job-badge jb-period"><span class="ic ic-13"><svg viewBox="0 0 24 24"><rect x="3.2" y="4.3" width="17.6" height="16.4" rx="2"/><path d="M16 2.3v4M8 2.3v4M3.2 9.8h17.6"/></svg></span> Oct 2024 – Present</span><span class="job-badge jb-loc"><span class="ic ic-13"><svg viewBox="0 0 24 24"><path d="M12 21.5s7-6.4 7-12.2a7 7 0 1 0-14 0c0 5.8 7 12.2 7 12.2z"/><circle cx="12" cy="9.3" r="2.4"/></svg></span> Remote · UAE</span><span class="job-badge jb-type"><span class="ic ic-13"><svg viewBox="0 0 24 24"><rect x="3" y="7.5" width="18" height="12.5" rx="2"/><path d="M8.5 7.5V5.8A1.8 1.8 0 0 1 10.3 4h3.4a1.8 1.8 0 0 1 1.8 1.8v1.7"/><path d="M3 13h18"/></svg></span> Freelance</span></div>
               <ul class="dbullets">
                 <li>Full-stack platform development using Laravel, cPanel, and Cloudflare infrastructure</li>
                 <li>Designed bilingual responsive layouts (RTL Arabic / LTR English) with optimized user journeys</li>
@@ -651,7 +740,7 @@ const CONFIG = {
               <div class="caret">▾</div>
           </summary>
           <div class="detail-body">
-              <div class="job-meta"><span class="job-badge jb-period">📅 Aug 2024 – Present</span><span class="job-badge jb-loc">📍 Remote · UAE</span><span class="job-badge jb-type">💼 Freelance</span></div>
+              <div class="job-meta"><span class="job-badge jb-period"><span class="ic ic-13"><svg viewBox="0 0 24 24"><rect x="3.2" y="4.3" width="17.6" height="16.4" rx="2"/><path d="M16 2.3v4M8 2.3v4M3.2 9.8h17.6"/></svg></span> Aug 2024 – Present</span><span class="job-badge jb-loc"><span class="ic ic-13"><svg viewBox="0 0 24 24"><path d="M12 21.5s7-6.4 7-12.2a7 7 0 1 0-14 0c0 5.8 7 12.2 7 12.2z"/><circle cx="12" cy="9.3" r="2.4"/></svg></span> Remote · UAE</span><span class="job-badge jb-type"><span class="ic ic-13"><svg viewBox="0 0 24 24"><rect x="3" y="7.5" width="18" height="12.5" rx="2"/><path d="M8.5 7.5V5.8A1.8 1.8 0 0 1 10.3 4h3.4a1.8 1.8 0 0 1 1.8 1.8v1.7"/><path d="M3 13h18"/></svg></span> Freelance</span></div>
               <ul class="dbullets">
                 <li>Developed and launched the official Publishelly website using WordPress, HTML, and CSS</li>
                 <li>Implemented advanced on-page SEO and page speed optimization for improved search visibility</li>
@@ -667,7 +756,7 @@ const CONFIG = {
               <div class="caret">▾</div>
           </summary>
           <div class="detail-body">
-              <div class="job-meta"><span class="job-badge jb-period">📅 Jul 2023 – Jun 2024</span><span class="job-badge jb-loc">📍 Remote · London, UK</span><span class="job-badge jb-type">💼 Full-Time</span></div>
+              <div class="job-meta"><span class="job-badge jb-period"><span class="ic ic-13"><svg viewBox="0 0 24 24"><rect x="3.2" y="4.3" width="17.6" height="16.4" rx="2"/><path d="M16 2.3v4M8 2.3v4M3.2 9.8h17.6"/></svg></span> Jul 2023 – Jun 2024</span><span class="job-badge jb-loc"><span class="ic ic-13"><svg viewBox="0 0 24 24"><path d="M12 21.5s7-6.4 7-12.2a7 7 0 1 0-14 0c0 5.8 7 12.2 7 12.2z"/><circle cx="12" cy="9.3" r="2.4"/></svg></span> Remote · London, UK</span><span class="job-badge jb-type"><span class="ic ic-13"><svg viewBox="0 0 24 24"><rect x="3" y="7.5" width="18" height="12.5" rx="2"/><path d="M8.5 7.5V5.8A1.8 1.8 0 0 1 10.3 4h3.4a1.8 1.8 0 0 1 1.8 1.8v1.7"/><path d="M3 13h18"/></svg></span> Full-Time</span></div>
               <ul class="dbullets">
                 <li>Managed full platform infrastructure for a UK-based educational SaaS product</li>
                 <li>Developed and maintained website; optimized system performance and uptime</li>
@@ -683,7 +772,7 @@ const CONFIG = {
               <div class="caret">▾</div>
           </summary>
           <div class="detail-body">
-              <div class="job-meta"><span class="job-badge jb-period">📅 Jul–Aug 2023</span><span class="job-badge jb-loc">📍 Ain Sokhna, Egypt</span><span class="job-badge jb-type">🏭 On-site</span></div>
+              <div class="job-meta"><span class="job-badge jb-period"><span class="ic ic-13"><svg viewBox="0 0 24 24"><rect x="3.2" y="4.3" width="17.6" height="16.4" rx="2"/><path d="M16 2.3v4M8 2.3v4M3.2 9.8h17.6"/></svg></span> Jul–Aug 2023</span><span class="job-badge jb-loc"><span class="ic ic-13"><svg viewBox="0 0 24 24"><path d="M12 21.5s7-6.4 7-12.2a7 7 0 1 0-14 0c0 5.8 7 12.2 7 12.2z"/><circle cx="12" cy="9.3" r="2.4"/></svg></span> Ain Sokhna, Egypt</span><span class="job-badge jb-type"><span class="ic ic-13"><svg viewBox="0 0 24 24"><path d="M3 21V10.5l5 3v-3l5 3V8l6 3.3V21z"/><path d="M3 21h17M7 15.2v2.3M11.5 15.2v2.3M16 13.6v3.9"/></svg></span> On-site</span></div>
               <ul class="dbullets">
                 <li>Trained on PLC systems, industrial control automation, and real-time monitoring</li>
                 <li>Assisted with fault diagnosis, software-hardware integration, and QA</li>
@@ -698,7 +787,7 @@ const CONFIG = {
               <div class="caret">▾</div>
           </summary>
           <div class="detail-body">
-              <div class="job-meta"><span class="job-badge jb-period">📅 Aug 2022</span><span class="job-badge jb-loc">📍 Ain Sokhna, Egypt</span><span class="job-badge jb-type">🏭 On-site</span></div>
+              <div class="job-meta"><span class="job-badge jb-period"><span class="ic ic-13"><svg viewBox="0 0 24 24"><rect x="3.2" y="4.3" width="17.6" height="16.4" rx="2"/><path d="M16 2.3v4M8 2.3v4M3.2 9.8h17.6"/></svg></span> Aug 2022</span><span class="job-badge jb-loc"><span class="ic ic-13"><svg viewBox="0 0 24 24"><path d="M12 21.5s7-6.4 7-12.2a7 7 0 1 0-14 0c0 5.8 7 12.2 7 12.2z"/><circle cx="12" cy="9.3" r="2.4"/></svg></span> Ain Sokhna, Egypt</span><span class="job-badge jb-type"><span class="ic ic-13"><svg viewBox="0 0 24 24"><path d="M3 21V10.5l5 3v-3l5 3V8l6 3.3V21z"/><path d="M3 21h17M7 15.2v2.3M11.5 15.2v2.3M16 13.6v3.9"/></svg></span> On-site</span></div>
               <ul class="dbullets">
                 <li>Observed electrical distribution inside a large-scale industrial steel plant</li>
                 <li>Practiced maintenance and industrial safety protocols</li>
@@ -752,24 +841,24 @@ const CONFIG = {
       <div class="sec-head r"><div class="kicker">Module 06 // Value Proposition</div><h2>Why Hire Me</h2><p>What makes my approach different from a typical developer. Tap a card to flip it.</p></div>
       <div class="flip-grid r">
         <div class="flip"><div class="flip-in">
-          <div class="flip-face flip-front"><div class="ic">🏗️</div><h3>Systems, not pages</h3><div class="tap">TAP TO EXPAND</div></div>
+          <div class="flip-face flip-front"><div class="ic ic-28"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="8" height="18"/><rect x="14.5" y="9.5" width="5.5" height="11.5"/><path d="M7 6.5h2M7 10h2M7 13.5h2M16.5 13h2M16.5 16.5h2"/></svg></div><h3>Systems, not pages</h3><div class="tap">TAP TO EXPAND</div></div>
           <div class="flip-face flip-back"><p>I start from the business problem — operations, pricing, workflows, data — then design a scalable solution that doesn't depend on a single person to maintain. Fewer errors, less manual effort, measurable outcomes.</p></div>
         </div></div>
         <div class="flip"><div class="flip-in">
-          <div class="flip-face flip-front"><div class="ic">🧭</div><h3>Multi-company leadership</h3><div class="tap">TAP TO EXPAND</div></div>
+          <div class="flip-face flip-front"><div class="ic ic-28"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.3 8.7l-2 5.2-5.2 2 2-5.2z"/></svg></div><h3>Multi-company leadership</h3><div class="tap">TAP TO EXPAND</div></div>
           <div class="flip-face flip-back"><p>Currently managing technical direction across 4+ active companies at the same time — each with different stacks, goals, and team structures. I switch contexts quickly and deliver consistently across all of them.</p></div>
         </div></div>
         <div class="flip"><div class="flip-in">
-          <div class="flip-face flip-front"><div class="ic">🤖</div><h3>Real AI agents in production</h3><div class="tap">TAP TO EXPAND</div></div>
-          <div class="flip-face flip-back"><p>I design and deploy AI agents handling real production workflows — not demos. Content pipelines, smart chatbots, trait analysis tools, and Alexa skill integrations, with Groq, Claude, OpenAI, and custom prompt architectures.</p></div>
+          <div class="flip-face flip-front"><div class="ic ic-28"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1.4"/><rect x="10" y="10" width="4" height="4"/><path d="M12 2v3.2M12 18.8V22M2 12h3.2M18.8 12H22M4.8 4.8l2.2 2.2M17 17l2.2 2.2M19.2 4.8L17 7M7 17l-2.2 2.2"/></svg></div><h3>End-to-end AI agents, not chat demos</h3><div class="tap">TAP TO EXPAND</div></div>
+          <div class="flip-face flip-back"><p>I build and fine-tune the AI model itself for a business, then wire it into WhatsApp or Telegram, dashboards, or internal tools — with vision, video, image generation, and smart-device control layered in as needed. SaaS platforms, admin panels, and monitoring dashboards are part of the same toolkit, not a separate skill.</p></div>
         </div></div>
         <div class="flip"><div class="flip-in">
-          <div class="flip-face flip-front"><div class="ic">🛡️</div><h3>SEO &amp; security are engineering</h3><div class="tap">TAP TO EXPAND</div></div>
-          <div class="flip-face flip-back"><p>Not afterthoughts — part of architecture: smart caching, proper metadata, Cloudflare hardening, DMARC/SPF/DKIM, and live threat response. I've neutralized real hacking attempts in production.</p></div>
+          <div class="flip-face flip-front"><div class="ic ic-28"><svg viewBox="0 0 24 24"><path d="M12 21.8s7.5-3.8 7.5-9.6V5.4L12 2.5 4.5 5.4v6.8c0 5.8 7.5 9.6 7.5 9.6z"/><path d="M8.7 12.1l2.2 2.2 4.4-4.6"/></svg></div><h3>SEO &amp; security are engineering</h3><div class="tap">TAP TO EXPAND</div></div>
+          <div class="flip-face flip-back"><p>Not afterthoughts — part of architecture: smart caching, proper metadata, Cloudflare hardening, DMARC/SPF/DKIM, and live threat response. I've neutralized real hacking attempts in production, and took The Saudi Times from a Semrush Authority Score of 8 to 40 through technical SEO alone.</p></div>
         </div></div>
         <div class="flip"><div class="flip-in">
-          <div class="flip-face flip-front"><div class="ic">📱</div><h3>Mobile without an internal team</h3><div class="tap">TAP TO EXPAND</div></div>
-          <div class="flip-face flip-back"><p>I prototype complete mobile app flows in Figma, write detailed specs, and coordinate external mobile teams — ensuring what gets built matches requirements and connects properly with backend APIs and admin systems.</p></div>
+          <div class="flip-face flip-front"><div class="ic ic-28"><svg viewBox="0 0 24 24"><rect x="7.2" y="2.2" width="9.6" height="19.6" rx="2"/><path d="M10.8 18.3h2.4"/></svg></div><h3>I ship real Android &amp; iOS apps</h3><div class="tap">TAP TO EXPAND</div></div>
+          <div class="flip-face flip-back"><p>Not just Figma handoffs — I design the flow, build the Flutter app, and ship it. Meat Station's full suite (customer, driver, restaurant, and admin apps) is live on Android and iOS under my ownership, with real-time order tracking, POS sync, and caching performance work along the way.</p></div>
         </div></div>
       </div>
     </div>
@@ -802,33 +891,35 @@ const CONFIG = {
       <div class="sec-head r"><div class="kicker">Module 08 // Case Studies</div><h2>What I Shipped — Structured</h2><p>Real problems, real solutions, real impact.</p></div>
       <div class="case-wrap r">
         <div class="case-tabs" id="caseTabs">
-          <button class="case-tab active" data-case="c1"><b>Saudi Times</b><span>AI Blogging &amp; Publishing Engine</span></button>
+          <button class="case-tab active" data-case="c1"><b>Saudi Times</b><span>From Score 8 to 40 — Built From Zero</span></button>
           <button class="case-tab" data-case="c2"><b>Meat Station</b><span>Shopify Commerce + POS Logic</span></button>
           <button class="case-tab" data-case="c3"><b>Feraasa</b><span>Bilingual AI Platform + Security</span></button>
         </div>
         <div class="case-panel" id="casePanel">
           <div class="cp active" id="c1">
-            <h4>Saudi Times — AI Blogging &amp; Publishing Engine</h4>
-            <p><span class="hl">Problem:</span> High manual effort to produce, optimize, and publish news content at scale.</p>
-            <p style="margin-top:8px"><span class="hl">Solution:</span> Automated pipeline for trend discovery, AI-assisted drafting, SEO structure, and publishing workflow automation.</p>
-            <p style="margin-top:8px"><span class="hl">Impact:</span> ~50–70% reduction in time per article cycle, more consistent bilingual content quality.</p>
+            <h4>Saudi Times — Grown From Day One</h4>
+            <p><span class="hl">Problem:</span> A young digital news platform with an Authority Score of 8, no brand assets to pitch advertisers with, and heavy manual effort to produce and publish content at scale.</p>
+            <p style="margin-top:8px"><span class="hl">Solution:</span> Rebuilt technical SEO and publishing architecture from the ground up, designed the brand's commercial assets from scratch, and layered AI-assisted drafting, trend discovery, and workflow automation on top.</p>
+            <p style="margin-top:8px"><span class="hl">Impact:</span> Semrush Authority Score grew from <span class="hl">8 to 40</span>; ~50–70% reduction in time per article cycle; a media kit, magazine, and proposal template now used to close advertiser deals.</p>
             <ul class="dbullets">
-              <li>Draft-first workflow with rules for bilingual Arabic/English structure and tone</li>
-              <li>Image sourcing validation, captions, and source attribution enforcement</li>
+              <li>Rebuilt site structure, article templates, and technical SEO for sustained organic growth</li>
+              <li>Designed the official media kit, digital magazine, and sponsorship proposal template</li>
+              <li>Directed and produced promotional video content for brand campaigns</li>
+              <li>Draft-first AI workflow with rules for bilingual Arabic/English structure and tone</li>
               <li>SEO alignment for Yoast and Google News requirements</li>
               <li>Media package pricing strategy for brand advertising clients</li>
             </ul>
           </div>
           <div class="cp" id="c2">
             <h4>Meat Station — Shopify Commerce + POS Logic</h4>
-            <p><span class="hl">Problem:</span> Complex ordering logic and custom operational needs not supported by default Shopify.</p>
-            <p style="margin-top:8px"><span class="hl">Solution:</span> Custom calculators, dynamic pricing, quantity logic, interactive modals, and client-editable sections.</p>
-            <p style="margin-top:8px"><span class="hl">Impact:</span> Fewer order errors, smoother UX, full admin control without developer involvement.</p>
+            <p><span class="hl">Problem:</span> Complex ordering logic and custom operational needs not supported by default Shopify — plus the need for a real mobile presence across four different user types.</p>
+            <p style="margin-top:8px"><span class="hl">Solution:</span> Custom calculators, dynamic pricing, quantity logic, and client-editable sections on the storefront, paired with a full native mobile suite built in Flutter.</p>
+            <p style="margin-top:8px"><span class="hl">Impact:</span> Fewer order errors, smoother UX, full admin control without developer involvement, and four production apps live on Android &amp; iOS.</p>
             <ul class="dbullets">
               <li>Quantity logic with real slider values and proper add-to-cart flow</li>
-              <li>Error handling and loading states for reliable production behavior</li>
+              <li>Built and shipped the customer, driver, restaurant, and admin apps in Flutter — live on Android &amp; iOS</li>
               <li>Dynamic sections allowing admins to manage content without code edits</li>
-              <li>POS system integrated with unified inventory and sales management</li>
+              <li>POS system integrated with unified inventory and sales management, including take-away/counter mode</li>
             </ul>
           </div>
           <div class="cp" id="c3">
@@ -874,32 +965,32 @@ const CONFIG = {
       <div class="contact-grid r">
         <div class="contact-left">
           <h3>Open to the Right Opportunity</h3>
-          <p>Best fit: Shopify ecosystems · publishing platforms · AI automation · Laravel backends · technical leadership roles. If you need someone who owns delivery end-to-end and leads while executing — let's talk.</p>
+          <p>Best fit: Shopify ecosystems · publishing platforms · AI automation · Laravel backends · technical leadership roles. The title matters less than the fit — Systems Architect, Tech Lead, Senior Engineer, or something this page hasn't named yet. Right now I'm especially looking to put down roots with a large Egyptian company for the long term, while staying open to remote and regional work.</p>
           <div class="contact-links">
             <button class="clink" id="copyEmail" type="button">
-              <div class="clink-icon">📧</div>
+              <div class="clink-icon ic ic-18"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.2"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg></div>
               <div class="clink-text"><b>kyrolosehab@gmail.com</b><span>Primary contact — click to copy</span></div>
             </button>
-            <a class="clink" href="tel:+201228370809"><div class="clink-icon">📱</div><div class="clink-text"><b>+20 122 837 0809</b><span>WhatsApp / Call</span></div></a>
-            <a class="clink" href="https://linkedin.com/in/eng-kirolos-ehab" target="_blank" rel="noopener"><div class="clink-icon">💼</div><div class="clink-text"><b>LinkedIn</b><span>linkedin.com/in/eng-kirolos-ehab</span></div></a>
-            <a class="clink" href="https://github.com/Eng-Kirolos-Ehab" target="_blank" rel="noopener"><div class="clink-icon">💻</div><div class="clink-text"><b>GitHub</b><span>github.com/Eng-Kirolos-Ehab</span></div></a>
-            <a class="clink" href="https://kyrolosehab.me" target="_blank" rel="noopener"><div class="clink-icon">🌐</div><div class="clink-text"><b>kyrolosehab.me</b><span>Personal portfolio website</span></div></a>
+            <a class="clink" href="tel:+201228370809"><div class="clink-icon ic ic-18"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.3 15.3 0 0 0 6.6 6.6l2.1-2.1a1 1 0 0 1 1-.25 10.8 10.8 0 0 0 3.35.55 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 10.8 10.8 0 0 0 .55 3.35 1 1 0 0 1-.25 1z"/></svg></div><div class="clink-text"><b>+20 122 837 0809</b><span>WhatsApp / Call</span></div></a>
+            <a class="clink" href="https://linkedin.com/in/eng-kirolos-ehab" target="_blank" rel="noopener"><div class="clink-icon ic ic-18"><svg viewBox="0 0 24 24"><circle cx="6" cy="6.5" r="2.5"/><circle cx="18" cy="6.5" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8.2 7.9L10.6 15.7M15.8 7.9L13.4 15.7M8.5 6.5h7"/></svg></div><div class="clink-text"><b>LinkedIn</b><span>linkedin.com/in/eng-kirolos-ehab</span></div></a>
+            <a class="clink" href="https://github.com/Eng-Kirolos-Ehab" target="_blank" rel="noopener"><div class="clink-icon ic ic-18"><svg viewBox="0 0 24 24"><path d="M8.7 7.2L3.4 12l5.3 4.8M15.3 7.2l5.3 4.8-5.3 4.8M13.6 4.6l-3.2 14.8"/></svg></div><div class="clink-text"><b>GitHub</b><span>github.com/Eng-Kirolos-Ehab</span></div></a>
+            <a class="clink" href="https://kyrolosehab.me" target="_blank" rel="noopener"><div class="clink-icon ic ic-18"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.5 4 5.7 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.7-4-9s1.4-6.5 4-9z"/></svg></div><div class="clink-text"><b>kyrolosehab.me</b><span>Personal portfolio website</span></div></a>
           </div>
         </div>
         <div>
           <div class="avail-card r r2">
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span class="avail-dot"></span><h4>Available for Work</h4></div>
-            <p>Remote collaboration across all timezones. Fast iterations with clear milestones.</p>
+            <p>Actively seeking a long-term, stable role with a major Egyptian company — on-site or hybrid. Still open to remote collaboration across timezones for the right project.</p>
             <div class="avail-list">
-              <div class="avail-item">Shopify development &amp; strategy</div>
-              <div class="avail-item">AI automation &amp; agent systems</div>
-              <div class="avail-item">Full-stack platform development</div>
-              <div class="avail-item">Technical leadership / CTO roles</div>
-              <div class="avail-item">Publishing platform engineering</div>
-              <div class="avail-item">WordPress / SEO infrastructure</div>
+              <div class="avail-item">Technical leadership — CTO / Tech Lead / Head of Engineering</div>
+              <div class="avail-item">Senior full-stack &amp; systems engineering roles</div>
+              <div class="avail-item">AI automation &amp; custom agent systems</div>
+              <div class="avail-item">Shopify / e-commerce platform development</div>
+              <div class="avail-item">Mobile app engineering (Flutter, Android &amp; iOS)</div>
+              <div class="avail-item">Open to the title that fits the role — not fixed to one label</div>
             </div>
           </div>
-          <div class="card r r3" style="margin-top:12px"><h3>📍 Based in Egypt</h3><p>GMT+2 timezone. Available for Saudi, Emirati, and international clients. 4+ years proven remote delivery across KSA, UAE, UK, and Egypt.</p></div>
+          <div class="card r r3" style="margin-top:12px"><h3><span class="ic ic-13"><svg viewBox="0 0 24 24"><path d="M12 21.5s7-6.4 7-12.2a7 7 0 1 0-14 0c0 5.8 7 12.2 7 12.2z"/><circle cx="12" cy="9.3" r="2.4"/></svg></span> Based in Egypt</h3><p>GMT+2 timezone. Open to on-site or hybrid roles with major Egyptian employers for long-term stability, and remain available for Saudi, Emirati, and international clients remotely. 4+ years proven delivery across KSA, UAE, UK, and Egypt.</p></div>
         </div>
       </div>
     </div>
@@ -937,7 +1028,13 @@ const CONFIG = {
   </div>
 </footer>
 
-<button id="totop" aria-label="Back to top">↑</button>
+<button id="totop" aria-label="Back to top"><span class="ic ic-18"><svg viewBox="0 0 24 24"><path d="M12 19.5V5M5.5 11.5L12 5l6.5 6.5"/></svg></span></button>
+
+<nav id="mobileBar" aria-label="Quick contact">
+  <a href="tel:+201228370809"><span class="ic ic-18"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.3 15.3 0 0 0 6.6 6.6l2.1-2.1a1 1 0 0 1 1-.25 10.8 10.8 0 0 0 3.35.55 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 10.8 10.8 0 0 0 .55 3.35 1 1 0 0 1-.25 1z"/></svg></span>Call</a>
+  <a href="mailto:kyrolosehab@gmail.com"><span class="ic ic-18"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.2"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg></span>Email</a>
+  <a href="https://linkedin.com/in/eng-kirolos-ehab" target="_blank" rel="noopener"><span class="ic ic-18"><svg viewBox="0 0 24 24"><circle cx="6" cy="6.5" r="2.5"/><circle cx="18" cy="6.5" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8.2 7.9L10.6 15.7M15.8 7.9L13.4 15.7M8.5 6.5h7"/></svg></span>LinkedIn</a>
+</nav>
 
 <!-- COMMAND PALETTE -->
 <div id="cmdk-overlay">
@@ -956,13 +1053,19 @@ const CONFIG = {
 <script>
 /* ═══════════════ THEME ═══════════════ */
 (function(){
+  const SUN = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.6M12 18.9v2.6M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M2.5 12h2.6M18.9 12h2.6M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></svg>';
+  const MOON = '<svg viewBox="0 0 24 24"><path d="M20.8 13.8A8.8 8.8 0 1 1 10.2 3.2a7 7 0 0 0 10.6 10.6z"/></svg>';
+  const themeIcon = document.getElementById('themeIcon');
+  function syncIcon(){ if (themeIcon) themeIcon.innerHTML = document.documentElement.getAttribute('data-theme') === 'light' ? MOON : SUN; }
   const saved = localStorage.getItem('ke-theme');
   if (saved) document.documentElement.setAttribute('data-theme', saved);
+  syncIcon();
   document.getElementById('themeBtn').addEventListener('click', () => {
     const cur = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', cur === 'dark' ? '' : 'light');
     if (cur === 'dark') document.documentElement.removeAttribute('data-theme');
     localStorage.setItem('ke-theme', cur === 'dark' ? '' : 'light');
+    syncIcon();
   });
 })();
 
@@ -1068,7 +1171,7 @@ const CONFIG = {
 /* ═══════════════ TYPED ROLE ═══════════════ */
 (function(){
   const el = document.getElementById('typeRole');
-  const roles = ['Commerce · Publishing · Automation · Leadership','Shopify Systems Architect','AI Automation & Agent Engineer','Laravel / PHP Backend Engineer','Technical Lead Running 5 Companies'];
+  const roles = ['Commerce · Publishing · Automation · Leadership','Shopify Systems Architect','AI Automation & Agent Engineer','Laravel / PHP Backend Engineer','Mobile Engineer — Flutter, iOS & Android','Technical Lead Running 5 Companies'];
   let ri=0, ci=0, deleting=false;
   function step(){
     const word = roles[ri];
@@ -1101,12 +1204,12 @@ const CONFIG = {
 (function(){
   const grid = document.getElementById('orgsGrid');
   const roleStyle = {
-    'saudi-times': { cls:'org-role-lead', label:'🏗 CTO' },
-    'meat-station': { cls:'org-role-lead', label:'💻 Lead Dev' },
-    'feraasa': { cls:'org-role-dev', label:'🤖 AI Lead & Dev' },
-    'publishelly': { cls:'org-role-dev', label:'🌐 Web Developer' },
-    'oloom': { cls:'org-role-mgr', label:'🖥 IT Manager' },
-    'ezz': { cls:'org-role-train', label:'🏭 Engineering Training' }
+    'saudi-times': { cls:'org-role-lead', ic:'building', label:'CTO' },
+    'meat-station': { cls:'org-role-lead', ic:'cpu', label:'Lead Dev' },
+    'feraasa': { cls:'org-role-dev', ic:'cpu', label:'AI Lead & Dev' },
+    'publishelly': { cls:'org-role-dev', ic:'globe', label:'Web Developer' },
+    'oloom': { cls:'org-role-mgr', ic:'compass', label:'IT Manager' },
+    'ezz': { cls:'org-role-train', ic:'factory', label:'Engineering Training' }
   };
   CONFIG.brands.forEach(b => {
     const card = document.createElement('div');
@@ -1118,8 +1221,8 @@ const CONFIG = {
     else { logoBox.style.background=b.fallbackBg; const fb=document.createElement('div'); fb.className='org-fallback'; fb.textContent=b.fallbackText; logoBox.appendChild(fb); }
     const name=document.createElement('div'); name.className='org-name'; name.textContent=b.name;
     const desc=document.createElement('div'); desc.className='org-desc'; desc.textContent=b.desc;
-    const rs = roleStyle[b.id] || {cls:'org-role-dev', label:b.country};
-    const role=document.createElement('div'); role.className='org-role '+rs.cls; role.textContent=rs.label;
+    const rs = roleStyle[b.id] || {cls:'org-role-dev', ic:'briefcase', label:b.country};
+    const role=document.createElement('div'); role.className='org-role '+rs.cls; role.innerHTML = icon(rs.ic,13)+'<span>'+rs.label+'</span>';
     card.append(logoBox,name,desc,role);
     grid.appendChild(card);
   });
@@ -1218,26 +1321,29 @@ document.querySelectorAll('.flip').forEach(f => f.addEventListener('click', () =
   const tags = document.getElementById('stackTags');
   const groups = [
     { key:'ai', color:'var(--cyan)', label:'AI & Automation', radius:0.86, dur:34, items:[
-      ['🤖','Prompt Engineering'],['🧠','LLM Integration (OpenAI/Groq/Claude)'],['⚙️','Workflow Automation'],['💬','Custom Chatbots'],['📰','AI Content Pipelines']
-    ]},
-    { key:'web', color:'var(--purple)', label:'Web Platforms', radius:1.28, dur:46, items:[
-      ['🛒','Shopify (Liquid, Sections, JS)'],['📝','WordPress (Yoast, WooCommerce)'],['🎨','Framer'],['📊','Odoo']
-    ]},
-    { key:'infra', color:'var(--gold)', label:'Backend & Infra', radius:1.72, dur:58, items:[
-      ['🐘','PHP / Laravel'],['🗄️','MySQL / Supabase'],['☁️','Cloudflare / cPanel'],['🔒','SPF / DKIM / DMARC'],['🔌','REST APIs']
-    ]},
-    { key:'design', color:'var(--green)', label:'Design & Business', radius:2.14, dur:70, items:[
-      ['📐','Figma Prototyping'],['🖌️','Adobe Suite'],['📈','SEO & Analytics'],['💼','Pricing Strategy']
-    ]}
+      ['cpu','Prompt Engineering'],['cpu','LLM Integration (OpenAI/Groq/Claude)'],['chat','WhatsApp &amp; Telegram AI Bots'],['newspaper','AI Content Pipelines'],['plug','Workflow Automation'],['cpu','Custom Model Training &amp; Multi-modal AI']
+    ], extra:['AI Agent Setup','Alexa Skills'] },
+    { key:'web', color:'var(--purple)', label:'Platforms &amp; Apps', radius:1.28, dur:46, items:[
+      ['cart','Shopify (Liquid, Sections, JS)'],['doc','WordPress (Yoast, WooCommerce)'],['smartphone','Flutter / Dart — iOS &amp; Android'],['palette','Framer'],['chart','Odoo']
+    ], extra:['Shopify APIs','Play Store &amp; App Store Release Ops'] },
+    { key:'infra', color:'var(--gold)', label:'Backend &amp; Infra', radius:1.72, dur:58, items:[
+      ['database','PHP / Laravel'],['database','MySQL / Supabase'],['cloud','Cloudflare / cPanel'],['lock','SPF / DKIM / DMARC'],['plug','REST APIs'],['database','SaaS &amp; Admin Dashboards']
+    ], extra:['JavaScript','HTML5','CSS3','C++','cPanel/WHM','PostgreSQL','IndexedDB'] },
+    { key:'design', color:'var(--green)', label:'Design &amp; Business', radius:2.14, dur:70, items:[
+      ['ruler','Figma Prototyping'],['palette','Adobe Suite'],['chart','SEO &amp; Analytics'],['briefcase','Pricing Strategy']
+    ], extra:['Photoshop','Illustrator','InDesign','Premiere Pro','After Effects','RTL/LTR Bilingual Layouts','Google Analytics','Search Console','Market Research','Vendor Management','Multi-team Leadership'] }
   ];
-  const allText = {
-    'AI & Automation':'Prompt Engineering, AI Agent Setup, LLM Integration (OpenAI / Groq / Claude), Workflow Automation, Custom Chatbots, AI Content Pipelines, Alexa Skills',
-    'Web Platforms':'Shopify (Liquid, Sections, JS, APIs), WordPress (Yoast, WooCommerce), Framer, Odoo',
-    'Backend & Infra':'PHP, Laravel, MySQL, JavaScript, HTML5, CSS3, REST APIs, C++, Cloudflare (Security, DNS, CDN), cPanel/WHM, SPF/DKIM/DMARC, Supabase, PostgreSQL, IndexedDB',
-    'Design & Business':'Figma, Adobe Photoshop/Illustrator/InDesign/Premiere/After Effects, RTL/LTR Bilingual Layouts, On-Page SEO, Yoast, GA, Search Console, Market Research, Pricing Strategy, Vendor Management, Multi-team Leadership'
-  };
-  Object.entries(allText).forEach(([k,v]) => {
-    const s = document.createElement('span'); s.textContent = k+': '+v; tags.appendChild(s);
+  groups.forEach(g => {
+    const wrap = document.createElement('div'); wrap.className = 'stack-group';
+    const head = document.createElement('div'); head.className = 'stack-group-label';
+    head.innerHTML = `<span class="sw" style="background:${g.color}"></span>${g.label}`;
+    wrap.appendChild(head);
+    const row = document.createElement('div'); row.className = 'stack-tags';
+    g.items.map(it => it[1]).concat(g.extra || []).forEach(label => {
+      const s = document.createElement('span'); s.innerHTML = label; row.appendChild(s);
+    });
+    wrap.appendChild(row);
+    tags.appendChild(wrap);
   });
   legend.innerHTML = groups.map(g => `<div class="lg"><span class="sw" style="background:${g.color}"></span>${g.label}</div>`).join('');
 
@@ -1264,9 +1370,9 @@ document.querySelectorAll('.flip').forEach(f => f.addEventListener('click', () =
       dot.className = 'dot';
       dot.style.animationDuration = g.dur+'s';
       dot.style.borderColor = g.color;
-      dot.textContent = item[0];
-      dot.addEventListener('mouseenter', () => { tip.innerHTML = `<b>${item[0]} ${item[1]}</b> — ${g.label}`; });
-      dot.addEventListener('click', () => { tip.innerHTML = `<b>${item[0]} ${item[1]}</b> — ${g.label}`; });
+      dot.innerHTML = icon(item[0], 18);
+      dot.addEventListener('mouseenter', () => { tip.innerHTML = `<span class="ic ic-14" style="color:${g.color}">${ICONS[item[0]]}</span> <b>${item[1]}</b> — ${g.label}`; });
+      dot.addEventListener('click', () => { tip.innerHTML = `<span class="ic ic-14" style="color:${g.color}">${ICONS[item[0]]}</span> <b>${item[1]}</b> — ${g.label}`; });
       node.appendChild(dot);
       spin.appendChild(node);
     });
