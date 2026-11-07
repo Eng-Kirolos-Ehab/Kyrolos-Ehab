@@ -485,7 +485,7 @@
   .k-built .ic{ color:var(--cyan); }
   .k-sub{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.3em; text-transform:uppercase; color:var(--muted2); margin:8px 0 12px; }
   .k-apps{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
-  @media(max-width:1080px){ .k-apps{ grid-template-columns:repeat(2,minmax(0,1fr)); } } @media(max-width:480px){ .k-apps{ grid-template-columns:1fr; } }
+  @media(max-width:1080px){ .k-apps{ grid-template-columns:repeat(2,minmax(0,1fr)); } } @media(max-width:480px){ .k-apps{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; } .k-app{ padding:12px; gap:8px; } .k-logo{ height:38px; } .k-logo img{ max-height:38px; } .k-app p{ font-size:12.5px!important; line-height:1.45; } .k-app .row{ flex-wrap:wrap; gap:6px; } .k-app .chip{ font-size:9px; padding:3px 7px; letter-spacing:.12em; } .k-app .go{ font-size:11px; } }
   .k-app{ position:relative; display:flex; flex-direction:column; gap:10px; padding:18px; border-radius:var(--rLg); text-decoration:none; color:var(--text); background:var(--surface); border:1px solid var(--border); overflow:hidden; transition:transform .2s,border-color .2s,box-shadow .2s; }
   .k-app::before{ content:''; position:absolute; inset:0; background:radial-gradient(220px circle at var(--mx,50%) var(--my,0%),rgba(0,210,255,.16),transparent 70%); opacity:0; transition:opacity .25s; pointer-events:none; }
   .k-app:hover{ transform:translateY(-4px); border-color:var(--borHi); box-shadow:0 18px 44px rgba(0,0,0,.28); } .k-app:hover::before{ opacity:1; }
