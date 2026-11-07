@@ -358,7 +358,7 @@
   .edu-badge span{ font-size:10.5px; color:var(--muted2); font-weight:600; letter-spacing:.06em; }
   .edu-projects{ margin-top:14px; display:grid; gap:6px; }
   .edu-proj{ display:flex; align-items:flex-start; gap:8px; font-size:13px; color:var(--muted); line-height:1.55; font-weight:300; }
-  .edu-proj::before{ content:'▸'; color:var(--cyan); font-size:10px; margin-top:3px; flex-shrink:0; }
+  .edu-proj::before{ content:''; width:6px; height:6px; border-top:2px solid var(--cyan); border-right:2px solid var(--cyan); transform:rotate(45deg); margin:6px 4px 0 0; box-sizing:border-box; flex-shrink:0; }
   .ref-card{ padding:18px; border-radius:var(--r); background:var(--surface); border:1px solid var(--border); display:flex; gap:14px; align-items:center; margin-top:14px; }
   @media(max-width:480px){ .ref-card{ flex-direction:column; align-items:flex-start; } }
   .ref-avatar{ width:50px; height:50px; border-radius:13px; flex-shrink:0; background:linear-gradient(135deg,rgba(139,92,246,.28),rgba(0,210,255,.28)); border:1px solid rgba(0,210,255,.2); display:grid; place-items:center; font-family:'Bebas Neue',sans-serif; font-size:22px; color:var(--cyan); }
@@ -382,7 +382,7 @@
   .avail-card p{ font-size:13px; color:var(--muted); line-height:1.65; }
   .avail-list{ margin-top:11px; display:grid; gap:6px; }
   .avail-item{ display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--text); font-weight:300; }
-  .avail-item::before{ content:'▸'; color:var(--cyan); font-size:10px; }
+  .avail-item::before{ content:''; width:6px; height:6px; border-top:2px solid var(--cyan); border-right:2px solid var(--cyan); transform:rotate(45deg); box-sizing:border-box; flex-shrink:0; }
 
   footer{ position:relative; z-index:2; background:color-mix(in srgb, var(--bg) 80%, black 8%); border-top:1px solid var(--border); }
   .footer-top{ padding:52px 0 38px; display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px; }
@@ -632,6 +632,27 @@
     .menu-btn{ min-height:44px; min-width:64px; }
   }
   @media(prefers-reduced-motion:reduce){ .marq-track,.hero::before{ animation:none!important; } }
+
+  /* FIXES: icons + mobile */
+  .caret{ display:grid; place-items:center; } .caret svg{ width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; transition:transform .2s; } details[open] > summary .caret svg{ transform:rotate(180deg); }
+  .arr-ic{ width:13px; height:13px; fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; vertical-align:-2px; margin-left:3px; }
+  .audit-list .dot svg{ width:11px; height:11px; fill:none; stroke:currentColor; stroke-width:3.2; stroke-linecap:round; stroke-linejoin:round; }
+  .cblink{ display:inline-block; width:.55em; height:1.05em; margin-left:3px; background:var(--cyan); vertical-align:-3px; animation:blinkc 1s steps(1) infinite; } @keyframes blinkc{ 50%{ opacity:0; } }
+  @media(max-width:640px){
+    .kicker{ letter-spacing:.2em!important; font-size:10px!important; flex-wrap:wrap; }
+    .hero{ padding-top:36px; } h1{ font-size:clamp(40px,13vw,64px); line-height:.98; }
+    .type-role{ font-size:13px; min-height:40px; }
+    #impact .g4,#brands .orgs-grid{ grid-template-columns:repeat(2,minmax(0,1fr))!important; gap:10px; }
+    #impact .card{ padding:14px; } #impact .card h3{ font-size:15px; } #impact .card p{ font-size:12.5px!important; } #impact .metric{ font-size:28px; }
+    .org-card{ padding:16px 10px 14px; } .org-logo-box{ width:54px; height:54px; margin-bottom:10px; } .org-desc{ font-size:11.5px; }
+    .brand-sub{ max-width:150px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
+    .tlog-head{ gap:8px; } .sum-title{ font-size:15px; }
+    .k-main{ padding:20px; } .k-stat{ padding:14px; } .k-stat .metric{ font-size:34px; }
+    .sec-head h2{ font-size:clamp(30px,9vw,40px); }
+    .lab-stage{ padding:16px; } .tv{ padding:10px; } .tv-grid{ gap:6px; } .tv-tile{ font-size:10px; }
+    .stage-text{ font-size:14px; }
+  }
+  html,body{ overflow-x:clip; max-width:100%; } .hero{ overflow:hidden; }
 </style>
 </head>
 
@@ -656,13 +677,13 @@
 const CONFIG = {
   photo: "images/kirolos.png",
   brands: [
-    { id:"kermi", logo:"images/kermi/kermi-mark.png", fallbackBg:"linear-gradient(135deg,#8B5CF6,#00D2FF)", fallbackText:"K", name:"KERMI", desc:"Windows & Android software — founder", country:"🇪🇬 Egypt · Founder" },
-    { id:"saudi-times",  logo:"images/s-w%20-%20Copy.png", fallbackBg:"linear-gradient(135deg,#00D2FF,#0A4F7A)", fallbackText:"ST", name:"Saudi Times", desc:"Digital news platform", country:"🇸🇦 Saudi Arabia · CTO" },
-    { id:"meat-station", logo:"images/Meat%20Station%20Web%20Icon.png", fallbackBg:"linear-gradient(135deg,#F4C842,#8B3A0A)", fallbackText:"MS", name:"Meat Station", desc:"Shopify commerce & POS", country:"🇸🇦 Saudi Arabia · Lead Dev" },
-    { id:"feraasa", logo:"images/sociallogo.png", fallbackBg:"linear-gradient(135deg,#8B5CF6,#1E0A4F)", fallbackText:"FS", name:"Feraasa", desc:"AI personality platform", country:"🇦🇪 UAE · AI Lead & Dev" },
-    { id:"publishelly", logo:"images/Untitled-1-1.png", fallbackBg:"linear-gradient(135deg,#22D97A,#0A3320)", fallbackText:"PB", name:"Publishelly", desc:"Media & press releases", country:"🇦🇪 UAE · Web Developer" },
-    { id:"oloom", logo:"images/Untitled%20design%20(9).png", fallbackBg:"linear-gradient(135deg,#3B82F6,#0A2050)", fallbackText:"OL", name:"Oloom Ltd", desc:"Educational SaaS platform", country:"🇬🇧 London, UK · IT Manager" },
-    { id:"ezz", logo:"images/%D8%AD%D8%AF%D9%8A%D8%AF-%D8%B9%D8%B2-ezz-steel.png", fallbackBg:"linear-gradient(135deg,#EF4444,#3A0A0A)", fallbackText:"EZ", name:"Ezz Industries", desc:"Industrial engineering training", country:"🇪🇬 Ain Sokhna · On-site" }
+    { id:"kermi", logo:"images/kermi/kermi-mark.png", fallbackBg:"linear-gradient(135deg,#8B5CF6,#00D2FF)", fallbackText:"K", name:"KERMI", desc:"Windows & Android software — founder", country:"Egypt · Founder" },
+    { id:"saudi-times",  logo:"images/s-w%20-%20Copy.png", fallbackBg:"linear-gradient(135deg,#00D2FF,#0A4F7A)", fallbackText:"ST", name:"Saudi Times", desc:"Digital news platform", country:"Saudi Arabia · CTO" },
+    { id:"meat-station", logo:"images/Meat%20Station%20Web%20Icon.png", fallbackBg:"linear-gradient(135deg,#F4C842,#8B3A0A)", fallbackText:"MS", name:"Meat Station", desc:"Shopify commerce & POS", country:"Saudi Arabia · Lead Dev" },
+    { id:"feraasa", logo:"images/sociallogo.png", fallbackBg:"linear-gradient(135deg,#8B5CF6,#1E0A4F)", fallbackText:"FS", name:"Feraasa", desc:"AI personality platform", country:"UAE · AI Lead & Dev" },
+    { id:"publishelly", logo:"images/Untitled-1-1.png", fallbackBg:"linear-gradient(135deg,#22D97A,#0A3320)", fallbackText:"PB", name:"Publishelly", desc:"Media & press releases", country:"UAE · Web Developer" },
+    { id:"oloom", logo:"images/Untitled%20design%20(9).png", fallbackBg:"linear-gradient(135deg,#3B82F6,#0A2050)", fallbackText:"OL", name:"Oloom Ltd", desc:"Educational SaaS platform", country:"London, UK · IT Manager" },
+    { id:"ezz", logo:"images/%D8%AD%D8%AF%D9%8A%D8%AF-%D8%B9%D8%B2-ezz-steel.png", fallbackBg:"linear-gradient(135deg,#EF4444,#3A0A0A)", fallbackText:"EZ", name:"Ezz Industries", desc:"Industrial engineering training", country:"Ain Sokhna · On-site" }
   ]
 };
 
@@ -743,7 +764,7 @@ function icon(name, size){ return '<span class="ic ic-'+(size||16)+'">'+(ICONS[n
         <div class="r">
           <div class="kicker">Founder of KERMI · Engineering Portfolio</div>
           <h1><span class="gtext">Systems Architect</span><br>&amp; AI Engineer</h1>
-          <div class="type-role mono"><span id="typeRole"></span><span class="cblink">▌</span></div>
+          <div class="type-role mono"><span id="typeRole"></span><span class="cblink" aria-hidden="true"></span></div>
           <p class="hero-sub">Founder of <b style="color:var(--text)">KERMI</b> — an independent software brand shipping Windows &amp; Android apps. End-to-end ownership from architecture to deployment. 4+ years leading remote engineering across Saudi Arabia, UAE, Egypt &amp; UK — specializing in AI agents, Shopify ecosystems, Laravel platforms, and intelligent workflow systems.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="mailto:kyrolosehab@gmail.com"><span class="ic ic-16"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.2"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg></span> Get in Touch</a>
@@ -751,7 +772,7 @@ function icon(name, size){ return '<span class="ic ic-'+(size||16)+'">'+(ICONS[n
             <a class="btn btn-ghost" href="https://linkedin.com/in/eng-kirolos-ehab" target="_blank" rel="noopener">LinkedIn</a>
             <button class="btn btn-ghost" id="cmdkBtnHero"><span class="ic ic-14"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span> Search (press /)</button>
           </div>
-          <a class="founder-pill" href="#kermi"><img src="images/kermi/kermi-mark.png" alt="KERMI logo"><span><b>Founder of KERMI</b> · 8 apps live on kermi.one</span><span class="arr">→</span></a>
+          <a class="founder-pill" href="#kermi"><img src="images/kermi/kermi-mark.png" alt="KERMI logo"><span><b>Founder of KERMI</b> · 8 apps live on kermi.one</span><span class="arr"><svg class="arr-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
           <div class="pill-row">
             <span class="pill">Custom AI Agents & Model Training</span>
             <span class="pill">Shopify (Liquid + JS)</span>
@@ -860,43 +881,43 @@ function icon(name, size){ return '<span class="ic ic-'+(size||16)+'">'+(ICONS[n
       <div class="k-apps">
         <a class="k-app r" href="https://kermi.one/vexa" target="_blank" rel="noopener" aria-label="Vexa on kermi.one">
           <div class="k-logo"><img class="dk-only" src="images/kermi/vexa-wide.png" alt="Vexa logo" loading="lazy"><img class="lt-only" src="images/kermi/vexa-wide-light.png" alt="" loading="lazy"></div>
-          <p>Image → clean editable vectors, background removal, AI upscaling, seamless patterns.</p>
-          <div class="row"><span class="chip">Windows</span><span class="go">Open →</span></div>
+          <p>Image to clean editable vectors, background removal, AI upscaling, seamless patterns.</p>
+          <div class="row"><span class="chip">Windows</span><span class="go">Open <svg class="arr-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
         </a>
         <a class="k-app r" href="https://kermi.one/rota" target="_blank" rel="noopener" aria-label="Rota on kermi.one">
           <div class="k-logo"><img class="dk-only" src="images/kermi/rota-wide.png" alt="Rota logo" loading="lazy"><img class="lt-only" src="images/kermi/rota-wide-light.png" alt="" loading="lazy"></div>
           <p>Drag a file, hold Shift: convert or edit images, PDF, Office, audio &amp; video offline.</p>
-          <div class="row"><span class="chip">Windows</span><span class="go">Open →</span></div>
+          <div class="row"><span class="chip">Windows</span><span class="go">Open <svg class="arr-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
         </a>
         <a class="k-app r" href="https://kermi.one/folia" target="_blank" rel="noopener" aria-label="Folia on kermi.one">
           <div class="k-logo"><img class="dk-only" src="images/kermi/folia-wide.png" alt="Folia logo" loading="lazy"><img class="lt-only" src="images/kermi/folia-wide-light.png" alt="" loading="lazy"></div>
           <p>PDF editor that edits text in the same font — with correctly joined Arabic letters.</p>
-          <div class="row"><span class="chip">Windows</span><span class="go">Open →</span></div>
+          <div class="row"><span class="chip">Windows</span><span class="go">Open <svg class="arr-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
         </a>
         <a class="k-app r" href="https://kermi.one/salva" target="_blank" rel="noopener" aria-label="Salva on kermi.one">
           <div class="k-logo"><img class="dk-only" src="images/kermi/salva-wide.png" alt="Salva logo" loading="lazy"><img class="lt-only" src="images/kermi/salva-wide-light.png" alt="" loading="lazy"></div>
           <p>Read-only flash/disk repair &amp; recovery — every fix backed up and undoable.</p>
-          <div class="row"><span class="chip">Windows</span><span class="go">Open →</span></div>
+          <div class="row"><span class="chip">Windows</span><span class="go">Open <svg class="arr-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
         </a>
         <a class="k-app r" href="https://kermi.one/lino" target="_blank" rel="noopener" aria-label="Lino on kermi.one">
           <div class="k-logo"><img class="dk-only" src="images/kermi/lino-wide.png" alt="Lino logo" loading="lazy"><img class="lt-only" src="images/kermi/lino-wide-light.png" alt="" loading="lazy"></div>
           <p>Screenshots hang on a glass line at the top of the screen — drag, mark up, OCR.</p>
-          <div class="row"><span class="chip">Windows</span><span class="go">Open →</span></div>
+          <div class="row"><span class="chip">Windows</span><span class="go">Open <svg class="arr-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
         </a>
         <a class="k-app r" href="https://kermi.one/btsplit" target="_blank" rel="noopener" aria-label="BTSplit on kermi.one">
           <div class="k-logo"><img class="dk-only" src="images/kermi/btsplit-wide.png" alt="BTSplit logo" loading="lazy"><img class="lt-only" src="images/kermi/btsplit-wide-light.png" alt="" loading="lazy"></div>
           <p>Same PC sound on several Bluetooth speakers, in sync, stereo or mono.</p>
-          <div class="row"><span class="chip">Windows</span><span class="go">Open →</span></div>
+          <div class="row"><span class="chip">Windows</span><span class="go">Open <svg class="arr-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
         </a>
         <a class="k-app r" href="https://kermi.one/tv-launcher" target="_blank" rel="noopener" aria-label="Kermi Lumo on kermi.one">
           <div class="k-logo"><img class="dk-only" src="images/kermi/lumo-wide.png" alt="Kermi Lumo logo" loading="lazy"><img class="lt-only" src="images/kermi/lumo-wide-light.png" alt="" loading="lazy"></div>
           <p>Fast, ad-free Google-TV-style home screen for smart projectors &amp; TV boxes.</p>
-          <div class="row"><span class="chip">Android TV</span><span class="go">Open →</span></div>
+          <div class="row"><span class="chip">Android TV</span><span class="go">Open <svg class="arr-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
         </a>
         <a class="k-app r" href="https://kermi.one/smart-panel" target="_blank" rel="noopener" aria-label="Kermi Domi on kermi.one">
           <div class="k-logo"><img class="dk-only" src="images/kermi/domi-wide.png" alt="Kermi Domi logo" loading="lazy"><img class="lt-only" src="images/kermi/domi-wide-light.png" alt="" loading="lazy"></div>
           <p>Turns an old tablet into a wall-mounted Home Assistant smart-home panel.</p>
-          <div class="row"><span class="chip">Android</span><span class="go">Open →</span></div>
+          <div class="row"><span class="chip">Android</span><span class="go">Open <svg class="arr-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
         </a>
       </div>
 
@@ -967,7 +988,7 @@ function icon(name, size){ return '<span class="ic ic-'+(size||16)+'">'+(ICONS[n
               <svg viewBox="0 0 120 120" class="ring" aria-hidden="true"><circle cx="60" cy="60" r="52" class="ring-bg"/><circle cx="60" cy="60" r="52" class="ring-fg" id="ringFg"/></svg>
               <div class="ring-num"><span id="ringNum">8</span><small>Semrush Authority Score</small></div>
             </div>
-            <div class="stage-title" style="text-align:center">The Saudi Times: 8 → 40</div>
+            <div class="stage-title" style="text-align:center">The Saudi Times: 8 to 40</div>
             <p class="stage-text" style="text-align:center">Rebuilt technical SEO, site structure and a publishing system designed for organic growth. Run the audit to watch the score climb.</p>
             <div class="mini-facts">
               <div><b>473K</b><span>cache files traced in a live-scores plugin audit</span></div>
@@ -1016,7 +1037,7 @@ function icon(name, size){ return '<span class="ic ic-'+(size||16)+'">'+(ICONS[n
             <div class="tv" id="tv" tabindex="0" aria-label="TV launcher demo. Use arrow keys and Enter.">
               <div class="tv-top"><span class="mono" id="tvClock">--:--</span><span class="tv-quick"><button data-q="wifi" class="on" type="button">Wi-Fi</button><button data-q="bt" type="button">Bluetooth</button><button data-q="cast" type="button">Cast</button></span></div>
               <div class="tv-grid" id="tvGrid"></div>
-              <div class="tv-foot"><div class="ram"><span class="mono">RAM</span><div class="ram-bar"><i id="ramFill"></i></div><span class="mono" id="ramTxt">78%</span></div><span class="tv-status mono" id="tvStatus">Press ← → ↑ ↓</span></div>
+              <div class="tv-foot"><div class="ram"><span class="mono">RAM</span><div class="ram-bar"><i id="ramFill"></i></div><span class="mono" id="ramTxt">78%</span></div><span class="tv-status mono" id="tvStatus">Arrow keys + Enter</span></div>
             </div>
           </div>
           <div>
@@ -1047,7 +1068,7 @@ function icon(name, size){ return '<span class="ic ic-'+(size||16)+'">'+(ICONS[n
         <div class="card r"><div class="card-top"><span class="chip">SEO Growth</span><span class="metric counter" data-target="40">0</span></div><h3>Semrush Authority Score</h3><p>Grew The Saudi Times from a score of 8 to 40 through technical SEO alone.</p></div>
         <div class="card r r2"><div class="card-top"><span class="chip">Brands</span><span class="metric counter" data-target="5">0</span></div><h3>Core Brands Active</h3><p>Saudi Times, Meat Station, Feraasa, Publishelly — plus KERMI, which I founded.</p></div>
         <div class="card r r3"><div class="card-top"><span class="chip">Countries</span><span class="metric counter" data-target="4">0</span></div><h3>Markets Served</h3><p>KSA, UAE, UK, Egypt — remote-first across all regions.</p></div>
-        <div class="card r r4"><div class="card-top"><span class="chip">Delivery</span><span class="metric">E2E</span></div><h3>End-to-End Ownership</h3><p>Architecture → Build → Deploy → Optimize → Scale.</p><div class="small">Approximations — for positioning and clarity.</div></div>
+        <div class="card r r4"><div class="card-top"><span class="chip">Delivery</span><span class="metric">E2E</span></div><h3>End-to-End Ownership</h3><p>Architecture, build, deploy, optimize, scale.</p><div class="small">Approximations — for positioning and clarity.</div></div>
       </div>
     </div>
   </section>
@@ -1073,7 +1094,7 @@ function icon(name, size){ return '<span class="ic ic-'+(size||16)+'">'+(ICONS[n
         <details class="tlog-item now" open data-org="kermi">
           <summary class="tlog-head">
               <div><div class="sum-title">Founder &amp; Product Engineer</div><div class="sum-meta">KERMI — Windows &amp; Android Software (kermi.one)</div><div class="sum-tags"><span class="tag">Founder</span><span class="tag">Desktop apps</span><span class="tag">Android</span><span class="tag">Product</span><span class="tag">SEO</span></div></div>
-              <div class="caret">▾</div>
+              <div class="caret"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
           </summary>
           <div class="detail-body">
               <div class="job-meta"><span class="job-badge jb-period"><span class="ic ic-13"><svg viewBox="0 0 24 24"><rect x="3.2" y="4.3" width="17.6" height="16.4" rx="2"/><path d="M16 2.3v4M8 2.3v4M3.2 9.8h17.6"/></svg></span> 2026 – Present</span><span class="job-badge jb-loc"><span class="ic ic-13"><svg viewBox="0 0 24 24"><path d="M12 21.5s7-6.4 7-12.2a7 7 0 1 0-14 0c0 5.8 7 12.2 7 12.2z"/><circle cx="12" cy="9.3" r="2.4"/></svg></span> Egypt · Global audience</span><span class="job-badge jb-type"><span class="ic ic-13"><svg viewBox="0 0 24 24"><rect x="3" y="7.5" width="18" height="12.5" rx="2"/><path d="M8.5 7.5V5.8A1.8 1.8 0 0 1 10.3 4h3.4a1.8 1.8 0 0 1 1.8 1.8v1.7"/><path d="M3 13h18"/></svg></span> Founder</span></div>
@@ -1093,7 +1114,7 @@ function icon(name, size){ return '<span class="ic ic-'+(size||16)+'">'+(ICONS[n
         <details class="tlog-item now" data-org="saudi-times">
           <summary class="tlog-head">
               <div><div class="sum-title">Chief Technology Officer (CTO)</div><div class="sum-meta">The Saudi Times — Digital News Platform</div><div class="sum-tags"><span class="tag">Leadership</span><span class="tag">SEO</span><span class="tag">AI</span><span class="tag">Brand</span><span class="tag">Infra</span></div></div>
-              <div class="caret">▾</div>
+              <div class="caret"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
           </summary>
           <div class="detail-body">
               <div class="job-meta"><span class="job-badge jb-period"><span class="ic ic-13"><svg viewBox="0 0 24 24"><rect x="3.2" y="4.3" width="17.6" height="16.4" rx="2"/><path d="M16 2.3v4M8 2.3v4M3.2 9.8h17.6"/></svg></span> Jul 2024 – Present</span><span class="job-badge jb-loc"><span class="ic ic-13"><svg viewBox="0 0 24 24"><path d="M12 21.5s7-6.4 7-12.2a7 7 0 1 0-14 0c0 5.8 7 12.2 7 12.2z"/><circle cx="12" cy="9.3" r="2.4"/></svg></span> Remote · Saudi Arabia</span><span class="job-badge jb-type"><span class="ic ic-13"><svg viewBox="0 0 24 24"><rect x="3" y="7.5" width="18" height="12.5" rx="2"/><path d="M8.5 7.5V5.8A1.8 1.8 0 0 1 10.3 4h3.4a1.8 1.8 0 0 1 1.8 1.8v1.7"/><path d="M3 13h18"/></svg></span> Full-Time</span></div>
@@ -1116,7 +1137,7 @@ function icon(name, size){ return '<span class="ic ic-'+(size||16)+'">'+(ICONS[n
         <details class="tlog-item" data-org="meat-station">
           <summary class="tlog-head">
               <div><div class="sum-title">Lead Shopify Developer, Mobile Engineer &amp; Business Strategist</div><div class="sum-meta">Meat Station</div><div class="sum-tags"><span class="tag">Shopify</span><span class="tag">Flutter · iOS/Android</span><span class="tag">POS</span><span class="tag">Strategy</span></div></div>
-              <div class="caret">▾</div>
+              <div class="caret"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
           </summary>
           <div class="detail-body">
               <div class="job-meta"><span class="job-badge jb-period"><span class="ic ic-13"><svg viewBox="0 0 24 24"><rect x="3.2" y="4.3" width="17.6" height="16.4" rx="2"/><path d="M16 2.3v4M8 2.3v4M3.2 9.8h17.6"/></svg></span> 2025 – Present</span><span class="job-badge jb-loc"><span class="ic ic-13"><svg viewBox="0 0 24 24"><path d="M12 21.5s7-6.4 7-12.2a7 7 0 1 0-14 0c0 5.8 7 12.2 7 12.2z"/><circle cx="12" cy="9.3" r="2.4"/></svg></span> Remote · Saudi Arabia</span><span class="job-badge jb-type"><span class="ic ic-13"><svg viewBox="0 0 24 24"><rect x="3" y="7.5" width="18" height="12.5" rx="2"/><path d="M8.5 7.5V5.8A1.8 1.8 0 0 1 10.3 4h3.4a1.8 1.8 0 0 1 1.8 1.8v1.7"/><path d="M3 13h18"/></svg></span> Full Ownership</span></div>
@@ -1135,7 +1156,7 @@ function icon(name, size){ return '<span class="ic ic-'+(size||16)+'">'+(ICONS[n
         <details class="tlog-item" data-org="feraasa">
           <summary class="tlog-head">
               <div><div class="sum-title">Full-Stack Web Developer, AI Lead &amp; Graphic Designer</div><div class="sum-meta">Feraasa</div><div class="sum-tags"><span class="tag">Laravel</span><span class="tag">AI Agents</span><span class="tag">Security</span><span class="tag">RTL/LTR</span></div></div>
-              <div class="caret">▾</div>
+              <div class="caret"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
           </summary>
           <div class="detail-body">
               <div class="job-meta"><span class="job-badge jb-period"><span class="ic ic-13"><svg viewBox="0 0 24 24"><rect x="3.2" y="4.3" width="17.6" height="16.4" rx="2"/><path d="M16 2.3v4M8 2.3v4M3.2 9.8h17.6"/></svg></span> Oct 2024 – Present</span><span class="job-badge jb-loc"><span class="ic ic-13"><svg viewBox="0 0 24 24"><path d="M12 21.5s7-6.4 7-12.2a7 7 0 1 0-14 0c0 5.8 7 12.2 7 12.2z"/><circle cx="12" cy="9.3" r="2.4"/></svg></span> Remote · UAE</span><span class="job-badge jb-type"><span class="ic ic-13"><svg viewBox="0 0 24 24"><rect x="3" y="7.5" width="18" height="12.5" rx="2"/><path d="M8.5 7.5V5.8A1.8 1.8 0 0 1 10.3 4h3.4a1.8 1.8 0 0 1 1.8 1.8v1.7"/><path d="M3 13h18"/></svg></span> Freelance</span></div>
@@ -1154,7 +1175,7 @@ function icon(name, size){ return '<span class="ic ic-'+(size||16)+'">'+(ICONS[n
         <details class="tlog-item" data-org="publishelly">
           <summary class="tlog-head">
               <div><div class="sum-title">Web Developer &amp; Digital Media Specialist</div><div class="sum-meta">Publishelly</div><div class="sum-tags"><span class="tag">WordPress</span><span class="tag">SEO</span><span class="tag">Media</span></div></div>
-              <div class="caret">▾</div>
+              <div class="caret"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
           </summary>
           <div class="detail-body">
               <div class="job-meta"><span class="job-badge jb-period"><span class="ic ic-13"><svg viewBox="0 0 24 24"><rect x="3.2" y="4.3" width="17.6" height="16.4" rx="2"/><path d="M16 2.3v4M8 2.3v4M3.2 9.8h17.6"/></svg></span> Aug 2024 – Present</span><span class="job-badge jb-loc"><span class="ic ic-13"><svg viewBox="0 0 24 24"><path d="M12 21.5s7-6.4 7-12.2a7 7 0 1 0-14 0c0 5.8 7 12.2 7 12.2z"/><circle cx="12" cy="9.3" r="2.4"/></svg></span> Remote · UAE</span><span class="job-badge jb-type"><span class="ic ic-13"><svg viewBox="0 0 24 24"><rect x="3" y="7.5" width="18" height="12.5" rx="2"/><path d="M8.5 7.5V5.8A1.8 1.8 0 0 1 10.3 4h3.4a1.8 1.8 0 0 1 1.8 1.8v1.7"/><path d="M3 13h18"/></svg></span> Freelance</span></div>
@@ -1170,7 +1191,7 @@ function icon(name, size){ return '<span class="ic ic-'+(size||16)+'">'+(ICONS[n
         <details class="tlog-item" data-org="oloom">
           <summary class="tlog-head">
               <div><div class="sum-title">IT Manager</div><div class="sum-meta">Oloom Ltd</div><div class="sum-tags"><span class="tag">IT</span><span class="tag">Platform</span><span class="tag">Automation</span></div></div>
-              <div class="caret">▾</div>
+              <div class="caret"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
           </summary>
           <div class="detail-body">
               <div class="job-meta"><span class="job-badge jb-period"><span class="ic ic-13"><svg viewBox="0 0 24 24"><rect x="3.2" y="4.3" width="17.6" height="16.4" rx="2"/><path d="M16 2.3v4M8 2.3v4M3.2 9.8h17.6"/></svg></span> Jul 2023 – Jun 2024</span><span class="job-badge jb-loc"><span class="ic ic-13"><svg viewBox="0 0 24 24"><path d="M12 21.5s7-6.4 7-12.2a7 7 0 1 0-14 0c0 5.8 7 12.2 7 12.2z"/><circle cx="12" cy="9.3" r="2.4"/></svg></span> Remote · London, UK</span><span class="job-badge jb-type"><span class="ic ic-13"><svg viewBox="0 0 24 24"><rect x="3" y="7.5" width="18" height="12.5" rx="2"/><path d="M8.5 7.5V5.8A1.8 1.8 0 0 1 10.3 4h3.4a1.8 1.8 0 0 1 1.8 1.8v1.7"/><path d="M3 13h18"/></svg></span> Full-Time</span></div>
@@ -1186,7 +1207,7 @@ function icon(name, size){ return '<span class="ic ic-'+(size||16)+'">'+(ICONS[n
         <details class="tlog-item" data-org="ezz">
           <summary class="tlog-head">
               <div><div class="sum-title">Engineering Trainee — Control &amp; Monitoring</div><div class="sum-meta">Ezz Direct Reduction</div><div class="sum-tags"><span class="tag">PLC</span><span class="tag">Industrial</span><span class="tag">On-site</span></div></div>
-              <div class="caret">▾</div>
+              <div class="caret"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
           </summary>
           <div class="detail-body">
               <div class="job-meta"><span class="job-badge jb-period"><span class="ic ic-13"><svg viewBox="0 0 24 24"><rect x="3.2" y="4.3" width="17.6" height="16.4" rx="2"/><path d="M16 2.3v4M8 2.3v4M3.2 9.8h17.6"/></svg></span> Jul–Aug 2023</span><span class="job-badge jb-loc"><span class="ic ic-13"><svg viewBox="0 0 24 24"><path d="M12 21.5s7-6.4 7-12.2a7 7 0 1 0-14 0c0 5.8 7 12.2 7 12.2z"/><circle cx="12" cy="9.3" r="2.4"/></svg></span> Ain Sokhna, Egypt</span><span class="job-badge jb-type"><span class="ic ic-13"><svg viewBox="0 0 24 24"><path d="M3 21V10.5l5 3v-3l5 3V8l6 3.3V21z"/><path d="M3 21h17M7 15.2v2.3M11.5 15.2v2.3M16 13.6v3.9"/></svg></span> On-site</span></div>
@@ -1201,7 +1222,7 @@ function icon(name, size){ return '<span class="ic ic-'+(size||16)+'">'+(ICONS[n
         <details class="tlog-item">
           <summary class="tlog-head">
               <div><div class="sum-title">Electrical Engineering Trainee</div><div class="sum-meta">Ezz Flat Steel</div><div class="sum-tags"><span class="tag">Electrical</span><span class="tag">Industrial</span><span class="tag">Safety</span></div></div>
-              <div class="caret">▾</div>
+              <div class="caret"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
           </summary>
           <div class="detail-body">
               <div class="job-meta"><span class="job-badge jb-period"><span class="ic ic-13"><svg viewBox="0 0 24 24"><rect x="3.2" y="4.3" width="17.6" height="16.4" rx="2"/><path d="M16 2.3v4M8 2.3v4M3.2 9.8h17.6"/></svg></span> Aug 2022</span><span class="job-badge jb-loc"><span class="ic ic-13"><svg viewBox="0 0 24 24"><path d="M12 21.5s7-6.4 7-12.2a7 7 0 1 0-14 0c0 5.8 7 12.2 7 12.2z"/><circle cx="12" cy="9.3" r="2.4"/></svg></span> Ain Sokhna, Egypt</span><span class="job-badge jb-type"><span class="ic ic-13"><svg viewBox="0 0 24 24"><path d="M3 21V10.5l5 3v-3l5 3V8l6 3.3V21z"/><path d="M3 21h17M7 15.2v2.3M11.5 15.2v2.3M16 13.6v3.9"/></svg></span> On-site</span></div>
@@ -1293,7 +1314,7 @@ function icon(name, size){ return '<span class="ic ic-'+(size||16)+'">'+(ICONS[n
         <div class="fit-row" data-fit="91"><div class="fit-top"><div class="fit-top-row"><b>WordPress Infrastructure + SEO Engineer</b><span>91%</span></div><div class="bar"><i></i></div></div><div class="eq"><i></i><i></i><i></i><i></i><i></i></div></div>
         <div class="fit-row" data-fit="89"><div class="fit-top"><div class="fit-top-row"><b>Full-Stack Product Engineer (Laravel/PHP/JS)</b><span>89%</span></div><div class="bar"><i></i></div></div><div class="eq"><i></i><i></i><i></i><i></i><i></i></div></div>
         <div class="fit-row" data-fit="87"><div class="fit-top"><div class="fit-top-row"><b>Technical Lead / CTO Track</b><span>87%</span></div><div class="bar"><i></i></div></div><div class="eq"><i></i><i></i><i></i><i></i><i></i></div></div>
-        <div class="fit-row" data-fit="84"><div class="fit-top"><div class="fit-top-row"><b>Mobile App Coordinator (Figma → Dev Handoff)</b><span>84%</span></div><div class="bar"><i></i></div></div><div class="eq"><i></i><i></i><i></i><i></i><i></i></div></div>
+        <div class="fit-row" data-fit="84"><div class="fit-top"><div class="fit-top-row"><b>Mobile App Engineer (Flutter, Android &amp; iOS)</b><span>84%</span></div><div class="bar"><i></i></div></div><div class="eq"><i></i><i></i><i></i><i></i><i></i></div></div>
         <div class="fit-row" data-fit="80"><div class="fit-top"><div class="fit-top-row"><b>DevOps / System Integrator</b><span>80%</span></div><div class="bar"><i></i></div></div><div class="eq"><i></i><i></i><i></i><i></i><i></i></div></div>
       </div>
       <p class="small r" style="margin-top:10px;color:var(--muted2);font-size:11.5px">Percentages are approximate — based on real responsibilities across Shopify, WordPress, Laravel, AI, infrastructure, and automation projects.</p>
@@ -1346,7 +1367,7 @@ function icon(name, size){ return '<span class="ic ic-'+(size||16)+'">'+(ICONS[n
             <p style="margin-top:8px"><span class="hl">Impact:</span> Cleaner UX, fully automated AI reading workflow, significantly more secure platform.</p>
             <ul class="dbullets">
               <li>Language-aware layout behavior (RTL/LTR auto-switching) across all components</li>
-              <li>Service workflow: login → AI analysis → purchase → delivery within 24h</li>
+              <li>Service workflow: login, AI analysis, purchase, then delivery within 24h</li>
               <li>Identified and blocked real-time attack attempts while keeping platform live</li>
               <li>Automated email delivery using Zoho Mail connected to backend triggers</li>
             </ul>
@@ -1746,7 +1767,7 @@ document.querySelectorAll('.flip').forEach(f => f.addEventListener('click', () =
 (function(){
   const btn = document.getElementById('copyEmail'), toast = document.getElementById('toast');
   btn?.addEventListener('click', async () => {
-    try { await navigator.clipboard.writeText('kyrolosehab@gmail.com'); showToast('Email copied to clipboard ✓'); }
+    try { await navigator.clipboard.writeText('kyrolosehab@gmail.com'); showToast('Email copied to clipboard'); }
     catch(e){ showToast('kyrolosehab@gmail.com'); }
   });
   window.showToast = function(msg){ toast.textContent = msg; toast.classList.add('show'); clearTimeout(window._tt); window._tt = setTimeout(()=>toast.classList.remove('show'), 2200); };
@@ -1769,7 +1790,7 @@ document.querySelectorAll('.flip').forEach(f => f.addEventListener('click', () =
       ['database','PHP / Laravel'],['database','MySQL / Supabase'],['cloud','Cloudflare / cPanel'],['lock','SPF / DKIM / DMARC'],['plug','REST APIs'],['database','SaaS &amp; Admin Dashboards']
     ], extra:['JavaScript','HTML5','CSS3','C++','cPanel/WHM','PostgreSQL','IndexedDB'] },
     { key:'design', color:'var(--green)', label:'Design &amp; Business', radius:2.14, dur:70, items:[
-      ['ruler','Figma Prototyping'],['palette','Adobe Suite'],['chart','SEO &amp; Analytics'],['briefcase','Pricing Strategy']
+      ['ruler','Figma Design'],['palette','Adobe Suite'],['chart','SEO &amp; Analytics'],['briefcase','Pricing Strategy']
     ], extra:['Photoshop','Illustrator','InDesign','Premiere Pro','After Effects','RTL/LTR Bilingual Layouts','Google Analytics','Search Console','Market Research','Vendor Management','Multi-team Leadership'] }
   ];
   groups.forEach(g => {
@@ -1973,7 +1994,7 @@ document.querySelectorAll('.flip').forEach(f => f.addEventListener('click', () =
     ['AI-search files', 'llms.txt and plain-Markdown copies so assistants can quote the site.']
   ];
   const list = $('#auditList');
-  list.innerHTML = checks.map(c => '<li><span class="dot">✓</span><div><b>' + c[0] + '</b><span class="d">' + c[1] + '</span></div></li>').join('');
+  list.innerHTML = checks.map(c => '<li><span class="dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><b>' + c[0] + '</b><span class="d">' + c[1] + '</span></div></li>').join('');
   const ringFg = $('#ringFg'), ringNum = $('#ringNum'), C = 326.7;
   function ring(v){ ringFg.style.strokeDashoffset = C - (C * Math.min(v,100) / 100); ringNum.textContent = Math.round(v); }
   ring(8);
