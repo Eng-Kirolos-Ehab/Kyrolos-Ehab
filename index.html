@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Kirolos Ehab — Founder of KERMI · Systems Architect &amp; AI Engineer</title>
-<meta name="description" content="Kirolos Ehab — Founder of KERMI (kermi.one), Systems Architect &amp; AI Engineer. Built and shipped 8 Windows &amp; Android apps, plus 4+ years leading remote engineering across Saudi Arabia, UAE, Egypt &amp; the UK: AI agents, Shopify commerce, Laravel platforms, and automation systems, running five companies at once.">
+<title>Kirolos Ehab | Founder of KERMI, Systems &amp; AI Engineer</title>
+<meta name="description" content="Kirolos Ehab, founder of KERMI (kermi.one) and AI engineer. 8 Windows and Android apps, Flutter, Laravel and SEO. 4+ years remote across KSA, UAE, UK.">
 <meta name="theme-color" content="#05070F">
 <meta name="author" content="Kirolos Ehab">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
@@ -42,7 +42,7 @@
     --bg:#05070F; --bg1:#080C18;
     --surface:rgba(255,255,255,.042); --surfB:rgba(255,255,255,.07);
     --border:rgba(255,255,255,.09); --borHi:rgba(0,210,255,.35);
-    --text:#E8F1FF; --muted:#8899B8; --muted2:#5A6E8F;
+    --text:#E8F1FF; --muted:#8899B8; --muted2:#7589AB;
     --cyan:#00D2FF; --purple:#8B5CF6; --gold:#F4C842; --green:#22D97A; --red:#FF5C7A;
     --r:16px; --rLg:22px;
     --cursor-x:50%; --cursor-y:50%;
@@ -51,7 +51,7 @@
     --bg:#F4F6FB; --bg1:#EAEEF7;
     --surface:rgba(10,20,40,.035); --surfB:rgba(10,20,40,.06);
     --border:rgba(10,20,40,.10); --borHi:rgba(0,150,220,.35);
-    --text:#0B1220; --muted:#4A5875; --muted2:#7C8AA5;
+    --text:#0B1220; --muted:#4A5875; --muted2:#5E6C88;
     --cyan:#0086C9; --purple:#6D3FD1; --gold:#B8860B; --green:#0E9F5C; --red:#D63A5C;
   }
   *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -653,6 +653,18 @@
     .stage-text{ font-size:14px; }
   }
   html,body{ overflow-x:clip; max-width:100%; } .hero{ overflow:hidden; }
+
+  /* REVIEW FIXES */
+  @media(max-width:760px){
+    .lab-tabs{ flex-wrap:wrap!important; overflow:visible!important; margin-inline:0!important; padding-inline:0!important; }
+    .lab-tab{ flex:1 1 calc(50% - 4px)!important; justify-content:center; }
+    .tag,.chip,.kicker,.pill,.tl-year,.tl-label,.org-desc,.job-badge,.flip-front .tap{ font-size:12px!important; }
+    .case-tabs{ flex-direction:column!important; overflow:visible!important; } .case-tab{ min-width:0!important; width:100%; }
+    .seg button{ min-height:44px; padding:6px 20px; }
+    footer .footer-col a{ padding:10px 0; margin-bottom:0; }
+    .clink{ min-height:48px; }
+  }
+  @media(hover:none){ #cmdkBtnHero{ display:none; } .tv-status{ display:none; } }
 </style>
 </head>
 
@@ -1382,12 +1394,12 @@ function icon(name, size){ return '<span class="ic ic-'+(size||16)+'">'+(ICONS[n
   <!-- STACK -->
   <section id="stack">
     <div class="wrap">
-      <div class="sec-head r"><div class="kicker">Module 09 // Technical Stack</div><h2>Tools &amp; Technologies</h2><p>Everything listed is production-tested. Hover an orbit node for detail.</p></div>
+      <div class="sec-head r"><div class="kicker">Module 09 // Technical Stack</div><h2>Tools &amp; Technologies</h2><p>Everything listed is production-tested. Tap or hover a group for detail.</p></div>
       <div class="orbit-wrap r" id="orbitWrap">
         <div class="orbit-stage" id="orbitStage" aria-hidden="true"></div>
         <div>
           <div class="orbit-legend" id="orbitLegend"></div>
-          <div class="orbit-tip" id="orbitTip">Hover or tap a node to see what it represents.</div>
+          <div class="orbit-tip" id="orbitTip">Tap or hover a group to see what it covers.</div>
           <div class="stack-tags" id="stackTags"></div>
         </div>
       </div>
@@ -1732,7 +1744,7 @@ document.querySelectorAll('.r').forEach(el => io.observe(el));
 
 function animCount(el){
   const t = +el.dataset.target, dur = t<=5?600:900, s=performance.now();
-  const tick = now => { const p=Math.min(1,(now-s)/dur), ease=1-Math.pow(1-p,3); el.textContent=Math.round(t*ease); if (p<1) requestAnimationFrame(tick); };
+  const tick = now => { const p=Math.max(0,Math.min(1,(now-s)/dur)), ease=1-Math.pow(1-p,3); el.textContent=Math.round(t*ease); if (p<1) requestAnimationFrame(tick); };
   requestAnimationFrame(tick);
 }
 const cio = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting){ animCount(e.target); cio.unobserve(e.target); } }), {threshold:.4});
