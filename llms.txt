@@ -1,0 +1,16 @@
+# Kirolos Ehab
+
+> Founder of KERMI (kermi.one), Systems Architect and AI Engineer based in Egypt. Builds Flutter mobile apps, Windows and Android software, Laravel back-ends, Shopify and WordPress sites, AI agents and SEO-driven publishing systems.
+
+## About
+- Founder of KERMI, an independent software brand with eight apps: Vexa, Rota, Folia, Salva, Lino, BTSplit, Kermi Lumo, Kermi Domi (https://kermi.one)
+- CTO of The Saudi Times (Semrush Authority Score grown from 8 to 40)
+- Lead developer of Meat Station (Flutter apps for customers, drivers, restaurants and admins; Laravel back-end; POS)
+- Looking for a long-term, stable role with a major Egyptian company (on-site or hybrid); open to remote projects
+
+## Links
+- Portfolio: https://kyrolosehab.me/
+- KERMI: https://kermi.one
+- GitHub: https://github.com/Eng-Kirolos-Ehab
+- LinkedIn: https://linkedin.com/in/eng-kirolos-ehab
+- Contact: kyrolosehab@gmail.com
