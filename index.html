@@ -670,6 +670,29 @@
   @media(hover:none){ #cmdkBtnHero{ display:none; } .tv-status{ display:none; } }
   .lang-switch{ display:inline-flex; align-items:center; min-height:40px; padding:0 14px; border-radius:10px; border:1px solid var(--border); background:var(--surface); color:var(--text); text-decoration:none; font:700 13px 'Outfit',system-ui,sans-serif; }
   .lang-switch:hover{ border-color:var(--borHi); }
+
+  /* IDEAS: code card, availability pill, process */
+  .avail-pill{ display:inline-flex; align-items:center; gap:10px; padding:6px 8px 6px 12px; margin-bottom:16px; border-radius:999px; background:rgba(34,217,122,.1); border:1px solid rgba(34,217,122,.35); color:var(--text); font:600 13px 'Outfit',sans-serif; text-decoration:none; }
+  .avail-pill i{ width:8px; height:8px; border-radius:50%; background:var(--green); box-shadow:0 0 10px var(--green); animation:pulse 2s ease-in-out infinite; }
+  .avail-pill b{ background:var(--green); color:#04210f; border-radius:999px; padding:3px 11px; font-size:12px; }
+  .codecard{ margin-top:14px; border-radius:14px; border:1px solid var(--border); background:color-mix(in srgb,var(--bg1) 80%,transparent); overflow:hidden; text-align:left; direction:ltr; }
+  .cc-bar{ display:flex; align-items:center; gap:7px; padding:9px 12px; border-bottom:1px solid var(--border); font:500 11px 'JetBrains Mono',monospace; color:var(--muted); }
+  .cc-bar i{ width:9px; height:9px; border-radius:50%; } .cc-bar i:nth-child(1){ background:#ff5f56; } .cc-bar i:nth-child(2){ background:#ffbd2e; } .cc-bar i:nth-child(3){ background:#27c93f; }
+  .cc-bar span{ margin-left:6px; flex:1; } .cc-run{ min-height:30px; padding:0 12px; border-radius:8px; border:1px solid var(--borHi); background:rgba(0,210,255,.1); color:var(--cyan); font:700 11px 'JetBrains Mono',monospace; cursor:pointer; }
+  .cc-run:hover{ background:rgba(0,210,255,.2); }
+  .codecard pre{ margin:0; padding:12px 14px; font:12px/1.65 'JetBrains Mono',monospace; color:var(--text); overflow-x:auto; white-space:pre; }
+  .tk-k{ color:var(--purple); } .tk-s{ color:var(--green); } .tk-t{ color:var(--cyan); } .tk-c{ color:var(--muted2); }
+  .cc-out{ margin:0; padding:10px 14px; border-top:1px dashed var(--border); font:11.5px/1.7 'JetBrains Mono',monospace; color:var(--muted); min-height:20px; white-space:pre-wrap; }
+  .cc-out .ok{ color:var(--green); }
+  .nav-cta{ display:inline-flex; align-items:center; min-height:40px; padding:0 16px; border-radius:10px; background:linear-gradient(135deg,var(--cyan),var(--purple)); color:#000; font:700 13px 'Outfit',sans-serif; text-decoration:none; white-space:nowrap; }
+  .nav-cta:hover{ filter:brightness(1.08); }
+  .proc{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; counter-reset:p; }
+  .proc .card{ padding:18px; } .proc .card::before{ counter-increment:p; content:'0' counter(p); display:block; font:700 12px 'JetBrains Mono',monospace; color:var(--cyan); margin-bottom:10px; }
+  .proc h3{ font-size:17px; margin-bottom:6px; } .proc p{ font-size:13px; color:var(--muted); line-height:1.6; }
+  @media(max-width:1000px){ .proc{ grid-template-columns:repeat(2,minmax(0,1fr)); } } @media(max-width:560px){ .proc{ grid-template-columns:1fr; } }
+  @media(max-width:760px){ .nav-cta{ display:none; } .codecard pre{ font-size:11.5px; } }
+  @media(max-width:1480px){ .nav-tools .clock{ display:none; } }
+  @media(max-width:1500px) and (min-width:941px){ .nav-links a[href="#fit"],.nav-links a[href="#case"],.nav-links a[href="#stack"]{ display:none; } }
 </style>
 </head>
 
@@ -764,6 +787,7 @@ function icon(name, size){ return '<span class="ic ic-'+(size||16)+'">'+(ICONS[n
       <a href="#contact">Contact</a>
     </nav>
     <div class="nav-tools">
+      <a class="nav-cta" href="mailto:kyrolosehab@gmail.com?subject=Opportunity">Hire me</a>
       <a class="lang-switch" href="ar/" hreflang="ar" lang="ar" dir="rtl">العربية</a>
       <span class="clock" id="clockDesk"></span>
       <button class="icon-btn" id="cmdkBtn" title="Command palette (/)" aria-label="Open command palette"><span class="ic ic-16"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span></button>
@@ -780,6 +804,7 @@ function icon(name, size){ return '<span class="ic ic-'+(size||16)+'">'+(ICONS[n
     <div class="wrap">
       <div class="hero-grid">
         <div class="r">
+          <a class="avail-pill" href="#contact"><i></i>Open to the right role<b>Let's talk</b></a>
           <div class="kicker">Founder of KERMI · Engineering Portfolio</div>
           <h1><span class="gtext">Systems Architect</span><br>&amp; AI Engineer</h1>
           <div class="type-role mono"><span id="typeRole"></span><span class="cblink" aria-hidden="true"></span></div>
@@ -811,7 +836,18 @@ function icon(name, size){ return '<span class="ic ic-'+(size||16)+'">'+(ICONS[n
               <div class="profile-title">Founder, KERMI · Systems Architect · AI Engineer</div>
             </div>
           </div>
-          <div class="side-label">Live Systems Snapshot <span class="live-dot"></span></div>
+          <div class="codecard" id="codeCard">
+            <div class="cc-bar"><i></i><i></i><i></i><span>kirolos.dart</span><button class="cc-run" id="ccRun" type="button">Run</button></div>
+<pre><span class="tk-k">class</span> <span class="tk-t">Engineer</span> {
+  <span class="tk-k">final</span> name    = <span class="tk-s">'Kirolos Ehab'</span>;
+  <span class="tk-k">final</span> founder = <span class="tk-s">'KERMI'</span>;
+  <span class="tk-k">final</span> stack   = [<span class="tk-s">'Flutter'</span>, <span class="tk-s">'Laravel'</span>,
+    <span class="tk-s">'Rust'</span>, <span class="tk-s">'Python'</span>, <span class="tk-s">'AI agents'</span>];
+  <span class="tk-k">bool get</span> openToWork => <span class="tk-k">true</span>;
+}</pre>
+            <div class="cc-out" id="ccOut" aria-live="polite"><span class="tk-c">// press Run</span></div>
+          </div>
+          <div class="side-label" style="margin-top:14px">Live Systems Snapshot <span class="live-dot"></span></div>
           <div class="snap-grid">
             <div class="snap-row"><b>Experience</b><span class="mono">4+ yrs remote</span></div>
             <div class="snap-row"><b>Markets</b><span class="mono">KSA·UAE·UK·EG</span></div>
@@ -1068,6 +1104,22 @@ function icon(name, size){ return '<span class="ic ic-'+(size||16)+'">'+(ICONS[n
           </div>
         </div>
         <div class="k-note">These are interactive replicas of the real apps, not the apps themselves. Real versions: kermi.one/tv-launcher and kermi.one/smart-panel.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- HOW I WORK -->
+  <section id="process">
+    <div class="wrap">
+      <div class="sec-head r"><div class="kicker">Method</div><h2>How I Work</h2><p>A clear path from idea to impact. You always know what is happening now, what is next, and why.</p></div>
+      <div class="proc">
+        <div class="card r"><h3>Discover</h3><p>Goals, users and constraints first. I read the data and the existing system before touching code.</p></div>
+        <div class="card r r2"><h3>Design</h3><p>Architecture, data model and UI in Figma. Bilingual and RTL from the start, not bolted on later.</p></div>
+        <div class="card r r3"><h3>Build</h3><p>Small, shippable steps in Flutter, Laravel, Rust or Python, with tests where they matter.</p></div>
+        <div class="card r r4"><h3>Ship</h3><p>Store releases, installers, in-app updates and safe rollbacks, so shipping is never scary.</p></div>
+        <div class="card r"><h3>Measure</h3><p>Logs, analytics and audits. Then I fix the real bottleneck: caching, images, sessions, SEO.</p></div>
       </div>
     </div>
   </section>
@@ -2139,6 +2191,15 @@ document.querySelectorAll('.flip').forEach(f => f.addEventListener('click', () =
   const io=new IntersectionObserver(es=>{ es.forEach(e=>{ if(e.isIntersecting){ links.forEach(a=>a.classList.remove('on')); (map[e.target.id]||{classList:{add(){}}}).classList.add('on'); } }); },{rootMargin:'-45% 0px -50% 0px'});
   ['top','kermi','lab','brands','contact'].forEach(id=>{ const el=document.getElementById(id); if(el) io.observe(el); });
   document.querySelectorAll('.card,.org-card').forEach(c=>c.addEventListener('pointermove',e=>{ const r=c.getBoundingClientRect(); c.style.setProperty('--mx',(e.clientX-r.left)+'px'); c.style.setProperty('--my',(e.clientY-r.top)+'px'); }));
+})();
+
+/* CODE CARD RUN */
+(function(){
+  const b=document.getElementById('ccRun'), o=document.getElementById('ccOut'); if(!b||!o) return;
+  const lines=[['$ dart run kirolos.dart',''],['building...   8 KERMI apps shipped','ok'],['seo.score    8 -> 40 (The Saudi Times)','ok'],['audited      1,246 records, 0 left unfixed','ok'],['openToWork   true','ok']];
+  let busy=false;
+  b.addEventListener('click',()=>{ if(busy) return; busy=true; o.innerHTML=''; let i=0; const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    (function next(){ if(i>=lines.length){ busy=false; return; } const d=document.createElement('div'); if(lines[i][1]) d.className=lines[i][1]; d.textContent=lines[i][0]; o.appendChild(d); i++; setTimeout(next,reduce?0:420); })(); });
 })();
 
 /* ═══════════════ KONAMI EASTER EGG ═══════════════ */

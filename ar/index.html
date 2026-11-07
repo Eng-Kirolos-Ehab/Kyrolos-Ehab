@@ -652,6 +652,31 @@
     .clink{ min-height:48px; }
   }
   @media(hover:none){ #cmdkBtnHero{ display:none; } .tv-status{ display:none; } }
+  .lang-switch{ display:inline-flex; align-items:center; min-height:40px; padding:0 14px; border-radius:10px; border:1px solid var(--border); background:var(--surface); color:var(--text); text-decoration:none; font:700 13px 'Outfit',system-ui,sans-serif; }
+  .lang-switch:hover{ border-color:var(--borHi); }
+
+  /* IDEAS: code card, availability pill, process */
+  .avail-pill{ display:inline-flex; align-items:center; gap:10px; padding:6px 8px 6px 12px; margin-bottom:16px; border-radius:999px; background:rgba(34,217,122,.1); border:1px solid rgba(34,217,122,.35); color:var(--text); font:600 13px 'Outfit',sans-serif; text-decoration:none; }
+  .avail-pill i{ width:8px; height:8px; border-radius:50%; background:var(--green); box-shadow:0 0 10px var(--green); animation:pulse 2s ease-in-out infinite; }
+  .avail-pill b{ background:var(--green); color:#04210f; border-radius:999px; padding:3px 11px; font-size:12px; }
+  .codecard{ margin-top:14px; border-radius:14px; border:1px solid var(--border); background:color-mix(in srgb,var(--bg1) 80%,transparent); overflow:hidden; text-align:left; direction:ltr; }
+  .cc-bar{ display:flex; align-items:center; gap:7px; padding:9px 12px; border-bottom:1px solid var(--border); font:500 11px 'JetBrains Mono',monospace; color:var(--muted); }
+  .cc-bar i{ width:9px; height:9px; border-radius:50%; } .cc-bar i:nth-child(1){ background:#ff5f56; } .cc-bar i:nth-child(2){ background:#ffbd2e; } .cc-bar i:nth-child(3){ background:#27c93f; }
+  .cc-bar span{ margin-left:6px; flex:1; } .cc-run{ min-height:30px; padding:0 12px; border-radius:8px; border:1px solid var(--borHi); background:rgba(0,210,255,.1); color:var(--cyan); font:700 11px 'JetBrains Mono',monospace; cursor:pointer; }
+  .cc-run:hover{ background:rgba(0,210,255,.2); }
+  .codecard pre{ margin:0; padding:12px 14px; font:12px/1.65 'JetBrains Mono',monospace; color:var(--text); overflow-x:auto; white-space:pre; }
+  .tk-k{ color:var(--purple); } .tk-s{ color:var(--green); } .tk-t{ color:var(--cyan); } .tk-c{ color:var(--muted2); }
+  .cc-out{ margin:0; padding:10px 14px; border-top:1px dashed var(--border); font:11.5px/1.7 'JetBrains Mono',monospace; color:var(--muted); min-height:20px; white-space:pre-wrap; }
+  .cc-out .ok{ color:var(--green); }
+  .nav-cta{ display:inline-flex; align-items:center; min-height:40px; padding:0 16px; border-radius:10px; background:linear-gradient(135deg,var(--cyan),var(--purple)); color:#000; font:700 13px 'Outfit',sans-serif; text-decoration:none; white-space:nowrap; }
+  .nav-cta:hover{ filter:brightness(1.08); }
+  .proc{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; counter-reset:p; }
+  .proc .card{ padding:18px; } .proc .card::before{ counter-increment:p; content:'0' counter(p); display:block; font:700 12px 'JetBrains Mono',monospace; color:var(--cyan); margin-bottom:10px; }
+  .proc h3{ font-size:17px; margin-bottom:6px; } .proc p{ font-size:13px; color:var(--muted); line-height:1.6; }
+  @media(max-width:1000px){ .proc{ grid-template-columns:repeat(2,minmax(0,1fr)); } } @media(max-width:560px){ .proc{ grid-template-columns:1fr; } }
+  @media(max-width:760px){ .nav-cta{ display:none; } .codecard pre{ font-size:11.5px; } }
+  @media(max-width:1480px){ .nav-tools .clock{ display:none; } }
+  @media(max-width:1500px) and (min-width:941px){ .nav-links a[href="#fit"],.nav-links a[href="#case"],.nav-links a[href="#stack"]{ display:none; } }
 
   /* ===== ARABIC / RTL ===== */
   html[lang="ar"] body{ font-family:'Tajawal','IBM Plex Sans Arabic','Segoe UI',Tahoma,system-ui,sans-serif; line-height:1.85; }
@@ -687,7 +712,7 @@
     </a>
     <button class="menu-btn" id="menuBtn" aria-expanded="false">القائمة</button>
     <nav class="nav-links" id="navLinks" aria-label="التنقل">
-      <a href="#summary">نبذة</a><a href="#kermi">KERMI</a><a href="#impact">الأثر</a><a href="#experience">الخبرة</a><a href="#skills">المهارات</a><a href="#education">التعليم</a><a href="#faq">أسئلة</a><a href="#contact">تواصل</a>
+      <a href="#summary">نبذة</a><a href="#kermi">KERMI</a><a href="#process">المنهج</a><a href="#impact">الأثر</a><a href="#experience">الخبرة</a><a href="#skills">المهارات</a><a href="#education">التعليم</a><a href="#faq">أسئلة</a><a href="#contact">تواصل</a>
     </nav>
     <div class="nav-tools">
       <a class="lang-switch" href="../" hreflang="en" lang="en" dir="ltr">English</a>
@@ -701,6 +726,7 @@
     <div class="wrap">
       <div class="hero-grid">
         <div class="r">
+          <a class="avail-pill" href="#contact"><i></i>منفتح على الفرصة المناسبة<b>تواصل</b></a>
           <div class="kicker">مؤسس KERMI · معرض أعمال هندسي</div>
           <h1><span class="gtext">مهندس أنظمة</span><br>ومهندس ذكاء اصطناعي</h1>
           <p class="hero-sub">مؤسس <b style="color:var(--text)">KERMI</b>، علامة برمجيات مستقلة تصدر تطبيقات ويندوز وأندرويد. أمتلك المشروع من المعمارية إلى النشر. أكثر من 4 سنوات أقود الهندسة عن بُعد في السعودية والإمارات ومصر وبريطانيا، وأتخصص في وكلاء الذكاء اصطناعي ومنظومات شوبيفاي ومنصات Laravel وأنظمة العمل الذكية.</p>
@@ -719,7 +745,18 @@
             <div class="profile-photo"><img src="../images/kirolos.png" alt="كيرلس إيهاب" width="64" height="64"></div>
             <div><div class="profile-name">كيرلس إيهاب</div><div class="profile-title">مؤسس KERMI · مهندس أنظمة · مهندس ذكاء اصطناعي</div></div>
           </div>
-          <div class="side-label">لمحة سريعة <span class="live-dot"></span></div>
+          <div class="codecard" id="codeCard">
+            <div class="cc-bar"><i></i><i></i><i></i><span>kirolos.dart</span><button class="cc-run" id="ccRun" type="button">Run</button></div>
+<pre><span class="tk-k">class</span> <span class="tk-t">Engineer</span> {
+  <span class="tk-k">final</span> name    = <span class="tk-s">'Kirolos Ehab'</span>;
+  <span class="tk-k">final</span> founder = <span class="tk-s">'KERMI'</span>;
+  <span class="tk-k">final</span> stack   = [<span class="tk-s">'Flutter'</span>, <span class="tk-s">'Laravel'</span>,
+    <span class="tk-s">'Rust'</span>, <span class="tk-s">'Python'</span>, <span class="tk-s">'AI agents'</span>];
+  <span class="tk-k">bool get</span> openToWork => <span class="tk-k">true</span>;
+}</pre>
+            <div class="cc-out" id="ccOut" aria-live="polite"><span class="tk-c">// press Run</span></div>
+          </div>
+          <div class="side-label" style="margin-top:14px">لمحة سريعة <span class="live-dot"></span></div>
           <div class="snap-grid">
             <div class="snap-row"><b>الخبرة</b><span>+4 سنوات عن بُعد</span></div>
             <div class="snap-row"><b>الأسواق</b><span>السعودية · الإمارات · بريطانيا · مصر</span></div>
@@ -822,6 +859,21 @@
           <p>يحوّل التابلت القديم إلى لوحة منزل ذكي على الحائط متصلة بـ Home Assistant.</p>
           <div class="row"><span class="chip">أندرويد</span><span class="go">افتح <svg class="arr-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section id="process">
+    <div class="wrap">
+      <div class="sec-head r"><div class="kicker">المنهج</div><h2>كيف أعمل</h2><p>طريق واضح من الفكرة إلى الأثر. تعرف دائمًا ما يحدث الآن وما التالي ولماذا.</p></div>
+      <div class="proc">
+        <div class="card r"><h3>الاكتشاف</h3><p>الأهداف والمستخدمون والقيود أولًا. أقرأ البيانات والنظام القائم قبل أن ألمس الكود.</p></div>
+        <div class="card r r2"><h3>التصميم</h3><p>المعمارية ونموذج البيانات والواجهة في Figma. عربي RTL وإنجليزي من البداية، لا كإضافة متأخرة.</p></div>
+        <div class="card r r3"><h3>البناء</h3><p>خطوات صغيرة قابلة للإطلاق بـ Flutter وLaravel وRust وPython، مع اختبارات حيث تلزم.</p></div>
+        <div class="card r r4"><h3>الإطلاق</h3><p>إصدارات المتاجر والمثبّتات والتحديث من داخل التطبيق والتراجع الآمن، فلا يخيف الإطلاق أحدًا.</p></div>
+        <div class="card r"><h3>القياس</h3><p>سجلات وتحليلات ومراجعات، ثم أعالج العنق الحقيقي: الكاش والصور والجلسات والسيو.</p></div>
       </div>
     </div>
   </section>
@@ -1029,6 +1081,9 @@
   try{ var s=localStorage.getItem('ke-theme'); if(s) root.setAttribute('data-theme',s); }catch(e){}
   var tb=document.getElementById('themeBtn');
   tb.addEventListener('click',function(){ var light=root.getAttribute('data-theme')==='light'; if(light) root.removeAttribute('data-theme'); else root.setAttribute('data-theme','light'); try{ localStorage.setItem('ke-theme', light?'':'light'); }catch(e){} });
+  var rb=document.getElementById('ccRun'), ro=document.getElementById('ccOut');
+  if(rb&&ro){ var L=[['$ dart run kirolos.dart',''],['building...   8 KERMI apps shipped','ok'],['seo.score    8 -> 40 (The Saudi Times)','ok'],['audited      1,246 records, 0 left unfixed','ok'],['openToWork   true','ok']], busy=false;
+    rb.addEventListener('click',function(){ if(busy) return; busy=true; ro.innerHTML=''; var i=0; (function nx(){ if(i>=L.length){ busy=false; return; } var d=document.createElement('div'); if(L[i][1]) d.className=L[i][1]; d.textContent=L[i][0]; ro.appendChild(d); i++; setTimeout(nx,420); })(); }); }
   var mb=document.getElementById('menuBtn'), nl=document.getElementById('navLinks');
   mb.addEventListener('click',function(){ var o=nl.classList.toggle('open'); mb.setAttribute('aria-expanded',String(o)); });
   nl.addEventListener('click',function(e){ if(e.target.closest('a')) nl.classList.remove('open'); });
