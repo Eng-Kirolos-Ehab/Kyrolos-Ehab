@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive"><meta name="referrer" content="no-referrer">
+<title>Work</title>
+<style>
+:root{--bg:#05070f;--card:#0c1222;--line:#1c2742;--text:#e8f1ff;--muted:#93a3c4;--cyan:#00d2ff;--purple:#8b5cf6;--ok:#22d97a;--mid:#f4c842;--low:#ff5c7a}
+@media(prefers-color-scheme:light){:root{--bg:#f4f6fb;--card:#fff;--line:#dde3ef;--text:#0b1220;--muted:#4a5875;--cyan:#0086c9;--purple:#6d3fd1;--ok:#0e9f5c;--mid:#b8860b;--low:#d63a5c}}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,"Segoe UI",Arial,sans-serif;padding:max(16px,env(safe-area-inset-top)) 16px calc(24px + env(safe-area-inset-bottom))}
+.w{max-width:1100px;margin:0 auto}
+h1{font-size:26px;margin:6px 0 2px}.s{color:var(--muted);margin:0 0 18px;font-size:14px}
+#lock{max-width:380px;margin:12vh auto;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px}
+#lock h1{font-size:22px}input,button{font:inherit}
+input[type=password],input[type=search]{width:100%;padding:13px 14px;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--text);margin:10px 0;min-height:48px}
+.btn{min-height:48px;padding:0 20px;border-radius:12px;border:0;background:linear-gradient(135deg,var(--cyan),var(--purple));color:#000;font-weight:700;cursor:pointer;width:100%}
+#err{color:var(--low);min-height:22px;font-size:14px}
+.kp{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:16px}
+.kp div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}.kp b{display:block;font-size:30px;color:var(--cyan);line-height:1.1}.kp span{color:var(--muted);font-size:13px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 14px}.tab{flex:1 1 auto;min-height:44px;padding:0 16px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--muted);font-weight:600;cursor:pointer}
+.tab[aria-selected=true]{color:var(--text);border-color:var(--cyan);background:color-mix(in srgb,var(--cyan) 12%,var(--card))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:12px}
+.card h3{margin:0 0 2px;font-size:17px}.meta{color:var(--muted);font-size:13px}
+.row{display:grid;grid-template-columns:130px 1fr;gap:6px 12px;margin-top:10px;font-size:14px}.row dt{color:var(--muted)}.row dd{margin:0;word-break:break-word}
+.st{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:700;border:1px solid currentColor}.ok{color:var(--ok)}.mid{color:var(--mid)}.low{color:var(--low)}
+.top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;flex-wrap:wrap}
+a{color:var(--cyan)}ul.todo{margin:0;padding-left:20px;color:var(--muted)}ul.todo li{margin:6px 0}
+@media(max-width:560px){.row{grid-template-columns:1fr}.row dt{margin-top:6px}}
+</style></head><body>
+<div id="lock"><h1>Private</h1><p class="s">Enter the passphrase.</p>
+<form id="f" autocomplete="off"><input id="pw" type="password" placeholder="Passphrase" autocomplete="current-password" aria-label="Passphrase"><div id="err" role="alert"></div><button class="btn" type="submit">Unlock</button></form></div>
+<div class="w" id="app" hidden></div>
+<script>
+const $=s=>document.querySelector(s), esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function decrypt(pass){
+  const r=await fetch('data.enc.json',{cache:'no-store'}); const d=await r.json();
+  const km=await crypto.subtle.importKey('raw',new TextEncoder().encode(pass),'PBKDF2',false,['deriveKey']);
+  const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:b64(d.salt),iterations:d.iter,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);
+  const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:b64(d.iv)},key,b64(d.ct));
+  return JSON.parse(new TextDecoder().decode(pt));
+}
+function render(d){
+  $('#lock').hidden=true; const app=$('#app'); app.hidden=false;
+  const A=d.applied||[], P=d.pipeline||[], T=d.todo||[], ans=d.answers||{};
+  const fit=f=>({High:'ok',Stretch:'mid',Check:'mid',Low:'low'}[f]||'mid');
+  app.innerHTML=`<h1>Work</h1><p class="s">Updated ${esc(d.updated)} · private tracker</p>
+  <div class="kp"><div><b>${A.length}</b><span>Applied</span></div><div><b>${P.length}</b><span>In pipeline</span></div><div><b>${T.length}</b><span>Needs you</span></div></div>
+  <input id="q" type="search" placeholder="Search company or role" aria-label="Search">
+  <div class="tabs" role="tablist"><button class="tab" role="tab" data-t="a" aria-selected="true">Applied (${A.length})</button><button class="tab" role="tab" data-t="p" aria-selected="false">Pipeline (${P.length})</button><button class="tab" role="tab" data-t="t" aria-selected="false">Missing / needs you (${T.length})</button><button class="tab" role="tab" data-t="r" aria-selected="false">Answers &amp; rules</button></div><div id="view"></div>`;
+  const views={
+    a:q=>A.filter(x=>(x.company+x.posted_role).toLowerCase().includes(q)).map(x=>`<div class="card"><div class="top"><div><h3>${esc(x.company)}</h3><div class="meta">${esc(x.location)} · ${esc(x.size)}</div></div><div><span class="st ok">${esc(x.status)}</span> <span class="meta">${esc(x.date)}</span></div></div>
+      <dl class="row"><dt>Role posted</dt><dd>${esc(x.posted_role)}</dd><dt>Our CV title</dt><dd>${esc(x.cv_title)}</dd><dt>CV file</dt><dd>${esc(x.cv_file)}</dd><dt>CV focus</dt><dd>${esc(x.cv_focus)}</dd><dt>We entered</dt><dd>${esc(x.entered)}</dd><dt>Channel</dt><dd>${esc(x.channel)}${x.url?` · <a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">open job</a>`:''}</dd></dl></div>`).join('')||'<p class="meta">Nothing matches.</p>',
+    p:q=>P.filter(x=>(x.company+x.role).toLowerCase().includes(q)).map(x=>`<div class="card"><div class="top"><div><h3>${esc(x.company)}</h3><div class="meta">${esc(x.role)} · ${esc(x.location)}</div></div><span class="st ${fit(x.fit)}">${esc(x.fit)}</span></div><dl class="row"><dt>Size</dt><dd>${esc(x.size)}</dd><dt>Note</dt><dd>${esc(x.note||'-')}</dd></dl></div>`).join('')||'<p class="meta">Nothing matches.</p>',
+    t:()=>`<div class="card"><ul class="todo">${T.map(x=>`<li>${esc(x)}</li>`).join('')||'<li>Nothing pending.</li>'}</ul></div>`,
+    r:()=>`<div class="card"><dl class="row"><dt>Current fixed net</dt><dd>${esc(ans.current_fixed_net_monthly_egp)} EGP / month</dd><dt>Commission, bonus, allowance</dt><dd>${esc(ans.commission_monthly_egp)}, ${esc(ans.annual_bonus_egp)}, ${esc(ans.transport_allowance_egp)}</dd><dt>Expected salary rule</dt><dd>${esc(ans.expected_rule)}</dd></dl></div>`
+  };
+  let tab='a'; const draw=()=>{ $('#view').innerHTML=views[tab]($('#q').value.trim().toLowerCase()); };
+  app.addEventListener('click',e=>{const b=e.target.closest('.tab'); if(!b)return; tab=b.dataset.t; app.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected',String(x===b))); draw();});
+  $('#q').addEventListener('input',draw); draw();
+}
+async function go(pass){ try{ const d=await decrypt(pass); try{sessionStorage.setItem('wk',pass)}catch(e){} render(d); return true }catch(e){ return false } }
+$('#f').addEventListener('submit',async e=>{ e.preventDefault(); $('#err').textContent='Checking...'; const ok=await go($('#pw').value); if(!ok) $('#err').textContent='Wrong passphrase.'; });
+(async()=>{ try{ const p=sessionStorage.getItem('wk'); if(p) await go(p) }catch(e){} })();
+</script></body></html>
